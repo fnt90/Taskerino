@@ -11,13 +11,14 @@ public class Menus {
         String inputNumString = menuSelector.nextLine();
         System.out.println("You entered: " + inputNumString);
 
+        // how to disallow non int??
         int inputNum = Integer.parseInt(inputNumString);
         if (inputNum == 1) {
-            Messages.showTasksMenuMsg();
+            showMenu();
         } else if (inputNum == 2) {
-            Messages.addTasksMenuMsg();
+            addMenu();
         } else if (inputNum == 3) {
-            Messages.editTasksMenuMsg();
+            editMenu();
         } else if (inputNum == 4) {
             Messages.exitMsg();
         } else {
@@ -26,4 +27,18 @@ public class Menus {
         }
     }
 
+    public static void showMenu() {
+        //here to display menu for task sort
+        Messages.showTasksMenuMsg();
+    }
+
+    public static void addMenu() {
+        Messages.addTasksMenuMsg();
+    }
+
+    public static void editMenu() {
+        //here to display menu for edit
+        Messages.editTasksMenuMsg();
+    }
+    public static void
 }
