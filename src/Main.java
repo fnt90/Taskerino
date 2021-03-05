@@ -7,6 +7,7 @@ public class Main {
         Messages.welcomeMsg();
         Messages.welcomeMsg();
         Messages.taskSummaryMsg();
-
+        Messages.taskSummaryMsg();
+        Messages.invalidInputMsg();
     }
 }
