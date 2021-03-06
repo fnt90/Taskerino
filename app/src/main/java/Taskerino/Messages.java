@@ -8,7 +8,7 @@ public class Messages {
 
     public static void mainMenuMsg() {
         //Message to display menu options
-        System.out.println("MAIN MENU");
+        System.out.println("~~~MAIN MENU~~~");
         System.out.println("What do you want to do?");
         System.out.println("1. Show all saved tasks");
         System.out.println("2. Add new task");
@@ -18,7 +18,7 @@ public class Messages {
     }
     public static void showTasksMenuMsg() {
         //Message to let user know they entered Show menu
-        System.out.println("SHOW TASKS MENU");
+        System.out.println("~SHOW TASKS MENU~");
         System.out.println("How do you want to sort your tasks?");
         System.out.println("1. By ticked status (complete first)");
         System.out.println("2. By due date (oldest first)");
@@ -27,18 +27,18 @@ public class Messages {
     }
     public static void addTasksMenuMsg() {
         //Message to let user know they entered Add menu
-        System.out.println("ADD TASKS MENU");
+        System.out.println("~ADD TASKS MENU~");
     }
     public static void editTasksMenuMsg() {
         //Message to let user know they entered Edit menu
-        System.out.println("EDIT MENU");
+        System.out.println("~EDIT MENU~");
         System.out.println("You selected Edit, delete or tick off a task.");
         System.out.println("PRINT ALL TASKS HERE WITH ITERATOR NUMBER");
         System.out.println("Type the number of the task you want to select.");
     }
     public static void editTasksSelectMsg() {
         //Message to provide edit options after selecting a task to edit
-        System.out.println("EDIT SUBMENU");
+        System.out.println("~~EDIT SUBMENU");
         System.out.println("What do you want to do with this task?");
         System.out.println("1. Edit name");
         System.out.println("2. Edit due date");
