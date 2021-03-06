@@ -18,7 +18,7 @@ public class Messages {
     }
     public static void showTasksMenuMsg() {
         //Message to let user know they entered Show menu
-        System.out.println("You selected Show all saved tasks.");
+        System.out.println("SHOW TASKS MENU");
         System.out.println("How do you want to sort your tasks?");
         System.out.println("1. By ticked status (complete first)");
         System.out.println("2. By due date (oldest first)");
@@ -27,7 +27,7 @@ public class Messages {
     }
     public static void addTasksMenuMsg() {
         //Message to let user know they entered Add menu
-        System.out.println("You selected Add new task.");
+        System.out.println("ADD TASKS MENU");
     }
     public static void editTasksMenuMsg() {
         //Message to let user know they entered Edit menu
@@ -49,7 +49,7 @@ public class Messages {
     }
     public static void invalidInputMsg() {
         /*Message to display when user inputs unexpected value as a menu choice.
-        *e.g. input "5" or "99" when menu options are 1,2,3,4
+        *e.g. input "5" or "ghjkf" when menu options are 1,2,3,4
          */
         System.out.println("Please enter a valid digit.");
     }
