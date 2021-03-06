@@ -1,4 +1,4 @@
-
+package Taskerino;
 
 public class Messages {
     public static void welcomeMsg() {
@@ -49,7 +49,7 @@ public class Messages {
     }
     public static void invalidInputMsg() {
         /*Message to display when user inputs unexpected value as a menu choice.
-        *e.g. input "5" or "ghjkf" when menu options are 1,2,3,4
+         *e.g. input "5" or "ghjkf" when menu options are 1,2,3,4
          */
         System.out.println("Please enter a valid digit.");
     }
@@ -81,8 +81,8 @@ public class Messages {
 
     public static void taskSummaryMsg() {
         /*Message to display summary of how many tasks are complete and how many are incomplete
-        *Need to replace "X" with variable containing number of tasks complete, and "Y" with incomplete
-        */
+         *Need to replace "X" with variable containing number of tasks complete, and "Y" with incomplete
+         */
         System.out.println("You've completed " + "X" + " tasks, and you've got " + "Y" + " tasks to go.");
     }
 
@@ -98,8 +98,8 @@ public class Messages {
 
     public static void taskStatusChangeMsg() {
         /*Message to display after task has been marked complete or incomplete
-        *Need to convert boolean true to string Complete, and boolean false to string Incomplete
-        */
+         *Need to convert boolean true to string Complete, and boolean false to string Incomplete
+         */
         System.out.println("This task status has been set to: " + "booleanstringhere");
     }
 

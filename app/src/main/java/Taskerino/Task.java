@@ -1,9 +1,11 @@
+package Taskerino;
+
 public class Task {
     //this gives instructions on how an object Task should look like
     public String name;
     public String project;
     public String date;
-   //public boolean isTicked;
+    //public boolean isTicked;
 
 
     public Task(String name, String project, String date) {
@@ -11,7 +13,7 @@ public class Task {
         this.project = project;
         this.date = date;
         //isTicked = true;
-        }
+    }
 
 
 
@@ -24,3 +26,4 @@ public class Task {
     //setTicked
     //getTicked
 }
+

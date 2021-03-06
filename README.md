@@ -2,7 +2,7 @@
 A To-Do List app (in progress) written in Java called Taskerino.
 
 This application should store tasks as a To-Do list.
-NOTE: This application does not yet use Gradle.
+
 
 ## Getting started
 This application can be run ...(directly through Gradle or through a generated jar file)

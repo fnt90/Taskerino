@@ -1,4 +1,7 @@
+package Taskerino;
+
 import java.util.Scanner;
+
 
 public class Menus {
 
@@ -16,7 +19,7 @@ public class Menus {
             int inputNum = Integer.parseInt(inputNumString);
             if (inputNum == 1) {
                 showMenu();
-             } else if (inputNum == 2) {
+            } else if (inputNum == 2) {
                 addMenu();
             } else if (inputNum == 3) {
                 editMenu();
@@ -87,8 +90,9 @@ public class Menus {
     }
     //This does not work as I want, inputNumString is left hanging
     //public static void textPrompt() {
-       // Scanner menuSelector = new Scanner(System.in);
-       // String inputNumString = menuSelector.nextLine();
-       // System.out.println("You entered: " + inputNumString);
-   // }
+    // Scanner menuSelector = new Scanner(System.in);
+    // String inputNumString = menuSelector.nextLine();
+    // System.out.println("You entered: " + inputNumString);
+    // }
 }
+
