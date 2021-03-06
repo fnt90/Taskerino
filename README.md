@@ -5,7 +5,7 @@ This application should store tasks as a To-Do list.
 
 
 ## Getting started
-This application can be run ...(directly through Gradle or through a generated jar file)
+This application can be run directly through Gradle or through a generated jar file.
 
 ### Run with Gradle
 In the root folder, start application with Gradle's run command.
