@@ -83,7 +83,7 @@ public class Menus {
         String newTsDate = newCreate.nextLine();
         Task newTask = new Task(newTsName,newTsProj,newTsDate);
         System.out.println("Now adding new task! Task name: "+ newTask.name + ", Task Project: " + newTask.project + ", Task Date: " + newTask.date);
-        System.out.println("Thank you! Unfortunately this was not saved because it isn't implemented yet.");
+        System.out.println("Thank you!Unfortunately this was not saved because it isn't implemented yet.");
         returnToMain();
 
     }
