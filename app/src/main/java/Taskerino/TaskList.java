@@ -6,8 +6,10 @@ public class TaskList {
     //this should be an array list of Task objects, and the list is called taskList
     private ArrayList<Task> taskList;
 
-    public TaskList() {
+    public ArrayList<Task> TaskList() {
         taskList = new ArrayList<>();
+
+        return taskList;
 
     }
     public void addTask(Task task) {

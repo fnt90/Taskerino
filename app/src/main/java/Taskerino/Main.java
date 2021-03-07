@@ -10,6 +10,7 @@ public class Main {
         Messages.welcomeMsg();
         Messages.taskSummaryMsg();
         Menus.mainMenu();
+        //TaskList taskList = new TaskList();
 
 
     }

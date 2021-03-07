@@ -20,6 +20,7 @@ public class Messages {
         //Message to let user know they entered Show menu
         System.out.println("~SHOW TASKS MENU~");
         System.out.println("How do you want to sort your tasks?");
+        System.out.println("0. for testing");
         System.out.println("1. By ticked status (complete first)");
         System.out.println("2. By due date (oldest first)");
         System.out.println("3. By project (alphabetical)");

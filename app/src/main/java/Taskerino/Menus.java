@@ -61,6 +61,9 @@ public class Menus {
             } else if (inputNum == 4) {
                 //return to main
                 mainMenu();
+            } else if (inputNum == 0) {
+                printFirst();
+
             } else {
                 Messages.invalidInputMsg();
                 showMenu();
@@ -83,7 +86,9 @@ public class Menus {
         String newTsDate = newCreate.nextLine();
         Task newTask = new Task(newTsName,newTsProj,newTsDate);
         System.out.println("Now adding new task! Task name: "+ newTask.name + ", Task Project: " + newTask.project + ", Task Date: " + newTask.date);
-        System.out.println("Thank you!Unfortunately this was not saved because it isn't implemented yet.");
+        TaskList taskList = new TaskList();
+        taskList.addTask(newTask);
+        System.out.println("Thank you! Unfortunately this was not saved because it isn't implemented yet.");
         returnToMain();
 
     }
@@ -162,7 +167,16 @@ public class Menus {
                 returnToMain();
             }
         }
-
+    public static void printFirst() {
+        System.out.println("Printing first task for testing!");
+        //int index = 0
+       // while(index < taskList.size()) {
+        //    Task printer = taskList.get(index);
+        //    System.out.println((index+1) + ". " + printer.name + printer.project + printer.date);
+         //   index++;
+        System.out.println("just kidding, sorreee");
+        }
+    }
     //This does not work as I want, inputNumString is left hanging
     //public static void textPrompt() {
     // Scanner menuSelector = new Scanner(System.in);
