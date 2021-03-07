@@ -73,10 +73,16 @@ public class Menus {
 
     public static void addMenu() {
         //here to display menu for task add
+        Scanner newCreate = new Scanner(System.in);
         Messages.addTasksMenuMsg();
-        Task.askForName();
-        Task.askForProject();
-        Task.askForDate();
+        System.out.println("Enter name:");
+        String newTsName = newCreate.nextLine();
+        System.out.println("Enter proj:");
+        String newTsProj = newCreate.nextLine();
+        System.out.println("Enter date:");
+        String newTsDate = newCreate.nextLine();
+        Task newTask = new Task(newTsName,newTsProj,newTsDate);
+        System.out.println("Now adding new task! Task name: "+ newTask.name + ", Task Project: " + newTask.project + ", Task Date: " + newTask.date);
         System.out.println("Thank you! Unfortunately this was not saved because it isn't implemented yet.");
         returnToMain();
 
