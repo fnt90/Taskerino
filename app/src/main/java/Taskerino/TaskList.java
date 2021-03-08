@@ -19,27 +19,29 @@ public class TaskList {
     }
 
     public int size() {
+
         return taskList.size();
     }
-    public Task get() {
-        int index = 0;
-        Task getIndex = taskList.get(index);
-        return getIndex;
+
+    public Task get(int index) {
+        //int index = 0;
+        Task getIndexVal = taskList.get(index);
+        return getIndexVal;
     }
 
-    public String askForName() {
+    public static String askForName() {
         Scanner askName = new Scanner(System.in);
         System.out.println("Type task name:");
         String name = askName.nextLine();
         return name;
     }
-    public String askForProject() {
+    public static String askForProject() {
         Scanner askProj = new Scanner(System.in);
         System.out.println("Type task project:");
         String project = askProj.nextLine();
         return project;
     }
-    public String askForDate() {
+    public static String askForDate() {
         Scanner askDate = new Scanner(System.in);
         System.out.println("Type task due date:");
         String date = askDate.nextLine();

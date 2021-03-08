@@ -12,8 +12,6 @@ public class Main {
         Menus menu = new Menus();
         menu.mainMenu();
 
-        //TaskList taskList = new TaskList();
-
 
     }
 }

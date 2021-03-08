@@ -79,14 +79,10 @@ public class Menus {
 
     public void addMenu() {
         //here to display menu for task add
-        Scanner newCreate = new Scanner(System.in);
         Messages.addTasksMenuMsg();
-        System.out.println("Enter name:");
-        String newTsName = newCreate.nextLine();
-        System.out.println("Enter proj:");
-        String newTsProj = newCreate.nextLine();
-        System.out.println("Enter date:");
-        String newTsDate = newCreate.nextLine();
+        String newTsName = TaskList.askForName();
+        String newTsProj = TaskList.askForProject();
+        String newTsDate = TaskList.askForDate();
         Task newTask = new Task(newTsName,newTsProj,newTsDate);
         System.out.println("Now adding new task! Task name: "+ newTask.name + ", Task Project: " + newTask.project + ", Task Date: " + newTask.date);
         //this? is where the error is
@@ -174,13 +170,12 @@ public class Menus {
         System.out.println("Printing task for testing!");
         int index = 0;
         while(index < taskList.size()) {
-            Task printer = taskList.get();
+            Task printer = taskList.get(index);
             System.out.println((index + 1) + ". " + printer.name + printer.project + printer.date);
             index++;
         }
-        //System.out.println("just kidding, sorreee");
-        }
     }
+}
     //This does not work as I want, inputNumString is left hanging
     //public static void textPrompt() {
     // Scanner menuSelector = new Scanner(System.in);
