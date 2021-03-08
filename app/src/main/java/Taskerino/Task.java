@@ -1,7 +1,8 @@
 package Taskerino;
+import java.io.Serializable;
 import java.util.Scanner;
 
-public class Task {
+public class Task implements Serializable {
     //this gives instructions on how an object Task should look like
     String name;
     String project;
