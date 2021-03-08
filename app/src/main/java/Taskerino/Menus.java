@@ -94,7 +94,7 @@ public class Menus {
     public void editMenu() {
         //here to display menu for edit
         Messages.editTasksMenuMsg();
-        System.out.println("Press enter to continue, imagining you are selecting a task from the list");
+        System.out.println("Press enter to continue, 'selecting a task from the list'");
 
         Scanner menuSelector = new Scanner(System.in);
         menuSelector.nextLine();
