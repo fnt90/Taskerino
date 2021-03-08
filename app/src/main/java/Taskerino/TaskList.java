@@ -33,6 +33,10 @@ public class TaskList {
         Scanner askName = new Scanner(System.in);
         System.out.println("Type task name:");
         String name = askName.nextLine();
+        if (name.length()==0) {
+            return "**Untitled**";
+        }
+
         return name;
     }
     public static String askForProject() {
@@ -48,7 +52,5 @@ public class TaskList {
         return date;
     }
 
-    //public void addTask() {
-        //Task task = new Task(this.name, this.project, this.date);
-   // }
+
 }

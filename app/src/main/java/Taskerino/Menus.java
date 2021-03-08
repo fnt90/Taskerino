@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 public class Menus {
  TaskList taskList;
+ int taskSelect;
  public Menus() {
      taskList = new TaskList();
  }
@@ -28,6 +29,7 @@ public class Menus {
                 editMenu();
             } else if (inputNum == 4) {
                 Messages.exitMsg();
+                System.exit(0);
             } else {
                 Messages.invalidInputMsg();
                 mainMenu();
@@ -39,9 +41,14 @@ public class Menus {
     }
 
     public void showMenu() {
+
+        //checking if there are any tasks in the list
+        if (taskList.size()==0) {
+            System.out.println("You don't have any tasks to show!");
+            returnToMain();
+        }
         //here to display menu for task sort
         Messages.showTasksMenuMsg();
-
         Scanner menuSelector = new Scanner(System.in);
         String inputNumString = menuSelector.nextLine();
         System.out.println("You entered: " + inputNumString);
@@ -65,8 +72,8 @@ public class Menus {
                 //return to main
                 mainMenu();
             } else if (inputNum == 0) {
-                printFirst();
-
+                printList();
+                returnToMain();
             } else {
                 Messages.invalidInputMsg();
                 showMenu();
@@ -91,19 +98,39 @@ public class Menus {
 
     }
 
+    public int taskListSelect() {
+     //this will take input from user, convert to integer, and then should convert this int by -1 to make index
+        Scanner taskSelector = new Scanner(System.in);
+        //here, taking user input and storing it as string
+        String taskSelectString = taskSelector.nextLine();
+        try {
+            //here, taking user string and converting to integer
+            taskSelect = Integer.parseInt(taskSelectString);
+            //take integer of user input and convert to index by subtracting 1
+            taskSelect--;
+            Task editor = taskList.get(taskSelect);
+            System.out.println("You selected: "+ (taskSelect + 1) + ". " + editor.name + ", " + editor.project + ", " + editor.date);
+            return taskSelect;
+        } catch (NumberFormatException e) {
+            Messages.invalidInputMsg();
+            editMenu();
+        }
+     return taskSelect;
+    }
+
     public void editMenu() {
+
+        // check if there are any tasks in your list, if not send to main menu
+        if (taskList.size()==0) {
+            System.out.println("You don't have any tasks to edit!");
+            returnToMain();
+        }
         //here to display menu for edit
         Messages.editTasksMenuMsg();
-        System.out.println("Press enter to continue, 'selecting a task from the list'");
+        printList();
+        System.out.println("Select a task from the list by entering its number.");
+        taskListSelect();
 
-        Scanner menuSelector = new Scanner(System.in);
-        menuSelector.nextLine();
-
-        editSubMenu();
-
-    }
-    public void editSubMenu() {
-        //this is the submenu for editing, after a task has been selected
         Messages.editTasksSelectMsg();
 
         Scanner menuSelector = new Scanner(System.in);
@@ -115,15 +142,21 @@ public class Menus {
             int inputNum = Integer.parseInt(inputNumString);
             if (inputNum == 1) {
                 //edit name
-                System.out.println("You can't edit name yet, sorry.");
+                Task editableName = taskList.get(taskSelect);
+                editableName.setName(TaskList.askForName());
+                System.out.println("Task name changed to:" + editableName.name);
                 returnToMain();
             } else if (inputNum == 2) {
-                //edit due date
-                System.out.println("You can't edit due date yet, sorry.");
+                //edit project
+                Task editableProj = taskList.get(taskSelect);
+                editableProj.setProject(TaskList.askForProject());
+                System.out.println("Task project changed to:" + editableProj.project);
                 returnToMain();
             } else if (inputNum == 3) {
-                //edit project
-                System.out.println("You can't edit project yet, sorry.");
+                //edit date
+                Task editableDate = taskList.get(taskSelect);
+                editableDate.setDate(TaskList.askForDate());
+                System.out.println("Task date changed to:" + editableDate.date);
                 returnToMain();
             } else if (inputNum == 4) {
                 //tick or untick
@@ -131,19 +164,21 @@ public class Menus {
                 returnToMain();
             } else if (inputNum == 5) {
                 //delete task
-                System.out.println("You can't delete yet, sorry.");
+                taskList.deleteTask(taskList.get(taskSelect));
+                System.out.println("Task deleted.");
                 returnToMain();
             } else if (inputNum == 6) {
                 mainMenu();
             } else {
                 Messages.invalidInputMsg();
-                editSubMenu();
+                editMenu();
             }
         } catch (NumberFormatException e) {
             Messages.invalidInputMsg();
-            editSubMenu();
+            editMenu();
         }
     }
+
     public void returnToMain() {
         //this is a method to take the user back to the main menu after completing some edit
         //or reaching a menu item that isn't complete yet
@@ -165,14 +200,15 @@ public class Menus {
                 returnToMain();
             }
         }
-    public void printFirst() {
-        System.out.println("Printing task for testing!");
+    public void printList() {
+        //System.out.println("Printing task for testing!");
         int index = 0;
         while(index < taskList.size()) {
             Task printer = taskList.get(index);
-            System.out.println((index + 1) + ". " + printer.name + printer.project + printer.date);
+            System.out.println((index + 1) + ". " + printer.name + ", " + printer.project + ", " + printer.date);
             index++;
         }
+        //returnToMain();
     }
 }
     //This does not work as I want, inputNumString is left hanging

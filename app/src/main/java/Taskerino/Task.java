@@ -28,7 +28,17 @@ public class Task {
         return date;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
 
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public void setProject(String project){
+        this.project = project;
+    }
     //setName
     //getName
     //setProject
