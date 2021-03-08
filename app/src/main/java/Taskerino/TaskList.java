@@ -6,10 +6,8 @@ public class TaskList {
     //this should be an array list of Task objects, and the list is called taskList
     private ArrayList<Task> taskList;
 
-    public ArrayList<Task> TaskList() {
+    public TaskList() {
         taskList = new ArrayList<>();
-
-        return taskList;
 
     }
     public void addTask(Task task) {
@@ -18,6 +16,15 @@ public class TaskList {
 
     public void deleteTask(Task task) {
         taskList.remove(task);
+    }
+
+    public int size() {
+        return taskList.size();
+    }
+    public Task get() {
+        int index = 0;
+        Task getIndex = taskList.get(index);
+        return getIndex;
     }
 
     public String askForName() {

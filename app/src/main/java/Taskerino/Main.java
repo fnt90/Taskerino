@@ -9,7 +9,9 @@ public class Main {
 
         Messages.welcomeMsg();
         Messages.taskSummaryMsg();
-        Menus.mainMenu();
+        Menus menu = new Menus();
+        menu.mainMenu();
+
         //TaskList taskList = new TaskList();
 
 

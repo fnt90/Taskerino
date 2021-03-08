@@ -4,9 +4,12 @@ import java.util.Scanner;
 
 
 public class Menus {
+ TaskList taskList;
+ public Menus() {
+     taskList = new TaskList();
+ }
 
-
-    public static void mainMenu() {
+    public void mainMenu() {
         //this should contain all of the main menu including logic and input
         Scanner menuSelector = new Scanner(System.in);
 
@@ -35,7 +38,7 @@ public class Menus {
         }
     }
 
-    public static void showMenu() {
+    public void showMenu() {
         //here to display menu for task sort
         Messages.showTasksMenuMsg();
 
@@ -74,7 +77,7 @@ public class Menus {
         }
     }
 
-    public static void addMenu() {
+    public void addMenu() {
         //here to display menu for task add
         Scanner newCreate = new Scanner(System.in);
         Messages.addTasksMenuMsg();
@@ -86,14 +89,14 @@ public class Menus {
         String newTsDate = newCreate.nextLine();
         Task newTask = new Task(newTsName,newTsProj,newTsDate);
         System.out.println("Now adding new task! Task name: "+ newTask.name + ", Task Project: " + newTask.project + ", Task Date: " + newTask.date);
-        TaskList taskList = new TaskList();
+        //this? is where the error is
         taskList.addTask(newTask);
         System.out.println("Thank you! Unfortunately this was not saved because it isn't implemented yet.");
         returnToMain();
 
     }
 
-    public static void editMenu() {
+    public void editMenu() {
         //here to display menu for edit
         Messages.editTasksMenuMsg();
         System.out.println("Press enter to continue, imagining you are selecting a task from the list");
@@ -104,7 +107,7 @@ public class Menus {
         editSubMenu();
 
     }
-    public static void editSubMenu() {
+    public void editSubMenu() {
         //this is the submenu for editing, after a task has been selected
         Messages.editTasksSelectMsg();
 
@@ -146,7 +149,7 @@ public class Menus {
             editSubMenu();
         }
     }
-    public static void returnToMain() {
+    public void returnToMain() {
         //this is a method to take the user back to the main menu after completing some edit
         //or reaching a menu item that isn't complete yet
             Messages.returnToMenuMsg();
@@ -167,14 +170,15 @@ public class Menus {
                 returnToMain();
             }
         }
-    public static void printFirst() {
-        System.out.println("Printing first task for testing!");
-        //int index = 0
-       // while(index < taskList.size()) {
-        //    Task printer = taskList.get(index);
-        //    System.out.println((index+1) + ". " + printer.name + printer.project + printer.date);
-         //   index++;
-        System.out.println("just kidding, sorreee");
+    public void printFirst() {
+        System.out.println("Printing task for testing!");
+        int index = 0;
+        while(index < taskList.size()) {
+            Task printer = taskList.get();
+            System.out.println((index + 1) + ". " + printer.name + printer.project + printer.date);
+            index++;
+        }
+        //System.out.println("just kidding, sorreee");
         }
     }
     //This does not work as I want, inputNumString is left hanging
@@ -183,5 +187,5 @@ public class Menus {
     // String inputNumString = menuSelector.nextLine();
     // System.out.println("You entered: " + inputNumString);
     // }
-}
+
 
