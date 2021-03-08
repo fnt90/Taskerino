@@ -6,14 +6,15 @@ public class Task {
     String name;
     String project;
     String date;
-    //boolean isTicked;
+    boolean isTicked;
 
 
-    public Task(String name, String project, String date) {
+    public Task(String name, String project, String date, boolean isTicked) {
         this.name = name;
         this.project = project;
         this.date = date;
-        //isTicked = true;
+        this.isTicked = isTicked;
+
     }
 
     public String getName() {
@@ -28,6 +29,10 @@ public class Task {
         return date;
     }
 
+    public boolean getTickStatus() {
+        return isTicked;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -39,14 +44,17 @@ public class Task {
     public void setProject(String project){
         this.project = project;
     }
-    //setName
-    //getName
-    //setProject
-    //getProject
-    //setDate
-    //getDate
-    //setTicked
-    //getTicked
+
+    public void setTicked(boolean isTicked) {
+        this.isTicked = isTicked;
+    }
+    public String boolToKlarsprak(){
+        if (isTicked==true){
+            return "complete";
+        } else {
+            return "incomplete";
+        }
+    }
 }
 
 

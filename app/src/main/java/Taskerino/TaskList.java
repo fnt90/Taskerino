@@ -23,6 +23,10 @@ public class TaskList {
         return taskList.size();
     }
 
+    public ArrayList<Task> getTaskList() {
+        return taskList;
+    }
+
     public Task get(int index) {
         //int index = 0;
         Task getIndexVal = taskList.get(index);

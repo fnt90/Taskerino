@@ -8,7 +8,7 @@ public class Main {
         // write comment
 
         Messages.welcomeMsg();
-        Messages.taskSummaryMsg();
+        //Messages.taskSummaryMsg();
         Menus menu = new Menus();
         menu.mainMenu();
 

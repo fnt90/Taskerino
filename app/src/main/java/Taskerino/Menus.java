@@ -15,6 +15,7 @@ public class Menus {
         Scanner menuSelector = new Scanner(System.in);
 
         Messages.mainMenuMsg();
+        makeJudgement();
         String inputNumString = menuSelector.nextLine();
         System.out.println("You entered: " + inputNumString);
 
@@ -90,7 +91,8 @@ public class Menus {
         String newTsName = TaskList.askForName();
         String newTsProj = TaskList.askForProject();
         String newTsDate = TaskList.askForDate();
-        Task newTask = new Task(newTsName,newTsProj,newTsDate);
+        //creating a new task, user input for name, project, date, and setting Ticked Off status to false
+        Task newTask = new Task(newTsName,newTsProj,newTsDate, false);
         System.out.println("Now adding new task! Task name: "+ newTask.name + ", Task Project: " + newTask.project + ", Task Date: " + newTask.date);
         taskList.addTask(newTask);
         System.out.println("Thank you! Your new task is saved.");
@@ -160,7 +162,13 @@ public class Menus {
                 returnToMain();
             } else if (inputNum == 4) {
                 //tick or untick
-                System.out.println("You can't tick/untick yet, sorry.");
+                Task editableTick = taskList.get(taskSelect);
+                if (editableTick.getTickStatus() == false) {
+                    editableTick.setTicked(true);
+                } else {
+                    editableTick.setTicked(false);
+                }
+                System.out.println("Task is now marked as: " + editableTick.boolToKlarsprak());
                 returnToMain();
             } else if (inputNum == 5) {
                 //delete task
@@ -205,17 +213,37 @@ public class Menus {
         int index = 0;
         while(index < taskList.size()) {
             Task printer = taskList.get(index);
-            System.out.println((index + 1) + ". " + printer.name + ", " + printer.project + ", " + printer.date);
+            System.out.println((index + 1) + ". " + printer.name + ", " + printer.project + ", " + printer.date + ", " + printer.boolToKlarsprak());
             index++;
         }
-        //returnToMain();
+
+    }
+
+    public void makeJudgement() {
+        //count how many tasks TRUE, using variable int tasksDone
+        //count how many tasks FALSE, using variable int tasksNotDone
+        //want to make a loop, for each task in taskList, if task.isTicked returns true, augment tasksDone by 1
+        int tasksDone = 0;
+        int tasksNotDone;
+        //tasksDone = 0;
+        for (Task task : taskList.getTaskList()) {
+
+            if (task.isTicked) {
+                tasksDone++;
+            }
+
+        }
+        tasksNotDone = taskList.size() - tasksDone;
+        System.out.println("You've completed " + tasksDone + " tasks, and you've got " + tasksNotDone + " tasks to go.");
+        if (tasksDone > tasksNotDone) {
+            Messages.judgementMsgGood();
+        } else if (tasksDone == tasksNotDone) {
+            Messages.judgementMsgNeutral();
+        } else {
+            Messages.judgementMsgBad();
+        }
+
     }
 }
-    //This does not work as I want, inputNumString is left hanging
-    //public static void textPrompt() {
-    // Scanner menuSelector = new Scanner(System.in);
-    // String inputNumString = menuSelector.nextLine();
-    // System.out.println("You entered: " + inputNumString);
-    // }
 
 
