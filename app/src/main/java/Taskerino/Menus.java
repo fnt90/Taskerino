@@ -1,10 +1,12 @@
 package Taskerino;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 
 public class Menus {
  TaskList taskList;
+ ArrayList<Task> objList;
  int taskSelect;
  public Menus() {
      taskList = new TaskList();
@@ -13,6 +15,15 @@ public class Menus {
     public void mainMenu() {
         //this should contain all of the main menu including logic and input
         Scanner menuSelector = new Scanner(System.in);
+        //Load tasks from save file... this seems to only work if there is a save file with stuff in it!!
+        //This seems to disallow new tasks from being saved..??
+        // need to change objList from ArrayList<Task> into a TaskList
+        //if (taskList.loadMethod() != null) {
+        //    objList = taskList.loadMethod();
+        //   //is this where the problem is
+        //    taskList.setTaskList(objList);
+        //    taskList.getTaskList() = taskList
+        //}
 
         Messages.mainMenuMsg();
         makeJudgement();
@@ -29,6 +40,10 @@ public class Menus {
             } else if (inputNum == 3) {
                 editMenu();
             } else if (inputNum == 4) {
+                System.out.println("Saving...");
+                //fileH.writeAsObject(taskList.getTaskList());
+                //FileHandlerObj.writeAsObject()
+                taskList.saveMethod();
                 Messages.exitMsg();
                 System.exit(0);
             } else {

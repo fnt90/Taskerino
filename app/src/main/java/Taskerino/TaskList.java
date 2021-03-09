@@ -56,5 +56,18 @@ public class TaskList {
         return date;
     }
 
+    public void setTaskList(ArrayList<Task> taskList) {
+        this.taskList = taskList;
+    }
 
+    public void saveMethod() {
+        FileHandlerObj saverFile = new FileHandlerObj();
+        saverFile.writeAsObject(taskList);
+    }
+    public ArrayList<Task> loadMethod() {
+        FileHandlerObj loaderFile = new FileHandlerObj();
+        ArrayList<Task> objList = new ArrayList<>();
+        objList = loaderFile.readAsObject();
+        return objList;
+    }
 }

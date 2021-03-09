@@ -5,13 +5,17 @@ import java.util.ArrayList;
 
 //to write as object!! Task class will need to implement Serializable
 public class FileHandlerObj {
-//C:\Users\fiona\Documents\IdeaProjs\Taskerino\app\src\main\resources
-    private String path = "src/main/resources";
-    TaskList taskList;
+//my path is C:\Users\fiona\Documents\IdeaProjs\Taskerino\app\src\main\resources
+    private String path = "app/src/main/resources/";
+    //TaskList objList;
+    //File taskerinoObjData;
 
     public void writeAsObject(ArrayList<Task> objList) {
         try {
-            FileOutputStream fileWriter = new FileOutputStream(path + "taskerinoObjData.txt"));
+
+            FileOutputStream fileWriter = new FileOutputStream(new File(path + "taskerinoObjData.txt"));
+
+            //FileOutputStream fileWriter = new FileOutputStream(new File(path + "taskerinoObjData.txt"));
             ObjectOutputStream objWriter = new ObjectOutputStream(fileWriter);
 
             objWriter.writeObject(objList);
@@ -19,14 +23,14 @@ public class FileHandlerObj {
             objWriter.close();
             fileWriter.close();
         } catch (IOException e) {
-            System.out.println("File not found." + e);
+            System.out.println("File not found.");
         }
     }
-    public void readAsObject() {
+    public ArrayList<Task> readAsObject() {
         ArrayList<Task> objList = new ArrayList<>();
 
         try {
-            FileInputStream fileStream = new FileInputStream(path + "taskerinoObjData.txt"));
+            FileInputStream fileStream = new FileInputStream(path + "taskerinoObjData.txt");
             ObjectInputStream objReader = new ObjectInputStream(fileStream);
 
             objList = (ArrayList<Task>) objReader.readObject();
@@ -34,16 +38,12 @@ public class FileHandlerObj {
             fileStream.close();
 
 
-
-           // bufReader.close();
         } catch (IOException e) {
-            System.out.println("File not found." + e);
+            System.out.println("No save file loaded");
         } catch (ClassNotFoundException e) {
-            System.out.println("File not found." + e);
-        } catch (FileNotFoundException e) {
-            System.out.println("File not found." + e);
+            System.out.println("No save file loaded.");
         }
-
+    return objList;
     }
 
 }
