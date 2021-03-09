@@ -3,11 +3,12 @@ package Taskerino;
 import java.io.*;
 import java.util.ArrayList;
 
-//to write as object!! Task class will need to implement Serializable
+//to write as object Task class will need to implement Serializable
+//TODO check to make sure Serializable is not needed anymore before removing it
 public class FileHandlerObj {
 //my path is C:\Users\fiona\Documents\IdeaProjs\Taskerino\app\src\main\resources
     private String path = "app/src/main/resources/";
-
+    //need to include app in string to prevent error
 
     public void writeAsObject(ArrayList<Task> objList) {
         try {
@@ -18,7 +19,6 @@ public class FileHandlerObj {
                 fileWriter.write(writeTask.date+ ",,");
                 fileWriter.write(writeTask.boolToString()+ ",\n");
             }
-            //objWriter.close();
             fileWriter.close();
         } catch (IOException e) {
             System.out.println("File not found.");
@@ -40,6 +40,7 @@ public class FileHandlerObj {
             }
             fileReader.close();
         } catch (IOException e) {
+            //this will print before the Main Menu message if there was no saved data found
             System.out.println("(No save file loaded)");
         }
     return objList;

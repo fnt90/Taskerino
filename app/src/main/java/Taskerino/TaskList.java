@@ -28,15 +28,16 @@ public class TaskList {
     }
 
     public Task get(int index) {
-        //int index = 0;
         Task getIndexVal = taskList.get(index);
         return getIndexVal;
     }
 
     public static String askForName() {
+        //Prompts user to input name, either when adding new task or selecting Edit Name
         Scanner askName = new Scanner(System.in);
         System.out.println("Type new task name:");
         String name = askName.nextLine();
+        //If user does not type a name, replace blank with **Untitled**
         if (name.length()==0) {
             return "**Untitled**";
         }
@@ -44,12 +45,14 @@ public class TaskList {
         return name;
     }
     public static String askForProject() {
+        //Prompts user to input project, either when adding new task or selecting Edit Project
         Scanner askProj = new Scanner(System.in);
         System.out.println("Type new task project:");
         String project = askProj.nextLine();
         return project;
     }
     public static String askForDate() {
+        //Prompts user to input due date, either when adding new task or selecting Edit Date
         Scanner askDate = new Scanner(System.in);
         System.out.println("Type new task due date:");
         String date = askDate.nextLine();
@@ -64,7 +67,6 @@ public class TaskList {
         FileHandlerObj saverFile = new FileHandlerObj();
         saverFile.writeAsObject(taskList);
     }
-
 
     public ArrayList<Task> loadMethod() {
         FileHandlerObj loaderFile = new FileHandlerObj();

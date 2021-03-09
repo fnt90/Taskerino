@@ -3,7 +3,7 @@ package Taskerino;
 public class Main {
 
     public static void main(String[] args) {
-        // write comment
+        //main method of Taskerino!
 
         Messages.welcomeMsg();
         Menus menu = new Menus();

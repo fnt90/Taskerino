@@ -25,6 +25,7 @@ public class Task implements Serializable {
     //}
 
     public Task(String name, String project, String date, String status) {
+        //this was added in order to correctly read Ticked status from save file
         this.name = name;
         this.project = project;
         this.date = date;
@@ -64,6 +65,7 @@ public class Task implements Serializable {
     }
 
     public String boolToString(){
+        //to convert boolean TRUE to "complete" and FALSE to "incomplete" for user understanding
         if (isTicked==true){
             return "complete";
         } else {
@@ -71,6 +73,7 @@ public class Task implements Serializable {
         }
     }
     public boolean stringToBool(String string) {
+        //to convert saved data from String back into boolean form, to correctly display # of tasks done and allow editing
         if (string.equals("complete")) {
             return true;
         } else {

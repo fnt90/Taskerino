@@ -16,8 +16,9 @@ public class Menus {
     public void mainMenu() {
         //this should contain all of the main menu including logic and input
         Scanner menuSelector = new Scanner(System.in);
-
+        //load save file
         objList = taskList.loadMethod();
+        //check if save file has already been loaded to avoid re-loading old data which prevents editing
         if (objList != null && !alreadyLoaded) {
 
             taskList.setTaskList(objList);
@@ -32,20 +33,24 @@ public class Menus {
         String inputNumString = menuSelector.nextLine();
         System.out.println("You entered: " + inputNumString + "\n");
 
-        // to disallow non integer inputs or values outside of 1-5
+        // to disallow non-integer inputs or values outside of 1-5
         try {
             int inputNum = Integer.parseInt(inputNumString);
             if (inputNum == 1) {
+                //add task
                 addMenu();
             } else if (inputNum == 2) {
+                //print tasks
                 showMenu();
             } else if (inputNum == 3) {
+                //edit or delete task
                 editMenu();
             } else if (inputNum == 4) {
                 //view instructions
                 Messages.instructionsMsg();
                 returnToMain();
             } else if (inputNum == 5) {
+                //save and quit
                 System.out.println("Saving...");
                 taskList.saveMethod();
                 Messages.exitMsg();
@@ -67,7 +72,7 @@ public class Menus {
             System.out.println("You don't have any tasks to show!");
             returnToMain();
         }
-        //here to display menu for showing list of tasks
+        //display menu for options how to show list of tasks
         Messages.showTasksMenuMsg();
         Scanner menuSelector = new Scanner(System.in);
         String inputNumString = menuSelector.nextLine();
@@ -97,6 +102,7 @@ public class Menus {
                 printList();
                 returnToMain();
             } else {
+                //tell user input was invalid and return to Show Tasks menu
                 Messages.invalidInputMsg();
                 showMenu();
             }
@@ -107,7 +113,7 @@ public class Menus {
     }
 
     public void addMenu() {
-        //here to display menu for task add
+        //display menu for adding new task, get user input for Name/Project/Date
         Messages.addTasksMenuMsg();
         String newTsName = TaskList.askForName();
         String newTsProj = TaskList.askForProject();
@@ -122,7 +128,7 @@ public class Menus {
     }
 
     public int taskListSelect() {
-     //this will take input from user, convert to integer, and then should convert this int by -1 to make index
+     //this will take input from user, convert to integer, and then should subtract 1 to make index
         Scanner taskSelector = new Scanner(System.in);
         //here, taking user input and storing it as string
         String taskSelectString = taskSelector.nextLine();
@@ -148,8 +154,9 @@ public class Menus {
             System.out.println("You don't have any tasks to edit!");
             returnToMain();
         }
-        //here to display menu for edit
+        //display menu for edit options
         Messages.editTasksMenuMsg();
+        //show all saved tasks to allow user to choose one
         printList();
         System.out.println("Select a task from the list by entering its number.");
         taskListSelect();
@@ -182,7 +189,7 @@ public class Menus {
                 System.out.println("Task date changed to:" + editableDate.date);
                 returnToMain();
             } else if (inputNum == 4) {
-                //tick or untick
+                //tick or untick: set Complete to Incomplete, or Incomplete to Complete
                 Task editableTick = taskList.get(taskSelect);
                 if (editableTick.getTickStatus() == false) {
                     editableTick.setTicked(true);
@@ -197,8 +204,10 @@ public class Menus {
                 System.out.println("Task deleted.");
                 returnToMain();
             } else if (inputNum == 6) {
+                //main menu
                 mainMenu();
             } else {
+                //tell user input was invalid and return to Edit Tasks menu
                 Messages.invalidInputMsg();
                 editMenu();
             }
@@ -209,13 +218,13 @@ public class Menus {
     }
 
     public void returnToMain() {
-        //this is a method to take the user back to the main menu after completing some edit
+        //take the user back to the main menu after adding/editing/printing
         //or reaching a menu item that isn't complete yet
             Messages.returnToMenuMsg();
             Scanner menuOne = new Scanner(System.in);
             String inputOne = menuOne.nextLine();
 
-            // to disallow input of anything that isn't 1
+            // to disallow input of anything other than 1
             try {
                 int menuInt = Integer.parseInt(inputOne);
                 if (menuInt == 1) {
@@ -230,19 +239,20 @@ public class Menus {
             }
         }
     public void printList() {
+        //show all saved tasks in the order they were added
         int index = 0;
         while(index < taskList.size()) {
             Task printer = taskList.get(index);
             System.out.println((index + 1) + ". " + printer.name + ", " + printer.project + ", " + printer.date + ", " + printer.boolToString());
             index++;
         }
-
     }
 
     public void makeJudgement() {
-        //count how many tasks TRUE, using variable int tasksDone
-        //count how many tasks FALSE, using variable int tasksNotDone
-        //want to make a loop, for each task in taskList, if task.isTicked returns true, augment tasksDone by 1
+        /* count how many tasks TRUE (complete) using variable int tasksDone
+        ** count how many tasks FALSE (incomplete) using variable int tasksNotDone
+        ** loop for each saved task. If task.isTicked returns true (is complete), augment tasksDone by 1
+         */
         int tasksDone = 0;
         int tasksNotDone;
         for (Task task : taskList.getTaskList()) {
@@ -250,8 +260,10 @@ public class Menus {
                 tasksDone++;
             }
         }
+        //counted completed tasks, so incomplete tasks = total - completed
         tasksNotDone = taskList.size() - tasksDone;
         System.out.println("You've completed " + tasksDone + " tasks, and you've got " + tasksNotDone + " tasks to go.");
+        //choose which judgement message to print
         if (tasksDone > tasksNotDone) {
             Messages.judgementMsgGood();
         } else if (tasksDone == tasksNotDone) {

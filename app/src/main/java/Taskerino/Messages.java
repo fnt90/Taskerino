@@ -7,7 +7,7 @@ public class Messages {
     }
 
     public static void mainMenuMsg() {
-        //Message to display menu options
+        //Display all main menu options
         System.out.println("~~~MAIN MENU~~~");
         System.out.println("What do you want to do?");
         System.out.println("1. Add new task");
@@ -18,7 +18,7 @@ public class Messages {
 
     }
     public static void showTasksMenuMsg() {
-        //Message to let user know they entered Show menu
+        //Display all Show menu options
         System.out.println("~SHOW TASKS MENU~");
         System.out.println("How do you want to sort your tasks?");
         System.out.println("0. Show all tasks");
@@ -28,17 +28,17 @@ public class Messages {
         System.out.println("4. Return to main menu");
     }
     public static void addTasksMenuMsg() {
-        //Message to let user know they entered Add menu
+        //welcome user to Add tasks menu
         System.out.println("~ADD TASKS MENU~");
         System.out.println("Enter a new task with a Name, Project, and Date.");
     }
     public static void editTasksMenuMsg() {
-        //Message to let user know they entered Edit menu
+        //welcome user to Edit menu
         System.out.println("~EDIT MENU~");
         System.out.println("You selected Edit, delete or tick off a task.");
     }
     public static void editTasksSelectMsg() {
-        //Message to provide edit options after selecting a task to edit
+        //Display all Edit menu options after selecting which task to edit
         System.out.println("~~EDIT SUBMENU");
         System.out.println("What do you want to do with this task?");
         System.out.println("1. Edit name");
@@ -49,19 +49,18 @@ public class Messages {
         System.out.println("6. Return to main menu");
     }
     public static void invalidInputMsg() {
-        /*Message to display when user inputs unexpected value as a menu choice.
-         *e.g. input "5" or "ghjkf" when menu options are 1,2,3,4
-         */
+        //tell user they typed a value that was not a menu choice
         System.out.println("Please enter a valid digit.");
     }
 
     public static void returnToMenuMsg() {
-        //Message to instruct user how to return to main menu after Adding, Editing, or Showing (sorted list)
+        //Prompt to user to return to main menu after Adding, Editing, or Showing (sorted list)
+        //This is used mostly to avoid automatically returning to main menu and clogging screen
         System.out.println("Enter 1 to return to main menu.");
     }
 
     public static void exitMsg() {
-        //Message to display after Save & Quit option is selected
+        //Display after Save & Quit option is selected
         System.out.println("Thanks for using Taskerino! See you again soon!");
     }
 
@@ -80,6 +79,7 @@ public class Messages {
         System.out.println("Lots to do today! You can do it!");
     }
     public static void instructionsMsg() {
+        //Provide some basic info about the program to user, upon request
         System.out.println("~INSTRUCTIONS~");
         System.out.println("Thanks for checking out my To-Do List project! This program \n" +
                 "will store tasks for you to help you remember what you need \n" +
@@ -89,6 +89,8 @@ public class Messages {
                 "next time you start. A task's name and project fields can \n" +
                 "hold any text you want, but please don't use two commas in \n" +
                 "a row (,,) as your save file won't load correctly if you do.\n" +
+                "Leaving a task Name blank will result in **Untitled**, but\n" +
+                "leaving a task Project or Date blank will save as blank/empty.\n" +
                 "Currently, the date field can hold any text, but this will \n" +
                 "change eventually (read: very soon as it’s due in a week).\n" +
                 "You can find more information in the README.\n");
