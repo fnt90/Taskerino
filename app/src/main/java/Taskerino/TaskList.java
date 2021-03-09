@@ -64,6 +64,8 @@ public class TaskList {
         FileHandlerObj saverFile = new FileHandlerObj();
         saverFile.writeAsObject(taskList);
     }
+
+
     public ArrayList<Task> loadMethod() {
         FileHandlerObj loaderFile = new FileHandlerObj();
         ArrayList<Task> objList = new ArrayList<>();

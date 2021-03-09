@@ -7,20 +7,18 @@ import java.util.ArrayList;
 public class FileHandlerObj {
 //my path is C:\Users\fiona\Documents\IdeaProjs\Taskerino\app\src\main\resources
     private String path = "app/src/main/resources/";
-    //TaskList objList;
-    //File taskerinoObjData;
+
 
     public void writeAsObject(ArrayList<Task> objList) {
         try {
-
-            FileOutputStream fileWriter = new FileOutputStream(new File(path + "taskerinoObjData.txt"));
-
-            //FileOutputStream fileWriter = new FileOutputStream(new File(path + "taskerinoObjData.txt"));
-            ObjectOutputStream objWriter = new ObjectOutputStream(fileWriter);
-
-            objWriter.writeObject(objList);
-
-            objWriter.close();
+            FileWriter fileWriter = new FileWriter(new File(path + "taskerinoData.txt"));
+            for (Task writeTask : objList) {
+                fileWriter.write(writeTask.name + ",,");
+                fileWriter.write(writeTask.project+ ",,");
+                fileWriter.write(writeTask.date+ ",,");
+                fileWriter.write(writeTask.boolToKlarsprak()+ ",\n");
+            }
+            //objWriter.close();
             fileWriter.close();
         } catch (IOException e) {
             System.out.println("File not found.");
@@ -30,18 +28,19 @@ public class FileHandlerObj {
         ArrayList<Task> objList = new ArrayList<>();
 
         try {
-            FileInputStream fileStream = new FileInputStream(path + "taskerinoObjData.txt");
-            ObjectInputStream objReader = new ObjectInputStream(fileStream);
+            FileReader fileReader = new FileReader(path + "taskerinoData.txt");
+            BufferedReader bufReader = new BufferedReader(fileReader);
 
-            objList = (ArrayList<Task>) objReader.readObject();
-            objReader.close();
-            fileStream.close();
-
-
+            String line = "";
+            String[] data;
+            while ((line = bufReader.readLine()) != null) {
+                data = line.split(",,");
+                Task saveTask = new Task(data[0], data[1], data[2], data[3]);
+                objList.add(saveTask);
+            }
+            fileReader.close();
         } catch (IOException e) {
             System.out.println("No save file loaded");
-        } catch (ClassNotFoundException e) {
-            System.out.println("No save file loaded.");
         }
     return objList;
     }

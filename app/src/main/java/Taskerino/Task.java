@@ -17,7 +17,21 @@ public class Task implements Serializable {
         this.isTicked = isTicked;
 
     }
+    //public Task(String name, String project, String date) {
+    //    this.name = name;
+    //    this.project = project;
+    //    this.date = date;
+     //   this.isTicked = false;
 
+    //}
+
+    public Task(String name, String project, String date, String status) {
+        this.name = name;
+        this.project = project;
+        this.date = date;
+        this.isTicked = klarsprakToBool(status);
+
+    }
     public String getName() {
         return name;
     }
@@ -49,11 +63,19 @@ public class Task implements Serializable {
     public void setTicked(boolean isTicked) {
         this.isTicked = isTicked;
     }
+
     public String boolToKlarsprak(){
         if (isTicked==true){
             return "complete";
         } else {
             return "incomplete";
+        }
+    }
+    public boolean klarsprakToBool(String string) {
+        if (string.equals("complete")) {
+            return true;
+        } else {
+            return false;
         }
     }
 }

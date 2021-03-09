@@ -8,6 +8,7 @@ public class Menus {
  TaskList taskList;
  ArrayList<Task> objList;
  int taskSelect;
+ boolean alreadyLoaded = false;
  public Menus() {
      taskList = new TaskList();
  }
@@ -15,15 +16,14 @@ public class Menus {
     public void mainMenu() {
         //this should contain all of the main menu including logic and input
         Scanner menuSelector = new Scanner(System.in);
-        //Load tasks from save file... this seems to only work if there is a save file with stuff in it!!
-        //This seems to disallow new tasks from being saved..??
-        // need to change objList from ArrayList<Task> into a TaskList
-        //if (taskList.loadMethod() != null) {
-        //    objList = taskList.loadMethod();
-        //   //is this where the problem is
-        //    taskList.setTaskList(objList);
-        //    taskList.getTaskList() = taskList
-        //}
+
+        objList = taskList.loadMethod();
+        if (objList != null && !alreadyLoaded) {
+
+            taskList.setTaskList(objList);
+            alreadyLoaded = true;
+
+        }
 
         Messages.mainMenuMsg();
         makeJudgement();
@@ -41,8 +41,6 @@ public class Menus {
                 editMenu();
             } else if (inputNum == 4) {
                 System.out.println("Saving...");
-                //fileH.writeAsObject(taskList.getTaskList());
-                //FileHandlerObj.writeAsObject()
                 taskList.saveMethod();
                 Messages.exitMsg();
                 System.exit(0);
@@ -240,13 +238,10 @@ public class Menus {
         //want to make a loop, for each task in taskList, if task.isTicked returns true, augment tasksDone by 1
         int tasksDone = 0;
         int tasksNotDone;
-        //tasksDone = 0;
         for (Task task : taskList.getTaskList()) {
-
             if (task.isTicked) {
                 tasksDone++;
             }
-
         }
         tasksNotDone = taskList.size() - tasksDone;
         System.out.println("You've completed " + tasksDone + " tasks, and you've got " + tasksNotDone + " tasks to go.");
