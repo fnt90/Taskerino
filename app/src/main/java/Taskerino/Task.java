@@ -1,6 +1,5 @@
 package Taskerino;
 import java.io.Serializable;
-import java.util.Scanner;
 
 public class Task implements Serializable {
     //this gives instructions on how an object Task should look like
@@ -29,7 +28,7 @@ public class Task implements Serializable {
         this.name = name;
         this.project = project;
         this.date = date;
-        this.isTicked = klarsprakToBool(status);
+        this.isTicked = stringToBool(status);
 
     }
     public String getName() {
@@ -64,14 +63,14 @@ public class Task implements Serializable {
         this.isTicked = isTicked;
     }
 
-    public String boolToKlarsprak(){
+    public String boolToString(){
         if (isTicked==true){
             return "complete";
         } else {
             return "incomplete";
         }
     }
-    public boolean klarsprakToBool(String string) {
+    public boolean stringToBool(String string) {
         if (string.equals("complete")) {
             return true;
         } else {

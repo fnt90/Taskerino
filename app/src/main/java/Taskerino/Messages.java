@@ -10,25 +10,27 @@ public class Messages {
         //Message to display menu options
         System.out.println("~~~MAIN MENU~~~");
         System.out.println("What do you want to do?");
-        System.out.println("1. Show all saved tasks");
-        System.out.println("2. Add new task");
+        System.out.println("1. Add new task");
+        System.out.println("2. Show all saved tasks");
         System.out.println("3. Edit, delete, or tick off a task");
-        System.out.println("4. Save and quit");
-        System.out.println("Type your selected digit and press Enter/Return");
+        System.out.println("4. View instructions");
+        System.out.println("5. Save and quit");
+
     }
     public static void showTasksMenuMsg() {
         //Message to let user know they entered Show menu
         System.out.println("~SHOW TASKS MENU~");
         System.out.println("How do you want to sort your tasks?");
-        System.out.println("0. for testing");
-        System.out.println("1. By ticked status (complete first)");
-        System.out.println("2. By due date (oldest first)");
-        System.out.println("3. By project (alphabetical)");
+        System.out.println("0. Show all tasks");
+        System.out.println("INACTIVE 1. By ticked status (complete first)");
+        System.out.println("INACTIVE 2. By due date (oldest first)");
+        System.out.println("INACTIVE 3. By project (alphabetical)");
         System.out.println("4. Return to main menu");
     }
     public static void addTasksMenuMsg() {
         //Message to let user know they entered Add menu
         System.out.println("~ADD TASKS MENU~");
+        System.out.println("Enter a new task with a Name, Project, and Date.");
     }
     public static void editTasksMenuMsg() {
         //Message to let user know they entered Edit menu
@@ -55,12 +57,12 @@ public class Messages {
 
     public static void returnToMenuMsg() {
         //Message to instruct user how to return to main menu after Adding, Editing, or Showing (sorted list)
-        System.out.println("Type 1 to return to main menu.");
+        System.out.println("Enter 1 to return to main menu.");
     }
 
     public static void exitMsg() {
         //Message to display after Save & Quit option is selected
-        System.out.println("Kthxbye!");
+        System.out.println("Thanks for using Taskerino! See you again soon!");
     }
 
     public static void judgementMsgGood() {
@@ -77,12 +79,18 @@ public class Messages {
         //Message to display if user has equal number of tasks complete and incomplete
         System.out.println("Lots to do today! You can do it!");
     }
-
-    //public static void taskSummaryMsg() {
-        /*Message to display summary of how many tasks are complete and how many are incomplete
-         *Need to replace "X" with variable containing number of tasks complete, and "Y" with incomplete
-         */
-        //System.out.println("You've completed " + "X" + " tasks, and you've got " + "Y" + " tasks to go.");
-    //}
-
+    public static void instructionsMsg() {
+        System.out.println("~INSTRUCTIONS~");
+        System.out.println("Thanks for checking out my To-Do List project! This program \n" +
+                "will store tasks for you to help you remember what you need \n" +
+                "to get done. Taskerino will also look at how many tasks you \n" +
+                "have completed, and give you a suitable judgement (hehe). It \n" +
+                "saves to a .txt file, and will load your saved tasks the \n" +
+                "next time you start. A task's name and project fields can \n" +
+                "hold any text you want, but please don't use two commas in \n" +
+                "a row (,,) as your save file won't load correctly if you do.\n" +
+                "Currently, the date field can hold any text, but this will \n" +
+                "change eventually (read: very soon as it’s due in a week).\n" +
+                "You can find more information in the README.\n");
+    }
 }

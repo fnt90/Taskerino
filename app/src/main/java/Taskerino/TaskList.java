@@ -35,7 +35,7 @@ public class TaskList {
 
     public static String askForName() {
         Scanner askName = new Scanner(System.in);
-        System.out.println("Type task name:");
+        System.out.println("Type new task name:");
         String name = askName.nextLine();
         if (name.length()==0) {
             return "**Untitled**";
@@ -45,13 +45,13 @@ public class TaskList {
     }
     public static String askForProject() {
         Scanner askProj = new Scanner(System.in);
-        System.out.println("Type task project:");
+        System.out.println("Type new task project:");
         String project = askProj.nextLine();
         return project;
     }
     public static String askForDate() {
         Scanner askDate = new Scanner(System.in);
-        System.out.println("Type task due date:");
+        System.out.println("Type new task due date:");
         String date = askDate.nextLine();
         return date;
     }

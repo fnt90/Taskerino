@@ -16,7 +16,7 @@ public class FileHandlerObj {
                 fileWriter.write(writeTask.name + ",,");
                 fileWriter.write(writeTask.project+ ",,");
                 fileWriter.write(writeTask.date+ ",,");
-                fileWriter.write(writeTask.boolToKlarsprak()+ ",\n");
+                fileWriter.write(writeTask.boolToString()+ ",\n");
             }
             //objWriter.close();
             fileWriter.close();
@@ -40,7 +40,7 @@ public class FileHandlerObj {
             }
             fileReader.close();
         } catch (IOException e) {
-            System.out.println("No save file loaded");
+            System.out.println("(No save file loaded)");
         }
     return objList;
     }
