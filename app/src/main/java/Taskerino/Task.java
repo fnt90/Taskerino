@@ -1,10 +1,7 @@
 package Taskerino;
-import java.io.Serializable;
+
 import java.util.Comparator;
-import java.time.DateTimeException;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
 
 
 public class Task {
@@ -23,7 +20,7 @@ public class Task {
     }
 
     public Task(String name, String project, String sDate, String status) {
-        //this was added in order to correctly read Ticked status from save file
+        //this was added in order to correctly read Date and Ticked status from save file
         this.name = name;
         this.project = project;
         this.date = LocalDate.parse(sDate);
@@ -79,13 +76,6 @@ public class Task {
         }
     }
 
-    //public String ldateToString(String string) {
-        //implement localDate to string
-    //}
-
-    //public LocalDate stringToLDate(LocalDate localDate) {
-    //implement string to localdate
-    //}
 
     //solution from https://beginnersbook.com/2013/12/java-arraylist-of-object-sort-example-comparable-and-comparator/
     //under heading Sorting ArrayList<Object> multiple properties with Comparator

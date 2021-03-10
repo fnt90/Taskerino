@@ -256,8 +256,8 @@ public class Menus {
         while(index < taskList.size()) {
             Task printer = taskList.get(index);
             String taskStatus = printer.boolToString();
-            //System.out.println((index + 1) + ". " + printer.name + ", " + printer.project + ", " + printer.date + ", " + ansBlue + printer.boolToString()+ansClear); //TODO green for complete?
             System.out.print((index + 1) + ". " + printer.name + ", " + printer.project + ", " + printer.date + ", ");
+            //if statement to print incomplete in blue but complete in normal colour
             if (taskStatus.equals("incomplete")) {
                 System.out.print(ansBlue + "incomplete" + ansClear + "\n");
             } else {
