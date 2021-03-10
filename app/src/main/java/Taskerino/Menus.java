@@ -9,6 +9,11 @@ public class Menus {
  ArrayList<Task> objList;
  int taskSelect;
  boolean alreadyLoaded = false;
+ public static final String ansReverse = "\u001b[7m";
+ public static final String ansYellow = "\u001B[33m";
+ public static final String ansClear = "\u001B[0m";
+public static final String ansBkBlue = "\u001b[30;44m";
+
  public Menus() {
      taskList = new TaskList();
  }
@@ -29,7 +34,7 @@ public class Menus {
         Messages.mainMenuMsg();
         //read how many tasks the user has marked Done and Not done, and print a message to correspond
         makeJudgement();
-        System.out.println("Select an option by typing a digit and pressing Enter/Return.");
+        System.out.println(ansReverse + "Select an option by typing a digit and pressing Enter/Return."+ ansClear);
         String inputNumString = menuSelector.nextLine();
         System.out.println("You entered: " + inputNumString + "\n");
 
@@ -98,7 +103,7 @@ public class Menus {
                 mainMenu();
             } else if (inputNum == 0) {
                 //just print all stored tasks
-                System.out.println("Here are all your saved tasks:");
+                System.out.println(ansYellow + "Here are all your saved tasks:" + ansClear);
                 printList();
                 returnToMain();
             } else {
@@ -120,7 +125,7 @@ public class Menus {
         String newTsDate = TaskList.askForDate();
         //creating a new task, user input for name, project, date, and setting default Ticked status to false
         Task newTask = new Task(newTsName,newTsProj,newTsDate, false);
-        System.out.println("NEW TASK Name: "+ newTask.name + "\nProject: " + newTask.project + "\nDate: " + newTask.date);
+        System.out.println("NEW TASK Name: "+ ansBkBlue + newTask.name + ansClear + "\nProject: " + ansBkBlue + newTask.project + ansClear + "\nDate: " + ansBkBlue + newTask.date + ansClear);
         taskList.addTask(newTask);
         System.out.println("Your new task is saved.");
         returnToMain();
@@ -138,7 +143,7 @@ public class Menus {
             //take integer of user input and convert to index by subtracting 1
             taskSelect--;
             Task editor = taskList.get(taskSelect);
-            System.out.println("You selected: "+ (taskSelect + 1) + ". " + editor.name + ", " + editor.project + ", " + editor.date + ", " + editor.boolToString());
+            System.out.println( "You selected: "+ ansBkBlue + (taskSelect + 1) + ". " + editor.name + ", " + editor.project + ", " + editor.date + ", " + editor.boolToString() + ansClear);
             return taskSelect;
         } catch (NumberFormatException e) {
             Messages.invalidInputMsg();
@@ -174,19 +179,19 @@ public class Menus {
                 //edit name
                 Task editableName = taskList.get(taskSelect);
                 editableName.setName(TaskList.askForName());
-                System.out.println("Task name changed to:" + editableName.name);
+                System.out.println("Task name changed to:" + ansBkBlue + editableName.name + ansClear);
                 returnToMain();
             } else if (inputNum == 2) {
                 //edit project
                 Task editableProj = taskList.get(taskSelect);
                 editableProj.setProject(TaskList.askForProject());
-                System.out.println("Task project changed to:" + editableProj.project);
+                System.out.println("Task project changed to:" + ansBkBlue + editableProj.project + ansClear);
                 returnToMain();
             } else if (inputNum == 3) {
                 //edit date
                 Task editableDate = taskList.get(taskSelect);
                 editableDate.setDate(TaskList.askForDate());
-                System.out.println("Task date changed to:" + editableDate.date);
+                System.out.println("Task date changed to:" + ansBkBlue + editableDate.date + ansClear);
                 returnToMain();
             } else if (inputNum == 4) {
                 //tick or untick: set Complete to Incomplete, or Incomplete to Complete
@@ -196,7 +201,7 @@ public class Menus {
                 } else {
                     editableTick.setTicked(false);
                 }
-                System.out.println("Task is now marked as: " + editableTick.boolToString());
+                System.out.println("Task is now marked as: " + ansBkBlue + editableTick.boolToString() + ansClear);
                 returnToMain();
             } else if (inputNum == 5) {
                 //delete task
@@ -262,7 +267,7 @@ public class Menus {
         }
         //counted completed tasks, so incomplete tasks = total - completed
         tasksNotDone = taskList.size() - tasksDone;
-        System.out.println("You've completed " + tasksDone + " tasks, and you've got " + tasksNotDone + " tasks to go.");
+        System.out.println("You've completed " + ansYellow + tasksDone + ansClear + " tasks, and you've got " + ansYellow + tasksNotDone + ansClear + " tasks to go.");
         //choose which judgement message to print
         if (tasksDone > tasksNotDone) {
             Messages.judgementMsgGood();

@@ -17,7 +17,7 @@ public class FileHandlerObj {
                 fileWriter.write(writeTask.name + ",,");
                 fileWriter.write(writeTask.project+ ",,");
                 fileWriter.write(writeTask.date+ ",,");
-                fileWriter.write(writeTask.boolToString()+ ",\n");
+                fileWriter.write(writeTask.boolToString()+ ",,\n");
             }
             fileWriter.close();
         } catch (IOException e) {
