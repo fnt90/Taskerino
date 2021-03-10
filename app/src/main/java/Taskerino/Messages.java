@@ -1,9 +1,12 @@
 package Taskerino;
 
 public class Messages {
+    public static final String ansClear = "\u001B[0m";
+    public static final String ansBold = "\u001b[1m";
+    public static final String ansYellow = "\u001B[33m";
     public static void welcomeMsg() {
         //A happy welcoming message to be printed only upon starting up the program
-        System.out.println("Welcome to Taskerino!");
+        System.out.println(ansYellow + "Welcome to " + ansBold + "Taskerino!" + ansClear);
     }
 
     public static void mainMenuMsg() {
