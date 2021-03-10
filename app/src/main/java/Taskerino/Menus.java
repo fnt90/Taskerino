@@ -91,7 +91,8 @@ public class Menus {
             int inputNum = Integer.parseInt(inputNumString);
             if (inputNum == 1) {
                 //by ticked status
-                System.out.println("You can't sort by ticked yet, sorry.");
+                System.out.println(ansYellow + "Here are all your saved tasks (incomplete first):" + ansClear);
+                printListStatus();
                 returnToMain();
             } else if (inputNum == 2) {
                 //by due date
@@ -287,6 +288,29 @@ public class Menus {
             Messages.judgementMsgBad();
         }
 
+    }
+
+    public void printListStatus() {
+        //show all saved tasks incomplete first, then complete
+        int index = 0;
+        while(index < taskList.size()) {
+            Task printer = taskList.get(index);
+            String taskStatus = printer.boolToString();
+            if (taskStatus.equals("incomplete")) {
+                System.out.println("- " + printer.name + ", " + printer.project + ", " + printer.date + ", " + ansBlue + printer.boolToString()+ansClear);
+            }
+            index++;
+        }
+        //print all tasks with complete status
+        int index2 = 0;
+        while(index2 < taskList.size()) {
+            Task printer = taskList.get(index2);
+            String taskStatus = printer.boolToString();
+            if (taskStatus.equals("complete")) {
+                System.out.println("- " + printer.name + ", " + printer.project + ", " + printer.date + ", " + printer.boolToString());
+            }
+            index2++;
+        }
     }
 }
 
