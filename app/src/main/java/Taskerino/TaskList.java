@@ -1,5 +1,9 @@
 package Taskerino;
+import java.time.DateTimeException;
+import java.time.LocalDate;
+
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Scanner;
 
 public class TaskList {
@@ -9,6 +13,7 @@ public class TaskList {
     //for formatting text and clearing formatting
     public static final String ansBold = "\u001b[1m";
     public static final String ansClear = "\u001B[0m";
+    public static final String ansYellow = "\u001B[33m";
 
     public TaskList() {
         taskList = new ArrayList<>();
@@ -55,12 +60,19 @@ public class TaskList {
         String project = askProj.nextLine();
         return project;
     }
-    public static String askForDate() {
+    public static LocalDate askForDate() {
         //Prompts user to input due date, either when adding new task or selecting Edit Date
         Scanner askDate = new Scanner(System.in);
-        System.out.println("Type new task " + ansBold + "due date" + ansClear + ":");
-        String date = askDate.nextLine();
-        return date;
+        System.out.println("Type new task " + ansBold + "due date " + ansYellow + "(YYYY-MM-DD)" + ansClear + ":");
+        try {
+            LocalDate date = LocalDate.parse(askDate.nextLine());
+
+            return date;
+        } catch (DateTimeException e) {
+            System.out.println("Invalid date entered. " + ansYellow + "Setting due date to " + ansBold + "today." + ansClear);
+            LocalDate date = LocalDate.now();
+            return date;
+        }
     }
 
     public void setTaskList(ArrayList<Task> taskList) {
@@ -78,4 +90,7 @@ public class TaskList {
         objList = loaderFile.readAsObject();
         return objList;
     }
+
+    //public void sort(Comparator<Task> taskProjComparator) {
+    //}
 }

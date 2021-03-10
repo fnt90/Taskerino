@@ -1,26 +1,32 @@
 package Taskerino;
 import java.io.Serializable;
+import java.util.Comparator;
+import java.time.DateTimeException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+
 
 public class Task {
     //this gives instructions on how an object Task should look like
     String name;
     String project;
-    String date;
+    LocalDate date;
     boolean isTicked;
 
 
-    public Task(String name, String project, String date, boolean isTicked) {
+    public Task(String name, String project, LocalDate date, boolean isTicked) {
         this.name = name;
         this.project = project;
         this.date = date;
         this.isTicked = isTicked;
     }
 
-    public Task(String name, String project, String date, String status) {
+    public Task(String name, String project, String sDate, String status) {
         //this was added in order to correctly read Ticked status from save file
         this.name = name;
         this.project = project;
-        this.date = date;
+        this.date = LocalDate.parse(sDate);
         this.isTicked = stringToBool(status);
 
     }
@@ -32,7 +38,7 @@ public class Task {
         return project;
     }
 
-    public String getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
@@ -44,7 +50,7 @@ public class Task {
         this.name = name;
     }
 
-    public void setDate(String date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
@@ -72,6 +78,27 @@ public class Task {
             return false;
         }
     }
+
+    //public String ldateToString(String string) {
+        //implement localDate to string
+    //}
+
+    //public LocalDate stringToLDate(LocalDate localDate) {
+    //implement string to localdate
+    //}
+
+    //solution from https://beginnersbook.com/2013/12/java-arraylist-of-object-sort-example-comparable-and-comparator/
+    //under heading Sorting ArrayList<Object> multiple properties with Comparator
+   // public static Comparator<Task> taskProjComparator = new Comparator<Task>() {
+   //     @Override
+    //    public int compare(Task o1, Task o2) {
+    //        String Project1 = o1.getProject().toUpperCase();
+    //        String Project2 = o2.getProject().toUpperCase();
+    //        return Project1.compareTo(Project2);
+    //    }
+    //};
+
+
 }
 
 

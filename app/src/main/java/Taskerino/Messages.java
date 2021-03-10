@@ -102,9 +102,9 @@ public class Messages {
                 "hold any text you want, but please don't use two commas in \n" +
                 "a row (,,) as your save file won't load correctly if you do.\n" +
                 "Leaving a task Name blank will result in **Untitled**, but\n" +
-                "leaving a task Project or Date blank will save as blank/empty.\n" +
-                "Currently, the date field can hold any text, but this will \n" +
-                "change eventually (read: very soon as it’s due in a week).\n" +
+                "leaving a task Project blank will save as blank/empty. The \n" +
+                "date field can hold any correctly formatted date (YYYY-MM-DD) \n" +
+                "and will automatically set date to today if left blank. \n" +
                 "You can find more information in the README.\n");
     }
 }
