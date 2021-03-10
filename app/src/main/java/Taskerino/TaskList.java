@@ -6,6 +6,10 @@ public class TaskList {
     //this should be an array list of Task objects, and the list is called taskList
     private ArrayList<Task> taskList;
 
+    //for formatting text and clearing formatting
+    public static final String ansBold = "\u001b[1m";
+    public static final String ansClear = "\u001B[0m";
+
     public TaskList() {
         taskList = new ArrayList<>();
 
@@ -35,7 +39,7 @@ public class TaskList {
     public static String askForName() {
         //Prompts user to input name, either when adding new task or selecting Edit Name
         Scanner askName = new Scanner(System.in);
-        System.out.println("Type new task name:");
+        System.out.println("Type new task " + ansBold + "name" + ansClear + ":");
         String name = askName.nextLine();
         //If user does not type a name, replace blank with **Untitled**
         if (name.length()==0) {
@@ -47,14 +51,14 @@ public class TaskList {
     public static String askForProject() {
         //Prompts user to input project, either when adding new task or selecting Edit Project
         Scanner askProj = new Scanner(System.in);
-        System.out.println("Type new task project:");
+        System.out.println("Type new task " + ansBold + "project" + ansClear + ":");
         String project = askProj.nextLine();
         return project;
     }
     public static String askForDate() {
         //Prompts user to input due date, either when adding new task or selecting Edit Date
         Scanner askDate = new Scanner(System.in);
-        System.out.println("Type new task due date:");
+        System.out.println("Type new task " + ansBold + "due date" + ansClear + ":");
         String date = askDate.nextLine();
         return date;
     }

@@ -9,10 +9,13 @@ public class Menus {
  ArrayList<Task> objList;
  int taskSelect;
  boolean alreadyLoaded = false;
+
+ //for formatting text and clearing formatting
  public static final String ansReverse = "\u001b[7m";
  public static final String ansYellow = "\u001B[33m";
  public static final String ansClear = "\u001B[0m";
-public static final String ansBkBlue = "\u001b[30;44m";
+ public static final String ansBkBlue = "\u001b[30;44m";
+ public static final String ansBlue = "\u001B[34m";
 
  public Menus() {
      taskList = new TaskList();
@@ -125,7 +128,7 @@ public static final String ansBkBlue = "\u001b[30;44m";
         String newTsDate = TaskList.askForDate();
         //creating a new task, user input for name, project, date, and setting default Ticked status to false
         Task newTask = new Task(newTsName,newTsProj,newTsDate, false);
-        System.out.println("NEW TASK Name: "+ ansBkBlue + newTask.name + ansClear + "\nProject: " + ansBkBlue + newTask.project + ansClear + "\nDate: " + ansBkBlue + newTask.date + ansClear);
+        System.out.println("NEW TASK Name: "+ ansBlue + newTask.name + ansClear + "\nProject: " + ansBlue + newTask.project + ansClear + "\nDate: " + ansBlue + newTask.date + ansClear);
         taskList.addTask(newTask);
         System.out.println("Your new task is saved.");
         returnToMain();
@@ -248,7 +251,14 @@ public static final String ansBkBlue = "\u001b[30;44m";
         int index = 0;
         while(index < taskList.size()) {
             Task printer = taskList.get(index);
-            System.out.println((index + 1) + ". " + printer.name + ", " + printer.project + ", " + printer.date + ", " + printer.boolToString());
+            String taskStatus = printer.boolToString();
+            //System.out.println((index + 1) + ". " + printer.name + ", " + printer.project + ", " + printer.date + ", " + ansBlue + printer.boolToString()+ansClear); //TODO green for complete?
+            System.out.print((index + 1) + ". " + printer.name + ", " + printer.project + ", " + printer.date + ", ");
+            if (taskStatus.equals("incomplete")) {
+                System.out.print(ansBlue + "incomplete" + ansClear + "\n");
+            } else {
+               System.out.print("complete" + "\n");
+            }
             index++;
         }
     }

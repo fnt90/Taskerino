@@ -3,8 +3,6 @@ package Taskerino;
 import java.io.*;
 import java.util.ArrayList;
 
-//to write as object Task class will need to implement Serializable
-//TODO check to make sure Serializable is not needed anymore before removing it
 public class FileHandlerObj {
 //my path is C:\Users\fiona\Documents\IdeaProjs\Taskerino\app\src\main\resources
     private String path = "app/src/main/resources/";

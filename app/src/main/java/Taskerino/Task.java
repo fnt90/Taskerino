@@ -1,7 +1,7 @@
 package Taskerino;
 import java.io.Serializable;
 
-public class Task implements Serializable {
+public class Task {
     //this gives instructions on how an object Task should look like
     String name;
     String project;
@@ -14,15 +14,7 @@ public class Task implements Serializable {
         this.project = project;
         this.date = date;
         this.isTicked = isTicked;
-
     }
-    //public Task(String name, String project, String date) {
-    //    this.name = name;
-    //    this.project = project;
-    //    this.date = date;
-     //   this.isTicked = false;
-
-    //}
 
     public Task(String name, String project, String date, String status) {
         //this was added in order to correctly read Ticked status from save file

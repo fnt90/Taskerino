@@ -1,6 +1,6 @@
 Fionataskiname,,projectio,,Datemine,,complete,,
 Do my homework,,School,,Tomorrow,,complete,,
-Watch videos,,School,,Today,,incomplete,,
+Watch videos,,School,,Today,,complete,,
 Make a nice program,,,,Whenever,,incomplete,,
 Cook food,,Home,,Now,,complete,,
 Eat cookies,,Cookie eating project,,asap,,incomplete,,

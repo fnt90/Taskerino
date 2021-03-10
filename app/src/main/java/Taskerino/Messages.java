@@ -1,7 +1,8 @@
 package Taskerino;
 
 public class Messages {
-    public static final String ansClear = "\u001B[0m";
+
+    //for formatting text and clearing formatting
     public static final String ansBold = "\u001b[1m";
     public static final String ansYellow = "\u001B[33m";
     public static final String ansReverse = "\u001b[7m";
@@ -9,6 +10,7 @@ public class Messages {
     public static final String ansStrike = "\u001B[9m";
     public static final String ansRed = "\u001B[31m";
     public static final String ansGreen = "\u001B[32m";
+    public static final String ansClear = "\u001B[0m";
 
 
     public static void welcomeMsg() {
