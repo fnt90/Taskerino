@@ -6,6 +6,7 @@ import java.util.Comparator;
 import java.util.Scanner;
 import java.time.LocalDate;
 
+//TODO once I figure out how to sort by date, write a method that checks how many tasks are overdue (date earlier than today)
 
 public class Menus {
  TaskList taskList;
