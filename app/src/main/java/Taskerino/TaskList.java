@@ -2,6 +2,10 @@ package Taskerino;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
+import java.time.temporal.ChronoField;
+import java.util.Locale;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Scanner;
@@ -63,10 +67,16 @@ public class TaskList {
     public static LocalDate askForDate() {
         //Prompts user to input due date, either when adding new task or selecting Edit Date
         Scanner askDate = new Scanner(System.in);
-        System.out.println("Type new task " + ansBold + "due date " + ansYellow + "(YYYY-MM-DD)" + ansClear + ":");
+
+        DateTimeFormatter formatter = new DateTimeFormatterBuilder()
+                .appendPattern("dd MMM")
+                .parseDefaulting(ChronoField.YEAR, 2021)
+                .toFormatter(Locale.US);
+
+        System.out.println("Type new task " + ansBold + "due date " + ansYellow + "(DD Mmm/04 Oct)" + ansClear + ":");
         //try block to check if date correctly formatted, if not, automatically set to today's date
         try {
-            LocalDate date = LocalDate.parse(askDate.nextLine());
+            LocalDate date = LocalDate.parse(askDate.nextLine(), formatter);
             return date;
         } catch (DateTimeException e) {
             System.out.println("Invalid date entered. " + ansYellow + "Setting due date to " + ansBold + "today." + ansClear);

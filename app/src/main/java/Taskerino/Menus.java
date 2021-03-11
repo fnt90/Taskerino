@@ -1,9 +1,9 @@
 package Taskerino;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Scanner;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
+import java.time.temporal.ChronoField;
+import java.util.*;
 import java.time.LocalDate;
 
 //TODO once I figure out how to sort by date, write a method that checks how many tasks are overdue (date earlier than today)
@@ -133,7 +133,13 @@ public class Menus {
         LocalDate newTsDate = TaskList.askForDate();
         //creating a new task, user input for name, project, date, and setting default Ticked status to false
         Task newTask = new Task(newTsName,newTsProj,newTsDate, false);
-        System.out.println("NEW TASK Name: "+ ansBlue + newTask.name + ansClear + "\nProject: " + ansBlue + newTask.project + ansClear + "\nDate: " + ansBlue + newTask.date + ansClear);
+
+        DateTimeFormatter formatter = new DateTimeFormatterBuilder()
+                .appendPattern("dd MMM")
+                .parseDefaulting(ChronoField.YEAR, 2021)
+                .toFormatter(Locale.US);
+
+        System.out.println("NEW TASK Name: "+ ansBlue + newTask.name + ansClear + "\nProject: " + ansBlue + newTask.project + ansClear + "\nDate: " + ansBlue + formatter.format(newTask.date) + ansClear);
         taskList.addTask(newTask);
         System.out.println("Your new task is saved.");
         returnToMain();
@@ -145,13 +151,19 @@ public class Menus {
         Scanner taskSelector = new Scanner(System.in);
         //here, taking user input and storing it as string
         String taskSelectString = taskSelector.nextLine();
+
+        DateTimeFormatter formatter = new DateTimeFormatterBuilder()
+                .appendPattern("dd MMM")
+                .parseDefaulting(ChronoField.YEAR, 2021)
+                .toFormatter(Locale.US);
+
         try {
             //take user string and converting to integer
             taskSelect = Integer.parseInt(taskSelectString);
             //take integer of user input and convert to index by subtracting 1
             taskSelect--;
             Task editor = taskList.get(taskSelect);
-            System.out.println( "You selected: "+ ansBkBlue + (taskSelect + 1) + ". " + editor.name + ", " + editor.project + ", " + editor.date + ", " + editor.boolToString() + ansClear);
+            System.out.println( "You selected: "+ ansBkBlue + (taskSelect + 1) + ". " + editor.name + ", " + editor.project + ", " + formatter.format(editor.date) + ", " + editor.boolToString() + ansClear);
             return taskSelect;
         } catch (NumberFormatException e) {
             Messages.invalidInputMsg();
@@ -199,7 +211,12 @@ public class Menus {
                 //edit date
                 Task editableDate = taskList.get(taskSelect);
                 editableDate.setDate(TaskList.askForDate());
-                System.out.println("Task date changed to:" + ansBkBlue + editableDate.date + ansClear);
+                //System.out.println("Task date changed to:" + ansBkBlue + editableDate.date + ansClear);
+                DateTimeFormatter formatter = new DateTimeFormatterBuilder()
+                        .appendPattern("dd MMM")
+                        .parseDefaulting(ChronoField.YEAR, 2021)
+                        .toFormatter(Locale.US);
+                System.out.println("Task date changed to: " + formatter.format(editableDate.date));
                 returnToMain();
             } else if (inputNum == 4) {
                 //tick or untick: set Complete to Incomplete, or Incomplete to Complete
@@ -253,11 +270,16 @@ public class Menus {
         }
     public void printList() {
         //show all saved tasks in the order they were added
+        DateTimeFormatter formatter = new DateTimeFormatterBuilder()
+                .appendPattern("dd MMM")
+                .parseDefaulting(ChronoField.YEAR, 2021)
+                .toFormatter(Locale.US);
+
         int index = 0;
         while(index < taskList.size()) {
             Task printer = taskList.get(index);
             String taskStatus = printer.boolToString();
-            System.out.print((index + 1) + ". " + printer.name + ", " + printer.project + ", " + printer.date + ", ");
+            System.out.print((index + 1) + ". " + printer.name + ", " + printer.project + ", " + formatter.format(printer.date) + ", ");
             //if statement to print incomplete in blue but complete in normal colour
             if (taskStatus.equals("incomplete")) {
                 System.out.print(ansBlue + "incomplete" + ansClear + "\n");
@@ -296,12 +318,17 @@ public class Menus {
 
     public void printListStatus() {
         //show all saved tasks incomplete first, then complete
+        DateTimeFormatter formatter = new DateTimeFormatterBuilder()
+                .appendPattern("dd MMM")
+                .parseDefaulting(ChronoField.YEAR, 2021)
+                .toFormatter(Locale.US);
+
         int index = 0;
         while(index < taskList.size()) {
             Task printer = taskList.get(index);
             String taskStatus = printer.boolToString();
             if (taskStatus.equals("incomplete")) {
-                System.out.println("- " + printer.name + ", " + printer.project + ", " + printer.date + ", " + ansBlue + printer.boolToString()+ansClear);
+                System.out.println("- " + printer.name + ", " + printer.project + ", " + formatter.format(printer.date) + ", " + ansBlue + printer.boolToString()+ansClear);
             }
             index++;
         }
@@ -311,7 +338,7 @@ public class Menus {
             Task printer = taskList.get(index2);
             String taskStatus = printer.boolToString();
             if (taskStatus.equals("complete")) {
-                System.out.println("- " + printer.name + ", " + printer.project + ", " + printer.date + ", " + printer.boolToString());
+                System.out.println("- " + printer.name + ", " + printer.project + ", " + formatter.format(printer.date) + ", " + printer.boolToString());
             }
             index2++;
         }
