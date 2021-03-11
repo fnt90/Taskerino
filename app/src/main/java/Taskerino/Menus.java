@@ -324,11 +324,13 @@ public class Menus {
                 .toFormatter(Locale.US);
 
         int index = 0;
+        int displayIndex = 1;
         while(index < taskList.size()) {
             Task printer = taskList.get(index);
             String taskStatus = printer.boolToString();
             if (taskStatus.equals("incomplete")) {
-                System.out.println("- " + printer.name + ", " + printer.project + ", " + formatter.format(printer.date) + ", " + ansBlue + printer.boolToString()+ansClear);
+                System.out.println(displayIndex +". " + printer.name + ", " + printer.project + ", " + formatter.format(printer.date) + ", " + ansBlue + printer.boolToString()+ansClear);
+                displayIndex++;
             }
             index++;
         }
@@ -338,7 +340,8 @@ public class Menus {
             Task printer = taskList.get(index2);
             String taskStatus = printer.boolToString();
             if (taskStatus.equals("complete")) {
-                System.out.println("- " + printer.name + ", " + printer.project + ", " + formatter.format(printer.date) + ", " + printer.boolToString());
+                System.out.println(displayIndex+". " + printer.name + ", " + printer.project + ", " + formatter.format(printer.date) + ", " + printer.boolToString());
+                displayIndex++;
             }
             index2++;
         }

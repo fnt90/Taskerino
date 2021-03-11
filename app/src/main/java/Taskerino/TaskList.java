@@ -79,7 +79,7 @@ public class TaskList {
             LocalDate date = LocalDate.parse(askDate.nextLine(), formatter);
             return date;
         } catch (DateTimeException e) {
-            System.out.println("Invalid date entered. " + ansYellow + "Setting due date to " + ansBold + "today." + ansClear);
+            System.out.println("Invalid date entered (or you didn't capitalize month). " + ansYellow + "Setting due date to " + ansBold + "today." + ansClear);
             LocalDate date = LocalDate.now();
             return date;
         }
