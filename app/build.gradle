@@ -38,14 +38,7 @@ tasks.named('test') {
     // Use junit platform for unit tests.
     useJUnitPlatform()
 }
-sourceSets {
-    main {
-        java {
-            srcDirs = ['src']
 
-        }
-    }
-}
 jar {
     manifest {
         attributes(
