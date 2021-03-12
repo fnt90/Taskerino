@@ -22,7 +22,7 @@ gradle build
 The jar file will be generated in `build/libs` which can be run by a Java environment.
 
 ```bash
-java -jar build/libs/taskerino.jar
+java -jar apps/build/libs/app.jar
 ```
 
 ## Usage
