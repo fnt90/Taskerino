@@ -105,7 +105,9 @@ public class Menus {
             } else if (inputNum == 3) {
                 //by project
                 System.out.println("You can't sort by project yet, sorry.");
-                returnToMain();
+                Sorter sortery = new Sorter();
+                sortery.sorter(taskList);
+                //returnToMain();
             } else if (inputNum == 4) {
                 //return to main
                 mainMenu();

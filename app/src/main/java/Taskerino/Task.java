@@ -4,7 +4,7 @@ import java.util.Comparator;
 import java.time.LocalDate;
 
 
-public class Task {
+public class Task implements Comparable {
     //this gives instructions on how an object Task should look like
     String name;
     String project;
@@ -75,18 +75,25 @@ public class Task {
             return false;
         }
     }
-
-
-    //solution from https://beginnersbook.com/2013/12/java-arraylist-of-object-sort-example-comparable-and-comparator/
-    //under heading Sorting ArrayList<Object> multiple properties with Comparator
-   // public static Comparator<Task> taskProjComparator = new Comparator<Task>() {
-   //     @Override
-    //    public int compare(Task o1, Task o2) {
-    //        String Project1 = o1.getProject().toUpperCase();
-    //        String Project2 = o2.getProject().toUpperCase();
-    //        return Project1.compareTo(Project2);
-    //    }
-    //};
+    @Override
+    public boolean equals(Object o) {
+        return ((Task) o).getProject().equals(getProject());
+    }
+    @Override
+    public int compareTo(Object o) {
+        Task t = (Task) o;
+        return getProject().compareTo(t.getProject());
+    }
+        //solution from https://beginnersbook.com/2013/12/java-arraylist-of-object-sort-example-comparable-and-comparator/
+        //under heading Sorting ArrayList<Object> multiple properties with Comparator
+        // public static Comparator<Task> taskProjComparator = new Comparator<Task>() {
+        //     @Override
+        //    public int compare(Task o1, Task o2) {
+        //        String Project1 = o1.getProject().toUpperCase();
+        //        String Project2 = o2.getProject().toUpperCase();
+        //        return Project1.compareTo(Project2);
+        //    }
+        //};
 
 
 }
