@@ -1,5 +1,0 @@
-Laundry,,Home,,2021-04-02,,incomplete,,
-Cook,,Home,,2021-04-06,,incomplete,,
-Eat,,Home,,2021-04-06,,complete,,
-Dishes,,Home,,2021-04-06,,incomplete,,
-Tidy,,Proj,,2021-03-11,,incomplete,,

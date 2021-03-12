@@ -100,14 +100,16 @@ public class Menus {
                 returnToMain();
             } else if (inputNum == 2) {
                 //by due date
-                System.out.println("You can't sort by date yet, sorry.");
+                System.out.println(ansYellow + "Here are all your saved tasks (date):" + ansClear);
+                Sorter sortery = new Sorter();
+                sortery.sorterDate(taskList);
                 returnToMain();
             } else if (inputNum == 3) {
                 //by project
-                System.out.println("You can't sort by project yet, sorry.");
+                System.out.println(ansYellow + "Here are all your saved tasks (project A-Z):" + ansClear);
                 Sorter sortery = new Sorter();
-                sortery.sorter(taskList);
-                //returnToMain();
+                sortery.sorterProj(taskList);
+                returnToMain();
             } else if (inputNum == 4) {
                 //return to main
                 mainMenu();

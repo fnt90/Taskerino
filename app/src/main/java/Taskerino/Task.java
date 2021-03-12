@@ -4,7 +4,7 @@ import java.util.Comparator;
 import java.time.LocalDate;
 
 
-public class Task implements Comparable {
+public class Task {
     //this gives instructions on how an object Task should look like
     String name;
     String project;
@@ -75,27 +75,35 @@ public class Task implements Comparable {
             return false;
         }
     }
-    @Override
-    public boolean equals(Object o) {
-        return ((Task) o).getProject().equals(getProject());
-    }
-    @Override
-    public int compareTo(Object o) {
-        Task t = (Task) o;
-        return getProject().compareTo(t.getProject());
-    }
+    //@Override
+    //public boolean equals(Object o) {
+    //    return ((Task) o).getProject().equals(getProject());
+    //}
+   // @Override
+    //public int compareTo(Object o) {
+    //    Task t = (Task) o;
+    //    return getProject().compareToIgnoreCase(t.getProject());
+   // }
         //solution from https://beginnersbook.com/2013/12/java-arraylist-of-object-sort-example-comparable-and-comparator/
         //under heading Sorting ArrayList<Object> multiple properties with Comparator
-        // public static Comparator<Task> taskProjComparator = new Comparator<Task>() {
-        //     @Override
-        //    public int compare(Task o1, Task o2) {
-        //        String Project1 = o1.getProject().toUpperCase();
-        //        String Project2 = o2.getProject().toUpperCase();
-        //        return Project1.compareTo(Project2);
-        //    }
-        //};
 
+        public static Comparator<Task> taskProjComparator = new Comparator<Task>() {
+            @Override
+            public int compare(Task o1, Task o2) {
+                String project1 = o1.getProject();
+                String project2 = o2.getProject();
+                return project1.compareToIgnoreCase(project2);
+            }
+        };
 
+        public static Comparator<Task> taskDateComparator = new Comparator<Task>() {
+            @Override
+            public int compare(Task o1, Task o2) {
+                LocalDate date1 = o1.getDate();
+                LocalDate date2 = o2.getDate();
+                return date1.compareTo(date2);
+            }
+        };
 }
 
 

@@ -7,7 +7,6 @@ import java.time.format.DateTimeFormatterBuilder;
 import java.time.temporal.ChronoField;
 import java.util.Locale;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.Scanner;
 
 public class TaskList {
@@ -90,14 +89,14 @@ public class TaskList {
     }
 
     public void saveMethod() {
-        FileHandlerObj saverFile = new FileHandlerObj();
-        saverFile.writeAsObject(taskList);
+        FileHandler saverFile = new FileHandler();
+        saverFile.writeAsData(taskList);
     }
 
     public ArrayList<Task> loadMethod() {
-        FileHandlerObj loaderFile = new FileHandlerObj();
+        FileHandler loaderFile = new FileHandler();
         ArrayList<Task> objList = new ArrayList<>();
-        objList = loaderFile.readAsObject();
+        objList = loaderFile.readAsData();
         return objList;
     }
 

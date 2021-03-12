@@ -3,15 +3,15 @@ package Taskerino;
 import java.io.*;
 import java.util.ArrayList;
 
-public class FileHandlerObj {
+public class FileHandler {
 //my path is C:\Users\fiona\Documents\IdeaProjs\Taskerino\app\src\main\resources
     private String path = "app/src/main/resources/";
     //need to include app in string to prevent error
 
-    public void writeAsObject(ArrayList<Task> objList) {
+    public void writeAsData(ArrayList<Task> dataList) {
         try {
             FileWriter fileWriter = new FileWriter(new File(path + "taskerinoData.txt"));
-            for (Task writeTask : objList) {
+            for (Task writeTask : dataList) {
                 fileWriter.write(writeTask.name + ",,");
                 fileWriter.write(writeTask.project+ ",,");
                 fileWriter.write(writeTask.date+ ",,");
@@ -22,8 +22,8 @@ public class FileHandlerObj {
             System.out.println("File not found.");
         }
     }
-    public ArrayList<Task> readAsObject() {
-        ArrayList<Task> objList = new ArrayList<>();
+    public ArrayList<Task> readAsData() {
+        ArrayList<Task> dataList = new ArrayList<>();
 
         try {
             FileReader fileReader = new FileReader(path + "taskerinoData.txt");
@@ -34,14 +34,14 @@ public class FileHandlerObj {
             while ((line = bufReader.readLine()) != null) {
                 data = line.split(",,");
                 Task saveTask = new Task(data[0], data[1], data[2], data[3]);
-                objList.add(saveTask);
+                dataList.add(saveTask);
             }
             fileReader.close();
         } catch (IOException e) {
             //this will print before the Main Menu message if there was no saved data found
             System.out.println("(No save file loaded)");
         }
-    return objList;
+    return dataList;
     }
 
 }
