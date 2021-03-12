@@ -33,11 +33,11 @@ public class Messages {
         //Display all Show menu options
         System.out.println(ansPurple + "~SHOW TASKS MENU~" + ansClear);
         System.out.println("How do you want to sort your tasks?");
-        System.out.println("0. Show all tasks");
         System.out.println("1. By ticked status (complete first)");
-        System.out.println(ansStrike + "2. By due date (oldest first)" + ansClear);
+        System.out.println("2. By due date (oldest first)");
         System.out.println("3. By project (alphabetical)");
-        System.out.println("4. Return to main menu");
+        System.out.println("4. In the order you added them");
+        System.out.println("5. Return to main menu");
     }
     public static void addTasksMenuMsg() {
         //welcome user to Add tasks menu

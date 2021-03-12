@@ -39,6 +39,8 @@ public class Menus {
         }
         //show all main menu options
         Messages.mainMenuMsg();
+        Sorter sorter = new Sorter();
+        sorter.overdueTasks(taskList);
         //read how many tasks the user has marked Done and Not done, and print a message to correspond
         makeJudgement();
         System.out.println(ansReverse + "Select an option by typing a digit and pressing Enter/Return."+ ansClear);
@@ -110,10 +112,10 @@ public class Menus {
                 Sorter sortery = new Sorter();
                 sortery.sorterProj(taskList);
                 returnToMain();
-            } else if (inputNum == 4) {
+            } else if (inputNum == 5) {
                 //return to main
                 mainMenu();
-            } else if (inputNum == 0) {
+            } else if (inputNum == 4) {
                 //just print all stored tasks
                 System.out.println(ansYellow + "Here are all your saved tasks:" + ansClear);
                 printList();
