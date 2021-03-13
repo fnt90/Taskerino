@@ -19,7 +19,7 @@ public class FileHandler {
             }
             fileWriter.close();
         } catch (IOException e) {
-            System.out.println("File not found.");
+            System.out.println("Saving failed.");
         }
     }
     public ArrayList<Task> readAsData() {

@@ -10,7 +10,7 @@ plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
     id 'java'
     id 'application'
-
+    id 'java-library'
 }
 
 repositories {
@@ -40,9 +40,13 @@ tasks.named('test') {
 }
 
 jar {
-    manifest {
-        attributes(
-                'Main-Class': 'Taskerino.Main'
+ manifest {
+     attributes(
+             'Main-Class': 'Taskerino.Main'
         )
     }
+}
+
+run{
+    standardInput = System.in
 }
