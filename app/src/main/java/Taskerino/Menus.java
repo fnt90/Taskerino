@@ -6,11 +6,10 @@ import java.time.temporal.ChronoField;
 import java.util.*;
 import java.time.LocalDate;
 
-//TODO once I figure out how to sort by date, write a method that checks how many tasks are overdue (date earlier than today)
 
 public class Menus {
  TaskList taskList;
- ArrayList<Task> objList;
+ ArrayList<Task> dataList;
  int taskSelect;
  boolean alreadyLoaded = false;
 
@@ -29,18 +28,17 @@ public class Menus {
         //this should contain all of the main menu including logic and input
         Scanner menuSelector = new Scanner(System.in);
         //load save file
-        objList = taskList.loadMethod();
+        dataList = taskList.loadMethod();
         //check if save file has already been loaded to avoid re-loading old data which prevents editing
-        if (objList != null && !alreadyLoaded) {
+        if (dataList != null && !alreadyLoaded) {
 
-            taskList.setTaskList(objList);
+            taskList.setTaskList(dataList);
             alreadyLoaded = true;
             //System.out.println("Loaded saved tasks from file.");
         }
         //show all main menu options
         Messages.mainMenuMsg();
-        Sorter sorter = new Sorter();
-        sorter.overdueTasks(taskList);
+
         //read how many tasks the user has marked Done and Not done, and print a message to correspond
         makeJudgement();
         System.out.println(ansReverse + "Select an option by typing a digit and pressing Enter/Return."+ ansClear);
@@ -310,7 +308,7 @@ public class Menus {
         }
         //counted completed tasks, so incomplete tasks = total - completed
         tasksNotDone = taskList.size() - tasksDone;
-        System.out.println("You've completed " + ansYellow + tasksDone + ansClear + " tasks, and you've got " + ansYellow + tasksNotDone + ansClear + " tasks to go.");
+        System.out.println("You've completed " + ansYellow + tasksDone + ansClear + " task(s), and you've got " + ansYellow + tasksNotDone + ansClear + " task(s) to go.");
         //choose which judgement message to print
         if (tasksDone > tasksNotDone) {
             Messages.judgementMsgGood();
@@ -352,52 +350,6 @@ public class Menus {
             index2++;
         }
     }
-    //public void printListProject() {
-    //    taskList.sort(Task.taskProjComparator);
-    //    for(Task abc: taskList){
-    //        System.out.println(abc);
-    //    }
-
-    //}
-     //sort tasks by alphabetical of Project field, by...? putting them into a new taskList in that order
-        //declaring a new arraylist of tasks, called projectList... this will be the result to print
-        //TaskList projectList = new TaskList();
-        //Task task = new Task(task.getName(),task.getProject(),task.getDate(),task.getTickStatus());
-
-        //want to pick out the first sort.project (lowest alphabetical), get the index of it within taskList,
-        //and add the whole task object to projectList
-
-        //int sortIndex = 0;
-        //Task sorter = taskList.get(sortIndex);
-
-        //trying out solution found on stackOverflow, not working
-        //https://stackoverflow.com/questions/19471005/sorting-an-arraylist-of-objects-alphabetically/19471040
-        //Collections.sort(taskList, new Comparator<Task>() {
-        //    public int compare(taskList.get(1), taskList.get(2)){
-        //        return taskList.get(1).getProject().compareTo(taskList.get(2).getProject());
-        //    }
-        //});
-
-
-        //trying out another solution from stackOverflow, also not working, TaskList does not conform to List<T>
-        //Collections.sort(taskList, Comparator.comparing(Task::getProject));
-
-
-
-        //This section will print the tasks in order of index from the new arraylist of tasks, projectList
-        //int index = 0;
-        //while(index < projectList.size()) {
-        //    Task printer = projectList.get(index);
-        //    String taskStatus = printer.boolToString();
-        //    System.out.print((index + 1) + ". " + printer.name + ", " + printer.project + ", " + printer.date + ", ");
-        //    if (taskStatus.equals("incomplete")) {
-        //        System.out.print(ansBlue + "incomplete" + ansClear + "\n");
-        //    } else {
-        //        System.out.print("complete" + "\n");
-        //    }
-        //    index++;
-        //}
-
 
 }
 

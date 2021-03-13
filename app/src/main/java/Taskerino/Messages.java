@@ -7,7 +7,6 @@ public class Messages {
     public static final String ansYellow = "\u001B[33m";
     public static final String ansReverse = "\u001b[7m";
     public static final String ansPurple = "\u001B[35m";
-    public static final String ansStrike = "\u001B[9m";
     public static final String ansRed = "\u001B[31m";
     public static final String ansGreen = "\u001B[32m";
     public static final String ansClear = "\u001B[0m";
@@ -97,14 +96,14 @@ public class Messages {
                 "will store tasks for you to help you remember what you need \n" +
                 "to get done. Taskerino will also look at how many tasks you \n" +
                 "have completed, and give you a suitable judgement (hehe). It \n" +
-                "saves to a .txt file, and will load your saved tasks the \n" +
-                "next time you start. A task's name and project fields can \n" +
-                "hold any text you want, but please don't use two commas in \n" +
-                "a row (,,) as your save file won't load correctly if you do.\n" +
-                "Leaving a task Name blank will result in **Untitled**, but\n" +
-                "leaving a task Project blank will save as blank/empty. The \n" +
-                "date field can hold any correctly formatted date (YYYY-MM-DD) \n" +
-                "and will automatically set date to today if left blank. \n" +
-                "You can find more information in the README.\n");
+                "saves to a .txt file, and will load your saved tasks the next\n" +
+                "time you start. A task's name and project fields can hold any\n" +
+                "text you want, but please don't use two commas in a row (,,)\n" +
+                "as your save file won't load correctly if you do. Leaving a\n" +
+                "task Name blank will result in **Untitled**, but leaving a task\n" +
+                "Project blank will save as blank/empty. The date field can hold\n" +
+                "any correctly formatted date (dd Mmm) and will automatically\n" +
+                "set date to today if left blank or incorrectly formatted.  \n" +
+                "You can find more information (and GIFs) in the README.\n");
     }
 }

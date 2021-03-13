@@ -44,4 +44,38 @@ public class FileHandler {
     return dataList;
     }
 
+    public void writeName(String userName) {
+        try {
+            FileWriter fileWriter = new FileWriter(new File(path + "taskerinoDataUser.txt"));
+
+            fileWriter.write(userName);
+
+            fileWriter.close();
+        } catch (IOException e) {
+            System.out.println("Saving user name failed.");
+        }
+    }
+
+    public String readName() {
+        String userName = "";
+
+        try {
+        FileReader fileReader = new FileReader(path + "taskerinoDataUser.txt");
+        BufferedReader bufReader = new BufferedReader(fileReader);
+
+        String line = "";
+
+        while ((line = bufReader.readLine()) != null) {
+            userName = line.toUpperCase();
+
+        }
+        fileReader.close();
+    } catch (IOException e) {
+        //this will print before the Main Menu message if there was no saved data found
+        //System.out.println("(No save file loaded)");
+    }
+
+        return userName;
+    }
+
 }
