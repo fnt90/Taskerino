@@ -31,7 +31,8 @@ public class Sorter {
         int i = 0;
         while (i < arrayTaskList.size()) {
             Task printer2 = arrayTaskList.get(i);
-            System.out.println((i + 1) +". " + printer2.name + ", " + ansBlue + printer2.project + ansClear + ", " +  formatter.format(printer2.date) + ", " + printer2.boolToString());
+            System.out.println((i + 1) +". " + printer2.name + ", " + ansBlue + printer2.project + ansClear + ", " +
+                    formatter.format(printer2.date) + ", " + printer2.boolToString());
             i++;
         }
     }
@@ -54,7 +55,8 @@ public class Sorter {
         int i = 0;
         while (i < arrayTaskList.size()) {
             Task printer2 = arrayTaskList.get(i);
-            System.out.println((i + 1) +". " + printer2.name + ", " + printer2.project  + ", " + ansBlue + formatter.format(printer2.date) + ansClear + ", " + printer2.boolToString());
+            System.out.println((i + 1) +". " + printer2.name + ", " + printer2.project  + ", " + ansBlue +
+                    formatter.format(printer2.date) + ansClear + ", " + printer2.boolToString());
             i++;
         }
     }

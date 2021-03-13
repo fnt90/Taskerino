@@ -8,17 +8,17 @@ import java.time.LocalDate;
 
 
 public class Menus {
- TaskList taskList;
- ArrayList<Task> dataList;
- int taskSelect;
- boolean alreadyLoaded = false;
+    TaskList taskList;
+    ArrayList<Task> dataList;
+    int taskSelect;
+    boolean alreadyLoaded = false;
 
  //for formatting text and clearing formatting
- public static final String ANS_REVERSE = "[7m";
- public static final String ANS_YELLOW = "[38;5;185m";
- public static final String ANS_CLEAR = "[0m";
- public static final String ANS_BK_BLUE = "[30;44m";
- public static final String ANS_BLUE = "[34m";
+    public static final String ANS_REVERSE = "[7m";
+    public static final String ANS_YELLOW = "[38;5;185m";
+    public static final String ANS_CLEAR = "[0m";
+    public static final String ANS_BK_BLUE = "[30;44m";
+    public static final String ANS_BLUE = "[34m";
 
  public Menus() {
      taskList = new TaskList();
@@ -144,7 +144,8 @@ public class Menus {
                 .parseDefaulting(ChronoField.YEAR, 2021)
                 .toFormatter(Locale.US);
 
-        System.out.println("NEW TASK Name: "+ ANS_BLUE + newTask.name + ANS_CLEAR + "\nProject: " + ANS_BLUE + newTask.project + ANS_CLEAR + "\nDate: " + ANS_BLUE + formatter.format(newTask.date) + ANS_CLEAR);
+        System.out.println("NEW TASK Name: "+ ANS_BLUE + newTask.name + ANS_CLEAR + "\nProject: " + ANS_BLUE +
+                newTask.project + ANS_CLEAR + "\nDate: " + ANS_BLUE + formatter.format(newTask.date) + ANS_CLEAR);
         taskList.addTask(newTask);
         System.out.println("Your new task is saved.");
         returnToMain();
@@ -168,7 +169,8 @@ public class Menus {
             //take integer of user input and convert to index by subtracting 1
             taskSelect--;
             Task editor = taskList.get(taskSelect);
-            System.out.println( "You selected: "+ ANS_BK_BLUE + (taskSelect + 1) + ". " + editor.name + ", " + editor.project + ", " + formatter.format(editor.date) + ", " + editor.boolToString() + ANS_CLEAR);
+            System.out.println( "You selected: "+ ANS_BK_BLUE + (taskSelect + 1) + ". " + editor.name + ", " +
+                    editor.project + ", " + formatter.format(editor.date) + ", " + editor.boolToString() + ANS_CLEAR);
             return taskSelect;
         } catch (NumberFormatException e) {
             Messages.invalidInputMsg();
@@ -284,7 +286,8 @@ public class Menus {
         while(index < taskList.size()) {
             Task printer = taskList.get(index);
             String taskStatus = printer.boolToString();
-            System.out.print((index + 1) + ". " + printer.name + ", " + printer.project + ", " + formatter.format(printer.date) + ", ");
+            System.out.print((index + 1) + ". " + printer.name + ", " + printer.project + ", " +
+                    formatter.format(printer.date) + ", ");
             //if statement to print incomplete in blue but complete in normal colour
             if (taskStatus.equals("incomplete")) {
                 System.out.print(ANS_BLUE + "incomplete" + ANS_CLEAR + "\n");
@@ -309,7 +312,8 @@ public class Menus {
         }
         //counted completed tasks, so incomplete tasks = total - completed
         tasksNotDone = taskList.size() - tasksDone;
-        System.out.println("You've completed " + ANS_YELLOW + tasksDone + ANS_CLEAR + " task(s), and you've got " + ANS_YELLOW + tasksNotDone + ANS_CLEAR + " task(s) to go.");
+        System.out.println("You've completed " + ANS_YELLOW + tasksDone + ANS_CLEAR + " task(s), and you've got " +
+                ANS_YELLOW + tasksNotDone + ANS_CLEAR + " task(s) to go.");
         //choose which judgement message to print
         if (tasksDone > tasksNotDone) {
             Messages.judgementMsgGood();
@@ -334,7 +338,8 @@ public class Menus {
             Task printer = taskList.get(index);
             String taskStatus = printer.boolToString();
             if (taskStatus.equals("incomplete")) {
-                System.out.println(displayIndex +". " + printer.name + ", " + printer.project + ", " + formatter.format(printer.date) + ", " + ANS_BLUE + printer.boolToString()+ ANS_CLEAR);
+                System.out.println(displayIndex +". " + printer.name + ", " + printer.project + ", " +
+                        formatter.format(printer.date) + ", " + ANS_BLUE + printer.boolToString()+ ANS_CLEAR);
                 displayIndex++;
             }
             index++;
@@ -345,7 +350,8 @@ public class Menus {
             Task printer = taskList.get(index2);
             String taskStatus = printer.boolToString();
             if (taskStatus.equals("complete")) {
-                System.out.println(displayIndex+". " + printer.name + ", " + printer.project + ", " + formatter.format(printer.date) + ", " + printer.boolToString());
+                System.out.println(displayIndex+". " + printer.name + ", " + printer.project + ", " +
+                        formatter.format(printer.date) + ", " + printer.boolToString());
                 displayIndex++;
             }
             index2++;

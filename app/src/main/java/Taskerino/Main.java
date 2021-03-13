@@ -3,6 +3,7 @@ package Taskerino;
 import java.util.Scanner;
 
 public class Main {
+    //for formatting text and clearing formatting
     public static final String ANS_YELLOW = "[38;5;185m";
     public static final String ANS_CLEAR = "[0m";
     public static final String ANS_BOLD = "[1m";
