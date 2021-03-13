@@ -59,26 +59,9 @@ public class Sorter {
         }
     }
     public void overdueTasks(TaskList taskList) {
-        /* count how many tasks TRUE (complete) using variable int tasksDone
-         ** count how many tasks FALSE (incomplete) using variable int tasksNotDone
-         ** loop for each saved task. If task.isTicked returns true (is complete), augment tasksDone by 1
 
-        int tasksDone = 0;
-        int tasksNotDone;
-        for (Task task : taskList.getTaskList()) {
-            if (task.isTicked) {
-                tasksDone++;
-            }
-        }
-        //counted completed tasks, so incomplete tasks = total - completed
-        tasksNotDone = taskList.size() - tasksDone;
-        System.out.println("You've completed " + ansYellow + tasksDone + ansClear + " tasks, and you've got " + ansYellow + tasksNotDone + ansClear + " tasks to go.");
-        //choose which judgement message to print
-
-         */
         int numOverdue = 0;
         int numDue = 0;
-        //int numNotDue;
 
         for (Task task : taskList.getTaskList()) {
             if (task.getDate().equals(LocalDate.now())) {
@@ -87,7 +70,7 @@ public class Sorter {
                 numOverdue++;
             }
         }
-        //numNotDue = taskList.size() - numOverdue - numDue;
+
         System.out.println("You have " + numDue + " tasks due today, and " + numOverdue + " overdue tasks.");
     }
 }

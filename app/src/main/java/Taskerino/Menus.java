@@ -14,11 +14,11 @@ public class Menus {
  boolean alreadyLoaded = false;
 
  //for formatting text and clearing formatting
- public static final String ansReverse = "\u001b[7m";
- public static final String ansYellow = "\u001B[33m";
- public static final String ansClear = "\u001B[0m";
- public static final String ansBkBlue = "\u001b[30;44m";
- public static final String ansBlue = "\u001B[34m";
+ public static final String ANS_REVERSE = "[7m";
+ public static final String ANS_YELLOW = "[38;5;185m";
+ public static final String ANS_CLEAR = "[0m";
+ public static final String ANS_BK_BLUE = "[30;44m";
+ public static final String ANS_BLUE = "[34m";
 
  public Menus() {
      taskList = new TaskList();
@@ -31,7 +31,8 @@ public class Menus {
         dataList = taskList.loadMethod();
         //check if save file has already been loaded to avoid re-loading old data which prevents editing
         if (dataList != null && !alreadyLoaded) {
-
+            Sorter sorter = new Sorter();
+            sorter.overdueTasks(taskList);
             taskList.setTaskList(dataList);
             alreadyLoaded = true;
             //System.out.println("Loaded saved tasks from file.");
@@ -41,7 +42,7 @@ public class Menus {
 
         //read how many tasks the user has marked Done and Not done, and print a message to correspond
         makeJudgement();
-        System.out.println(ansReverse + "Select an option by typing a digit and pressing Enter/Return."+ ansClear);
+        System.out.println(ANS_REVERSE + "Select an option by typing a digit and pressing Enter/Return."+ ANS_CLEAR);
         String inputNumString = menuSelector.nextLine();
         System.out.println("You entered: " + inputNumString + "\n");
 
@@ -95,18 +96,18 @@ public class Menus {
             int inputNum = Integer.parseInt(inputNumString);
             if (inputNum == 1) {
                 //by ticked status
-                System.out.println(ansYellow + "Here are all your saved tasks (incomplete first):" + ansClear);
+                System.out.println(ANS_YELLOW + "Here are all your saved tasks (incomplete first):" + ANS_CLEAR);
                 printListStatus();
                 returnToMain();
             } else if (inputNum == 2) {
                 //by due date
-                System.out.println(ansYellow + "Here are all your saved tasks (date):" + ansClear);
+                System.out.println(ANS_YELLOW + "Here are all your saved tasks (date):" + ANS_CLEAR);
                 Sorter sortery = new Sorter();
                 sortery.sorterDate(taskList);
                 returnToMain();
             } else if (inputNum == 3) {
                 //by project
-                System.out.println(ansYellow + "Here are all your saved tasks (project A-Z):" + ansClear);
+                System.out.println(ANS_YELLOW + "Here are all your saved tasks (project A-Z):" + ANS_CLEAR);
                 Sorter sortery = new Sorter();
                 sortery.sorterProj(taskList);
                 returnToMain();
@@ -115,7 +116,7 @@ public class Menus {
                 mainMenu();
             } else if (inputNum == 4) {
                 //just print all stored tasks
-                System.out.println(ansYellow + "Here are all your saved tasks:" + ansClear);
+                System.out.println(ANS_YELLOW + "Here are all your saved tasks:" + ANS_CLEAR);
                 printList();
                 returnToMain();
             } else {
@@ -143,7 +144,7 @@ public class Menus {
                 .parseDefaulting(ChronoField.YEAR, 2021)
                 .toFormatter(Locale.US);
 
-        System.out.println("NEW TASK Name: "+ ansBlue + newTask.name + ansClear + "\nProject: " + ansBlue + newTask.project + ansClear + "\nDate: " + ansBlue + formatter.format(newTask.date) + ansClear);
+        System.out.println("NEW TASK Name: "+ ANS_BLUE + newTask.name + ANS_CLEAR + "\nProject: " + ANS_BLUE + newTask.project + ANS_CLEAR + "\nDate: " + ANS_BLUE + formatter.format(newTask.date) + ANS_CLEAR);
         taskList.addTask(newTask);
         System.out.println("Your new task is saved.");
         returnToMain();
@@ -167,7 +168,7 @@ public class Menus {
             //take integer of user input and convert to index by subtracting 1
             taskSelect--;
             Task editor = taskList.get(taskSelect);
-            System.out.println( "You selected: "+ ansBkBlue + (taskSelect + 1) + ". " + editor.name + ", " + editor.project + ", " + formatter.format(editor.date) + ", " + editor.boolToString() + ansClear);
+            System.out.println( "You selected: "+ ANS_BK_BLUE + (taskSelect + 1) + ". " + editor.name + ", " + editor.project + ", " + formatter.format(editor.date) + ", " + editor.boolToString() + ANS_CLEAR);
             return taskSelect;
         } catch (NumberFormatException e) {
             Messages.invalidInputMsg();
@@ -203,13 +204,13 @@ public class Menus {
                 //edit name
                 Task editableName = taskList.get(taskSelect);
                 editableName.setName(TaskList.askForName());
-                System.out.println("Task name changed to:" + ansBkBlue + editableName.name + ansClear);
+                System.out.println("Task name changed to:" + ANS_BK_BLUE + editableName.name + ANS_CLEAR);
                 returnToMain();
             } else if (inputNum == 2) {
                 //edit project
                 Task editableProj = taskList.get(taskSelect);
                 editableProj.setProject(TaskList.askForProject());
-                System.out.println("Task project changed to:" + ansBkBlue + editableProj.project + ansClear);
+                System.out.println("Task project changed to:" + ANS_BK_BLUE + editableProj.project + ANS_CLEAR);
                 returnToMain();
             } else if (inputNum == 3) {
                 //edit date
@@ -230,7 +231,7 @@ public class Menus {
                 } else {
                     editableTick.setTicked(false);
                 }
-                System.out.println("Task is now marked as: " + ansBkBlue + editableTick.boolToString() + ansClear);
+                System.out.println("Task is now marked as: " + ANS_BK_BLUE + editableTick.boolToString() + ANS_CLEAR);
                 returnToMain();
             } else if (inputNum == 5) {
                 //delete task
@@ -286,7 +287,7 @@ public class Menus {
             System.out.print((index + 1) + ". " + printer.name + ", " + printer.project + ", " + formatter.format(printer.date) + ", ");
             //if statement to print incomplete in blue but complete in normal colour
             if (taskStatus.equals("incomplete")) {
-                System.out.print(ansBlue + "incomplete" + ansClear + "\n");
+                System.out.print(ANS_BLUE + "incomplete" + ANS_CLEAR + "\n");
             } else {
                System.out.print("complete" + "\n");
             }
@@ -308,7 +309,7 @@ public class Menus {
         }
         //counted completed tasks, so incomplete tasks = total - completed
         tasksNotDone = taskList.size() - tasksDone;
-        System.out.println("You've completed " + ansYellow + tasksDone + ansClear + " task(s), and you've got " + ansYellow + tasksNotDone + ansClear + " task(s) to go.");
+        System.out.println("You've completed " + ANS_YELLOW + tasksDone + ANS_CLEAR + " task(s), and you've got " + ANS_YELLOW + tasksNotDone + ANS_CLEAR + " task(s) to go.");
         //choose which judgement message to print
         if (tasksDone > tasksNotDone) {
             Messages.judgementMsgGood();
@@ -333,7 +334,7 @@ public class Menus {
             Task printer = taskList.get(index);
             String taskStatus = printer.boolToString();
             if (taskStatus.equals("incomplete")) {
-                System.out.println(displayIndex +". " + printer.name + ", " + printer.project + ", " + formatter.format(printer.date) + ", " + ansBlue + printer.boolToString()+ansClear);
+                System.out.println(displayIndex +". " + printer.name + ", " + printer.project + ", " + formatter.format(printer.date) + ", " + ANS_BLUE + printer.boolToString()+ ANS_CLEAR);
                 displayIndex++;
             }
             index++;
