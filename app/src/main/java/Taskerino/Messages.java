@@ -13,14 +13,14 @@ public class Messages {
             "[38;5;141m" + "n" + "[38;5;135m" + "o";
 
 
-    public static void welcomeMsg() {
+    public static void printWelcome() {
         //A happy welcoming message to be printed only upon starting up the program
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~");
         System.out.println(ANS_YELLOW + " Welcome to "  + TASKERINO + ANS_CLEAR);
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~");
     }
 
-    public static void mainMenuMsg() {
+    public static void printMainMenu() {
         //Display all main menu options
         System.out.println(ANS_PURPLE + ANS_BOLD + "~~~MAIN MENU~~~" + ANS_CLEAR);
         System.out.println("What do you want to do?");
@@ -31,7 +31,7 @@ public class Messages {
         System.out.println("5. Save and quit");
 
     }
-    public static void showTasksMenuMsg() {
+    public static void printShowTasksMenu() {
         //Display all Show menu options
         System.out.println(ANS_PURPLE + "~SHOW TASKS MENU~" + ANS_CLEAR);
         System.out.println("How do you want to sort your tasks?");
@@ -41,17 +41,17 @@ public class Messages {
         System.out.println("4. In the order you added them");
         System.out.println("5. Return to main menu");
     }
-    public static void addTasksMenuMsg() {
+    public static void printAddTasksMenu() {
         //welcome user to Add tasks menu
         System.out.println(ANS_PURPLE + "~ADD TASKS MENU~" + ANS_CLEAR);
         System.out.println("Enter a new task with a Name, Project, and Date.");
     }
-    public static void editTasksMenuMsg() {
+    public static void printEditTasksMenu() {
         //welcome user to Edit menu
         System.out.println(ANS_PURPLE + "~EDIT MENU~" + ANS_CLEAR);
         System.out.println("You selected Edit, delete or tick off a task.");
     }
-    public static void editTasksSelectMsg() {
+    public static void printEditTasksSelect() {
         //Display all Edit menu options after selecting which task to edit
         System.out.println(ANS_PURPLE + "~~EDIT SUBMENU" + ANS_CLEAR);
         System.out.println("What do you want to do with this task?");
@@ -62,37 +62,37 @@ public class Messages {
         System.out.println("5. Delete this task");
         System.out.println("6. Return to main menu");
     }
-    public static void invalidInputMsg() {
+    public static void printInvalidInput() {
         //tell user they typed a value that was not a menu choice
         System.out.println("Please enter a valid digit.");
     }
 
-    public static void returnToMenuMsg() {
+    public static void printReturnToMain() {
         //Prompt to user to return to main menu after Adding, Editing, or Showing (sorted list)
         //This is used mostly to avoid automatically returning to main menu and clogging screen
         System.out.println(ANS_REVERSE + "Enter 1 to return to main menu." + ANS_CLEAR);
     }
 
-    public static void exitMsg() {
+    public static void printExit() {
         //Display after Save & Quit option is selected
         System.out.println(ANS_YELLOW + "Thanks for using "+TASKERINO+ ANS_YELLOW +"! See you again soon!" + ANS_CLEAR);
     }
 
-    public static void judgementMsgGood() {
+    public static void printJudgementGood() {
         //Message to display if user has more tasks completed than incomplete
         System.out.println("[38;5;112m" + "Excellent work, you're a star!" + ANS_CLEAR);
     }
 
-    public static void judgementMsgBad() {
+    public static void printJudgementBad() {
         //Message to display if user has more tasks incomplete than complete
         System.out.println("[38;5;166m" + "Terrible. Better get on it." + ANS_CLEAR);
     }
 
-    public static void judgementMsgNeutral() {
+    public static void printJudgementNeutral() {
         //Message to display if user has equal number of tasks complete and incomplete
-        System.out.println(ANS_YELLOW + "Lots to do today! You can do it!" + ANS_CLEAR);
+        System.out.println(ANS_YELLOW + "Lots to do today, but you've made a start!" + ANS_CLEAR);
     }
-    public static void instructionsMsg() {
+    public static void printInstructions() {
         //Provide some basic info about the program to user, upon request
         System.out.println(ANS_PURPLE + "~INSTRUCTIONS~" + ANS_CLEAR);
         System.out.println("Thanks for checking out my To-Do List project! This program \n" +
