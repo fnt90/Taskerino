@@ -20,7 +20,7 @@ Generate the jar file with Gradle's build command.
 gradle build
 ```
 The jar file will be generated in `build/libs` which can be run by a Java environment.
-Note that formatting is not supported this way.
+**Note:**  formatting is not supported when running this way.
 
 ```bash
 java -jar apps/build/libs/app.jar
@@ -30,8 +30,33 @@ Running java -jar app.jar will not allow saving/loading from file.
 
 ## Usage
 You can add tasks you want to store in your list.
-(screenshot)
-//![screenshotname](directory/screenshotname)
 
+Main menu still image:
+
+![Main menu screen](screens/taskerino_1.jpg)
+
+
+
+
+Adding a task with information, and adding a task with no information:
+
+![Adding tasks](screens/addingtasks.gif)
+
+Editing a task:
+
+![Editing tasks](screens/editing.gif)
+
+Showing saved tasks:
+
+![Showing/Printing tasks](screens/showtasks.gif)
+
+Saving to file, and exit:
+
+![Saving and exit](screens/savequit.gif)
 ## Author
 Fiona Thompson
+
+mp4 to GIF conversion:
+https://ezgif.com/video-to-gif 
+
+PowerPoint screen record
