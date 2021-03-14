@@ -38,7 +38,7 @@ public class Menus {
             //System.out.println("Loaded saved tasks from file.");
         }
         //show all main menu options
-        Messages.mainMenuMsg();
+        Messages.printMainMenu();
 
         //read how many tasks the user has marked Done and Not done, and print a message to correspond
         makeJudgement();
@@ -60,20 +60,20 @@ public class Menus {
                 editMenu();
             } else if (inputNum == 4) {
                 //view instructions
-                Messages.instructionsMsg();
+                Messages.printInstructions();
                 returnToMain();
             } else if (inputNum == 5) {
                 //save and quit
                 System.out.println("Saving...");
                 taskList.saveMethod();
-                Messages.exitMsg();
+                Messages.printExit();
                 System.exit(0);
             } else {
-                Messages.invalidInputMsg();
+                Messages.printInvalidInput();
                 mainMenu();
             }
         } catch(NumberFormatException e) {
-            Messages.invalidInputMsg();
+            Messages.printInvalidInput();
             mainMenu();
         }
     }
@@ -86,7 +86,7 @@ public class Menus {
             returnToMain();
         }
         //display menu for options how to show list of tasks
-        Messages.showTasksMenuMsg();
+        Messages.printShowTasksMenu();
         Scanner menuSelector = new Scanner(System.in);
         String inputNumString = menuSelector.nextLine();
         System.out.println("You entered: " + inputNumString + "\n");
@@ -121,18 +121,18 @@ public class Menus {
                 returnToMain();
             } else {
                 //tell user input was invalid and return to Show Tasks menu
-                Messages.invalidInputMsg();
+                Messages.printInvalidInput();
                 showMenu();
             }
         } catch (NumberFormatException e) {
-            Messages.invalidInputMsg();
+            Messages.printInvalidInput();
             showMenu();
         }
     }
 
     public void addMenu() {
         //display menu for adding new task, get user input for Name/Project/Date
-        Messages.addTasksMenuMsg();
+        Messages.printAddTasksMenu();
         String newTsName = TaskList.askForName();
         String newTsProj = TaskList.askForProject();
         LocalDate newTsDate = TaskList.askForDate();
@@ -173,7 +173,7 @@ public class Menus {
                     editor.project + ", " + formatter.format(editor.date) + ", " + editor.boolToString() + ANS_CLEAR);
             return taskSelect;
         } catch (NumberFormatException e) {
-            Messages.invalidInputMsg();
+            Messages.printInvalidInput();
             editMenu();
         }
      return taskSelect;
@@ -187,13 +187,13 @@ public class Menus {
             returnToMain();
         }
         //display menu for edit options
-        Messages.editTasksMenuMsg();
+        Messages.printEditTasksMenu();
         //show all saved tasks to allow user to choose one
         printList();
         System.out.println("Select a task from the list by entering its number.");
         taskListSelect();
 
-        Messages.editTasksSelectMsg();
+        Messages.printEditTasksSelect();
 
         Scanner menuSelector = new Scanner(System.in);
         String inputNumString = menuSelector.nextLine();
@@ -245,11 +245,11 @@ public class Menus {
                 mainMenu();
             } else {
                 //tell user input was invalid and return to Edit Tasks menu
-                Messages.invalidInputMsg();
+                Messages.printInvalidInput();
                 editMenu();
             }
         } catch (NumberFormatException e) {
-            Messages.invalidInputMsg();
+            Messages.printInvalidInput();
             editMenu();
         }
     }
@@ -257,7 +257,7 @@ public class Menus {
     public void returnToMain() {
         //take the user back to the main menu after adding/editing/printing
         //or reaching a menu item that isn't complete yet
-            Messages.returnToMenuMsg();
+            Messages.printReturnToMain();
             Scanner menuOne = new Scanner(System.in);
             String inputOne = menuOne.nextLine();
 
@@ -267,11 +267,11 @@ public class Menus {
                 if (menuInt == 1) {
                     mainMenu();
                 } else{
-                    Messages.invalidInputMsg();
+                    Messages.printInvalidInput();
                     returnToMain();
                 }
             } catch (NumberFormatException e) {
-                Messages.invalidInputMsg();
+                Messages.printInvalidInput();
                 returnToMain();
             }
         }
@@ -316,11 +316,11 @@ public class Menus {
                 ANS_YELLOW + tasksNotDone + ANS_CLEAR + " task(s) to go.");
         //choose which judgement message to print
         if (tasksDone > tasksNotDone) {
-            Messages.judgementMsgGood();
+            Messages.printJudgementGood();
         } else if (tasksDone == tasksNotDone) {
-            Messages.judgementMsgNeutral();
+            Messages.printJudgementNeutral();
         } else {
-            Messages.judgementMsgBad();
+            Messages.printJudgementBad();
         }
 
     }
