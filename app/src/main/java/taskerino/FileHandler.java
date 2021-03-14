@@ -1,4 +1,4 @@
-package Taskerino;
+package taskerino;
 
 import java.io.*;
 import java.util.ArrayList;

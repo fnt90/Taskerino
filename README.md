@@ -1,5 +1,5 @@
-# Taskerino
-A To-Do List app (in progress) written in Java called Taskerino.
+# taskerino
+A To-Do List app (in progress) written in Java called taskerino.
 
 This application should store tasks as a To-Do list.
 
@@ -20,13 +20,14 @@ Generate the jar file with Gradle's build command.
 gradle build
 ```
 The jar file will be generated in `build/libs` which can be run by a Java environment.
-**Note:**  formatting is not supported when running this way.
+
 
 ```bash
 java -jar apps/build/libs/app.jar
 ```
 
-Running java -jar app.jar will not allow saving/loading from file.
+**NOTE:** Running using `gradle build` or `java -jar app.jar` will not allow saving/loading from file, and text format may appear 
+differently.
 
 ## Usage
 You can add tasks you want to store in your list.

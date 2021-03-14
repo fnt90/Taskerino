@@ -1,4 +1,4 @@
-package Taskerino;
+package taskerino;
 
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
@@ -19,6 +19,10 @@ public class Menus {
     public static final String ANS_CLEAR = "[0m";
     public static final String ANS_BK_BLUE = "[30;44m";
     public static final String ANS_BLUE = "[34m";
+    public static DateTimeFormatter formatter = new DateTimeFormatterBuilder()
+            .appendPattern("dd MMM")
+            .parseDefaulting(ChronoField.YEAR, 2021)
+            .toFormatter(Locale.US);
 
  public Menus() {
      taskList = new TaskList();
@@ -26,14 +30,15 @@ public class Menus {
 
     public void mainMenu() {
         //this should contain all of the main menu including logic and input
-        Scanner menuSelector = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
         //load save file
         dataList = taskList.loadMethod();
         //check if save file has already been loaded to avoid re-loading old data which prevents editing
         if (dataList != null && !alreadyLoaded) {
+            taskList.setTaskList(dataList);
             Sorter sorter = new Sorter();
             sorter.overdueTasks(taskList);
-            taskList.setTaskList(dataList);
+
             alreadyLoaded = true;
             //System.out.println("Loaded saved tasks from file.");
         }
@@ -43,7 +48,7 @@ public class Menus {
         //read how many tasks the user has marked Done and Not done, and print a message to correspond
         makeJudgement();
         System.out.println(ANS_REVERSE + "Select an option by typing a digit and pressing Enter/Return."+ ANS_CLEAR);
-        String inputNumString = menuSelector.nextLine();
+        String inputNumString = scanner.nextLine();
         System.out.println("You entered: " + inputNumString + "\n");
 
         // to disallow non-integer inputs or values outside of 1-5
@@ -64,7 +69,6 @@ public class Menus {
                 returnToMain();
             } else if (inputNum == 5) {
                 //save and quit
-                System.out.println("Saving...");
                 taskList.saveMethod();
                 Messages.printExit();
                 System.exit(0);
@@ -87,8 +91,8 @@ public class Menus {
         }
         //display menu for options how to show list of tasks
         Messages.printShowTasksMenu();
-        Scanner menuSelector = new Scanner(System.in);
-        String inputNumString = menuSelector.nextLine();
+        Scanner scanner = new Scanner(System.in);
+        String inputNumString = scanner.nextLine();
         System.out.println("You entered: " + inputNumString + "\n");
 
         //to disallow non integer inputs or values outside of 1-4
@@ -133,16 +137,16 @@ public class Menus {
     public void addMenu() {
         //display menu for adding new task, get user input for Name/Project/Date
         Messages.printAddTasksMenu();
-        String newTsName = TaskList.askForName();
-        String newTsProj = TaskList.askForProject();
-        LocalDate newTsDate = TaskList.askForDate();
+        String newTsName = TaskList.askName();
+        String newTsProj = TaskList.askProj();
+        LocalDate newTsDate = TaskList.askDate();
         //creating a new task, user input for name, project, date, and setting default Ticked status to false
         Task newTask = new Task(newTsName,newTsProj,newTsDate, false);
 
-        DateTimeFormatter formatter = new DateTimeFormatterBuilder()
-                .appendPattern("dd MMM")
-                .parseDefaulting(ChronoField.YEAR, 2021)
-                .toFormatter(Locale.US);
+        //DateTimeFormatter formatter = new DateTimeFormatterBuilder()
+               // .appendPattern("dd MMM")
+              //  .parseDefaulting(ChronoField.YEAR, 2021)
+              //  .toFormatter(Locale.US);
 
         System.out.println("NEW TASK Name: "+ ANS_BLUE + newTask.name + ANS_CLEAR + "\nProject: " + ANS_BLUE +
                 newTask.project + ANS_CLEAR + "\nDate: " + ANS_BLUE + formatter.format(newTask.date) + ANS_CLEAR);
@@ -152,35 +156,9 @@ public class Menus {
 
     }
 
-    public int taskListSelect() {
-     //this will take input from user, convert to integer, and then should subtract 1 to make index
-        Scanner taskSelector = new Scanner(System.in);
-        //here, taking user input and storing it as string
-        String taskSelectString = taskSelector.nextLine();
 
-        DateTimeFormatter formatter = new DateTimeFormatterBuilder()
-                .appendPattern("dd MMM")
-                .parseDefaulting(ChronoField.YEAR, 2021)
-                .toFormatter(Locale.US);
-
-        try {
-            //take user string and converting to integer
-            taskSelect = Integer.parseInt(taskSelectString);
-            //take integer of user input and convert to index by subtracting 1
-            taskSelect--;
-            Task editor = taskList.get(taskSelect);
-            System.out.println( "You selected: "+ ANS_BK_BLUE + (taskSelect + 1) + ". " + editor.name + ", " +
-                    editor.project + ", " + formatter.format(editor.date) + ", " + editor.boolToString() + ANS_CLEAR);
-            return taskSelect;
-        } catch (NumberFormatException e) {
-            Messages.printInvalidInput();
-            editMenu();
-        }
-     return taskSelect;
-    }
 
     public void editMenu() {
-
         // check if there are any tasks in your list, if not send to main menu
         if (taskList.size()==0) {
             System.out.println("You don't have any tasks to edit!");
@@ -190,97 +168,71 @@ public class Menus {
         Messages.printEditTasksMenu();
         //show all saved tasks to allow user to choose one
         printList();
-        System.out.println("Select a task from the list by entering its number.");
-        taskListSelect();
+
+        //user selects task
+        int taskSelect = UserInput.taskListSelect();
+
+        if (taskSelect == -1) {
+            //user input is invalid
+            editMenu();
+        }
+        //user input is valid
+        Task editor = taskList.get(taskSelect);
+        System.out.println("You selected: " + ANS_BK_BLUE + (taskSelect + 1) + ". " + editor.name + ", " +
+                editor.project + ", " + formatter.format(editor.date) + ", " + editor.boolToString() + ANS_CLEAR);
 
         Messages.printEditTasksSelect();
 
-        Scanner menuSelector = new Scanner(System.in);
-        String inputNumString = menuSelector.nextLine();
-        System.out.println("You entered: " + inputNumString);
+        int menuChoice = UserInput.menuSelect();
 
-        // to disallow non integer inputs or values outside of 1-6
-        try {
-            int inputNum = Integer.parseInt(inputNumString);
-            if (inputNum == 1) {
+            if (menuChoice == 1) {
                 //edit name
-                Task editableName = taskList.get(taskSelect);
-                editableName.setName(TaskList.askForName());
-                System.out.println("Task name changed to:" + ANS_BK_BLUE + editableName.name + ANS_CLEAR);
+                taskList.changeName(taskSelect);
                 returnToMain();
-            } else if (inputNum == 2) {
+            } else if (menuChoice == 2) {
                 //edit project
-                Task editableProj = taskList.get(taskSelect);
-                editableProj.setProject(TaskList.askForProject());
-                System.out.println("Task project changed to:" + ANS_BK_BLUE + editableProj.project + ANS_CLEAR);
+                taskList.changeProj(taskSelect);
                 returnToMain();
-            } else if (inputNum == 3) {
+            } else if (menuChoice == 3) {
                 //edit date
-                Task editableDate = taskList.get(taskSelect);
-                editableDate.setDate(TaskList.askForDate());
-                //System.out.println("Task date changed to:" + ansBkBlue + editableDate.date + ansClear);
-                DateTimeFormatter formatter = new DateTimeFormatterBuilder()
-                        .appendPattern("dd MMM")
-                        .parseDefaulting(ChronoField.YEAR, 2021)
-                        .toFormatter(Locale.US);
-                System.out.println("Task date changed to: " + formatter.format(editableDate.date));
+                taskList.changeDate(taskSelect);
                 returnToMain();
-            } else if (inputNum == 4) {
+            } else if (menuChoice == 4) {
                 //tick or untick: set Complete to Incomplete, or Incomplete to Complete
-                Task editableTick = taskList.get(taskSelect);
-                if (editableTick.getTickStatus() == false) {
-                    editableTick.setTicked(true);
-                } else {
-                    editableTick.setTicked(false);
-                }
-                System.out.println("Task is now marked as: " + ANS_BK_BLUE + editableTick.boolToString() + ANS_CLEAR);
+                taskList.changeTicked(taskSelect);
                 returnToMain();
-            } else if (inputNum == 5) {
+            } else if (menuChoice == 5) {
                 //delete task
                 taskList.deleteTask(taskList.get(taskSelect));
                 System.out.println("Task deleted.");
                 returnToMain();
-            } else if (inputNum == 6) {
+            } else if (menuChoice == 6) {
                 //main menu
                 mainMenu();
             } else {
-                //tell user input was invalid and return to Edit Tasks menu
-                Messages.printInvalidInput();
+                //user input was invalid, return to Edit Tasks menu
                 editMenu();
             }
-        } catch (NumberFormatException e) {
-            Messages.printInvalidInput();
-            editMenu();
-        }
+
     }
 
     public void returnToMain() {
         //take the user back to the main menu after adding/editing/printing
-        //or reaching a menu item that isn't complete yet
-            Messages.printReturnToMain();
-            Scanner menuOne = new Scanner(System.in);
-            String inputOne = menuOne.nextLine();
+        Messages.printReturnToMain();
 
-            // to disallow input of anything other than 1
-            try {
-                int menuInt = Integer.parseInt(inputOne);
-                if (menuInt == 1) {
-                    mainMenu();
-                } else{
-                    Messages.printInvalidInput();
-                    returnToMain();
-                }
-            } catch (NumberFormatException e) {
-                Messages.printInvalidInput();
-                returnToMain();
-            }
+        int menuChoice = UserInput.menuSelect();
+
+        if (menuChoice == 1) {
+            //user input is valid
+            mainMenu();
+        } else {
+            //user input is invalid
+            returnToMain();
+        }
+
         }
     public void printList() {
         //show all saved tasks in the order they were added
-        DateTimeFormatter formatter = new DateTimeFormatterBuilder()
-                .appendPattern("dd MMM")
-                .parseDefaulting(ChronoField.YEAR, 2021)
-                .toFormatter(Locale.US);
 
         int index = 0;
         while(index < taskList.size()) {
@@ -327,10 +279,6 @@ public class Menus {
 
     public void printListStatus() {
         //show all saved tasks incomplete first, then complete
-        DateTimeFormatter formatter = new DateTimeFormatterBuilder()
-                .appendPattern("dd MMM")
-                .parseDefaulting(ChronoField.YEAR, 2021)
-                .toFormatter(Locale.US);
 
         int index = 0;
         int displayIndex = 1;

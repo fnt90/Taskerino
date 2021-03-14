@@ -1,13 +1,16 @@
-package Taskerino;
+package taskerino;
 
 public class Messages {
 
     //for formatting text and clearing formatting
     public static final String ANS_BOLD = "[1m";
     public static final String ANS_YELLOW = "[38;5;185m";
+    public static final String ANS_GREEN = "[38;5;112m";
+    public static final String ANS_RED = "[38;5;166m";
     public static final String ANS_REVERSE = "[7m";
     public static final String ANS_PURPLE = "[35m";
     public static final String ANS_CLEAR = "[0m";
+    //for rainbow print of Taskerino
     public static final String TASKERINO = "[38;5;212m" + "T"+"[38;5;217m" + "a"+ "[38;5;222m" + "s" +
             "[38;5;229m" + "k" + "[38;5;192m" + "e" + "[38;5;159m" + "r" + "[38;5;117m" + "i" +
             "[38;5;141m" + "n" + "[38;5;135m" + "o";
@@ -75,17 +78,19 @@ public class Messages {
 
     public static void printExit() {
         //Display after Save & Quit option is selected
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         System.out.println(ANS_YELLOW + "Thanks for using "+TASKERINO+ ANS_YELLOW +"! See you again soon!" + ANS_CLEAR);
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
     }
 
     public static void printJudgementGood() {
         //Message to display if user has more tasks completed than incomplete
-        System.out.println("[38;5;112m" + "Excellent work, you're a star!" + ANS_CLEAR);
+        System.out.println(ANS_GREEN + "Excellent work, you're a star!" + ANS_CLEAR);
     }
 
     public static void printJudgementBad() {
         //Message to display if user has more tasks incomplete than complete
-        System.out.println("[38;5;166m" + "Terrible. Better get on it." + ANS_CLEAR);
+        System.out.println(ANS_RED + "Terrible. Better get on it." + ANS_CLEAR);
     }
 
     public static void printJudgementNeutral() {
