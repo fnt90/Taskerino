@@ -10,10 +10,10 @@ import java.time.LocalDate;
 public class Menus {
     TaskList taskList;
     ArrayList<Task> dataList;
-    int taskSelect;
     boolean alreadyLoaded = false;
+    Sorter sorter = new Sorter();
 
- //for formatting text and clearing formatting
+    //for formatting text and clearing formatting
     public static final String ANS_REVERSE = "[7m";
     public static final String ANS_YELLOW = "[38;5;185m";
     public static final String ANS_CLEAR = "[0m";
@@ -29,109 +29,85 @@ public class Menus {
  }
 
     public void mainMenu() {
-        //this should contain all of the main menu including logic and input
-        Scanner scanner = new Scanner(System.in);
         //load save file
         dataList = taskList.loadMethod();
-        //check if save file has already been loaded to avoid re-loading old data which prevents editing
+        //check if save file exists, and check if file has already been loaded
         if (dataList != null && !alreadyLoaded) {
+            //first loading confirmed, set loaded info into taskList
             taskList.setTaskList(dataList);
-            Sorter sorter = new Sorter();
+            //check and print number tasks due today and number tasks overdue (to print only once per program execution)
             sorter.overdueTasks(taskList);
-
+            //set alreadyLoaded to true which prevents re-loading on each call to mainMenu
             alreadyLoaded = true;
             //System.out.println("Loaded saved tasks from file.");
         }
         //show all main menu options
         Messages.printMainMenu();
-
         //read how many tasks the user has marked Done and Not done, and print a message to correspond
         makeJudgement();
         System.out.println(ANS_REVERSE + "Select an option by typing a digit and pressing Enter/Return."+ ANS_CLEAR);
-        String inputNumString = scanner.nextLine();
-        System.out.println("You entered: " + inputNumString + "\n");
+        //ask user to choose menu option
+        int menuChoice = UserInput.menuSelect();
 
-        // to disallow non-integer inputs or values outside of 1-5
-        try {
-            int inputNum = Integer.parseInt(inputNumString);
-            if (inputNum == 1) {
+            if (menuChoice == 1) {
                 //add task
                 addMenu();
-            } else if (inputNum == 2) {
+            } else if (menuChoice == 2) {
                 //print tasks
                 showMenu();
-            } else if (inputNum == 3) {
+            } else if (menuChoice == 3) {
                 //edit or delete task
                 editMenu();
-            } else if (inputNum == 4) {
+            } else if (menuChoice == 4) {
                 //view instructions
                 Messages.printInstructions();
                 returnToMain();
-            } else if (inputNum == 5) {
+            } else if (menuChoice == 5) {
                 //save and quit
                 taskList.saveMethod();
                 Messages.printExit();
-                System.exit(0);
+               //quit should happen here even without System.exit(0);
             } else {
                 Messages.printInvalidInput();
                 mainMenu();
             }
-        } catch(NumberFormatException e) {
-            Messages.printInvalidInput();
-            mainMenu();
-        }
     }
 
     public void showMenu() {
-
         //check if the list is empty, if so, return to main menu
         if (taskList.size()==0) {
             System.out.println("You don't have any tasks to show!");
             returnToMain();
         }
-        //display menu for options how to show list of tasks
+        //print menu for options how to show list of tasks
         Messages.printShowTasksMenu();
-        Scanner scanner = new Scanner(System.in);
-        String inputNumString = scanner.nextLine();
-        System.out.println("You entered: " + inputNumString + "\n");
+        //ask user for menu choice
+        int menuSelect = UserInput.menuSelect();
 
-        //to disallow non integer inputs or values outside of 1-4
-        try {
-            int inputNum = Integer.parseInt(inputNumString);
-            if (inputNum == 1) {
+            if (menuSelect == 1) {
                 //by ticked status
-                System.out.println(ANS_YELLOW + "Here are all your saved tasks (incomplete first):" + ANS_CLEAR);
                 printListStatus();
                 returnToMain();
-            } else if (inputNum == 2) {
+            } else if (menuSelect == 2) {
                 //by due date
-                System.out.println(ANS_YELLOW + "Here are all your saved tasks (date):" + ANS_CLEAR);
-                Sorter sortery = new Sorter();
-                sortery.sorterDate(taskList);
+                sorter.sorterDate(taskList);
                 returnToMain();
-            } else if (inputNum == 3) {
+            } else if (menuSelect == 3) {
                 //by project
-                System.out.println(ANS_YELLOW + "Here are all your saved tasks (project A-Z):" + ANS_CLEAR);
-                Sorter sortery = new Sorter();
-                sortery.sorterProj(taskList);
+                sorter.sorterProj(taskList);
                 returnToMain();
-            } else if (inputNum == 5) {
+            } else if (menuSelect == 5) {
                 //return to main
                 mainMenu();
-            } else if (inputNum == 4) {
-                //just print all stored tasks
+            } else if (menuSelect == 4) {
+                //print all stored tasks
                 System.out.println(ANS_YELLOW + "Here are all your saved tasks:" + ANS_CLEAR);
                 printList();
                 returnToMain();
             } else {
-                //tell user input was invalid and return to Show Tasks menu
-                Messages.printInvalidInput();
+                //user input invalid, return to Show Tasks menu
                 showMenu();
             }
-        } catch (NumberFormatException e) {
-            Messages.printInvalidInput();
-            showMenu();
-        }
     }
 
     public void addMenu() {
@@ -143,20 +119,12 @@ public class Menus {
         //creating a new task, user input for name, project, date, and setting default Ticked status to false
         Task newTask = new Task(newTsName,newTsProj,newTsDate, false);
 
-        //DateTimeFormatter formatter = new DateTimeFormatterBuilder()
-               // .appendPattern("dd MMM")
-              //  .parseDefaulting(ChronoField.YEAR, 2021)
-              //  .toFormatter(Locale.US);
-
-        System.out.println("NEW TASK Name: "+ ANS_BLUE + newTask.name + ANS_CLEAR + "\nProject: " + ANS_BLUE +
+        System.out.println("NEW TASK \nName: "+ ANS_BLUE + newTask.name + ANS_CLEAR + "\nProject: " + ANS_BLUE +
                 newTask.project + ANS_CLEAR + "\nDate: " + ANS_BLUE + formatter.format(newTask.date) + ANS_CLEAR);
         taskList.addTask(newTask);
         System.out.println("Your new task is saved.");
         returnToMain();
-
     }
-
-
 
     public void editMenu() {
         // check if there are any tasks in your list, if not send to main menu
@@ -168,20 +136,18 @@ public class Menus {
         Messages.printEditTasksMenu();
         //show all saved tasks to allow user to choose one
         printList();
-
         //user selects task
         int taskSelect = UserInput.taskListSelect();
-
         if (taskSelect == -1) {
             //user input is invalid
             editMenu();
         }
-        //user input is valid
+        //user input is valid, print details of selected task
         Task editor = taskList.get(taskSelect);
         System.out.println("You selected: " + ANS_BK_BLUE + (taskSelect + 1) + ". " + editor.name + ", " +
                 editor.project + ", " + formatter.format(editor.date) + ", " + editor.boolToString() + ANS_CLEAR);
 
-        Messages.printEditTasksSelect();
+        Messages.printEditTaskActions();
 
         int menuChoice = UserInput.menuSelect();
 
@@ -213,7 +179,6 @@ public class Menus {
                 //user input was invalid, return to Edit Tasks menu
                 editMenu();
             }
-
     }
 
     public void returnToMain() {
@@ -229,8 +194,8 @@ public class Menus {
             //user input is invalid
             returnToMain();
         }
+    }
 
-        }
     public void printList() {
         //show all saved tasks in the order they were added
 
@@ -251,10 +216,7 @@ public class Menus {
     }
 
     public void makeJudgement() {
-        /* count how many tasks TRUE (complete) using variable int tasksDone
-        ** count how many tasks FALSE (incomplete) using variable int tasksNotDone
-        ** loop for each saved task. If task.isTicked returns true (is complete), augment tasksDone by 1
-         */
+        //count complete and incomplete tasks, print judgement message based on result
         int tasksDone = 0;
         int tasksNotDone;
         for (Task task : taskList.getTaskList()) {
@@ -274,12 +236,12 @@ public class Menus {
         } else {
             Messages.printJudgementBad();
         }
-
     }
 
     public void printListStatus() {
         //show all saved tasks incomplete first, then complete
-
+        System.out.println(ANS_YELLOW + "Here are all your saved tasks (incomplete first):" + ANS_CLEAR);
+        //print all incomplete tasks
         int index = 0;
         int displayIndex = 1;
         while(index < taskList.size()) {
@@ -292,7 +254,7 @@ public class Menus {
             }
             index++;
         }
-        //print all tasks with complete status
+        //print all complete tasks
         int index2 = 0;
         while(index2 < taskList.size()) {
             Task printer = taskList.get(index2);

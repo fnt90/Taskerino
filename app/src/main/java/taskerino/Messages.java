@@ -54,16 +54,16 @@ public class Messages {
         System.out.println(ANS_PURPLE + "~EDIT MENU~" + ANS_CLEAR);
         System.out.println("You selected Edit, delete or tick off a task.");
     }
-    public static void printEditTasksSelect() {
+    public static void printEditTaskActions() {
         //Display all Edit menu options after selecting which task to edit
         System.out.println(ANS_PURPLE + "~~EDIT SUBMENU" + ANS_CLEAR);
         System.out.println("What do you want to do with this task?");
         System.out.println("1. Edit name");
         System.out.println("2. Edit project");
         System.out.println("3. Edit due date");
-        System.out.println("4. Tick off (or un-tick) this task");
-        System.out.println("5. Delete this task");
-        System.out.println("6. Return to main menu");
+        System.out.println("4. Tick off (or un-tick) task");
+        System.out.println("5. Delete task");
+        System.out.println("6. Cancel (return to main menu)");
     }
     public static void printInvalidInput() {
         //tell user they typed a value that was not a menu choice
