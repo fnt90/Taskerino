@@ -44,7 +44,7 @@ public class Menus {
         //show all main menu options
         Messages.printMainMenu();
         //read how many tasks the user has marked Done and Not done, and print a message to correspond
-        makeJudgement();
+        sorter.makeJudgementOnTasks(taskList);
         System.out.println(ANS_REVERSE + "Select an option by typing a digit and pressing Enter/Return."+ ANS_CLEAR);
         //ask user to choose menu option
         int menuChoice = UserInput.menuSelect();
@@ -86,15 +86,15 @@ public class Menus {
 
             if (menuSelect == 1) {
                 //by ticked status
-                printListStatus();
+                sorter.printByStatus(taskList);
                 returnToMain();
             } else if (menuSelect == 2) {
                 //by due date
-                sorter.sorterDate(taskList);
+                sorter.sortByDate(taskList);
                 returnToMain();
             } else if (menuSelect == 3) {
                 //by project
-                sorter.sorterProj(taskList);
+                sorter.sortByProj(taskList);
                 returnToMain();
             } else if (menuSelect == 5) {
                 //return to main
@@ -102,7 +102,7 @@ public class Menus {
             } else if (menuSelect == 4) {
                 //print all stored tasks
                 System.out.println(ANS_YELLOW + "Here are all your saved tasks:" + ANS_CLEAR);
-                printList();
+                sorter.printAllTasks(taskList);
                 returnToMain();
             } else {
                 //user input invalid, return to Show Tasks menu
@@ -135,7 +135,7 @@ public class Menus {
         //display menu for edit options
         Messages.printEditTasksMenu();
         //show all saved tasks to allow user to choose one
-        printList();
+        sorter.printAllTasks(taskList);
         //user selects task
         int taskSelect = UserInput.taskListSelect();
         if (taskSelect == -1) {
@@ -195,79 +195,6 @@ public class Menus {
             returnToMain();
         }
     }
-
-    public void printList() {
-        //show all saved tasks in the order they were added
-
-        int index = 0;
-        while(index < taskList.size()) {
-            Task printer = taskList.get(index);
-            String taskStatus = printer.boolToString();
-            System.out.print((index + 1) + ". " + printer.name + ", " + printer.project + ", " +
-                    formatter.format(printer.date) + ", ");
-            //if statement to print incomplete in blue but complete in normal colour
-            if (taskStatus.equals("incomplete")) {
-                System.out.print(ANS_BLUE + "incomplete" + ANS_CLEAR + "\n");
-            } else {
-               System.out.print("complete" + "\n");
-            }
-            index++;
-        }
-    }
-
-    public void makeJudgement() {
-        //count complete and incomplete tasks, print judgement message based on result
-        int tasksDone = 0;
-        int tasksNotDone;
-        for (Task task : taskList.getTaskList()) {
-            if (task.isTicked) {
-                tasksDone++;
-            }
-        }
-        //counted completed tasks, so incomplete tasks = total - completed
-        tasksNotDone = taskList.size() - tasksDone;
-        System.out.println("You've completed " + ANS_YELLOW + tasksDone + ANS_CLEAR + " task(s), and you've got " +
-                ANS_YELLOW + tasksNotDone + ANS_CLEAR + " task(s) to go.");
-        //choose which judgement message to print
-        if (tasksDone > tasksNotDone) {
-            Messages.printJudgementGood();
-        } else if (tasksDone == tasksNotDone) {
-            Messages.printJudgementNeutral();
-        } else {
-            Messages.printJudgementBad();
-        }
-    }
-
-    public void printListStatus() {
-        //show all saved tasks incomplete first, then complete
-        System.out.println(ANS_YELLOW + "Here are all your saved tasks (incomplete first):" + ANS_CLEAR);
-        //print all incomplete tasks
-        int index = 0;
-        int displayIndex = 1;
-        while(index < taskList.size()) {
-            Task printer = taskList.get(index);
-            String taskStatus = printer.boolToString();
-            if (taskStatus.equals("incomplete")) {
-                System.out.println(displayIndex +". " + printer.name + ", " + printer.project + ", " +
-                        formatter.format(printer.date) + ", " + ANS_BLUE + printer.boolToString()+ ANS_CLEAR);
-                displayIndex++;
-            }
-            index++;
-        }
-        //print all complete tasks
-        int index2 = 0;
-        while(index2 < taskList.size()) {
-            Task printer = taskList.get(index2);
-            String taskStatus = printer.boolToString();
-            if (taskStatus.equals("complete")) {
-                System.out.println(displayIndex+". " + printer.name + ", " + printer.project + ", " +
-                        formatter.format(printer.date) + ", " + printer.boolToString());
-                displayIndex++;
-            }
-            index2++;
-        }
-    }
-
 }
 
 
