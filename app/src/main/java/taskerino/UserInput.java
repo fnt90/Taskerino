@@ -14,26 +14,36 @@ import java.util.Scanner;
  * @version 1.0 (2021.03.18)
  */
 public class UserInput {
+    /**
+     * @param taskChoice String of user input, should be a number corresponding to a task printed on console
+     */
     public static int taskChoice;
+    /**
+     * ANSI escape codes corresponding to text formatting.
+     */
     public static final String ANS_YELLOW = "[38;5;185m";
     public static final String ANS_CLEAR = "[0m";
     public static final String ANS_BOLD = "[1m";
+    /**
+     * Allows conversion of standard LocalDate format "YYYY-MM-DD" to a custom pattern "dd MMM".
+     */
     public static DateTimeFormatter formatter = new DateTimeFormatterBuilder()
             .appendPattern("dd MMM")
             .parseDefaulting(ChronoField.YEAR, 2021)
             .toFormatter(Locale.US);
 
+    /**
+     * Takes user input and converts to integer. If successful, subtracts 1 to correspond to task's index in ArrayList.
+     * If unsuccessful, throws NumberFormatException and prints error message to user.
+     * @return user's chosen task as an index value or error value (-1)
+     */
     public static int taskListSelect() {
         System.out.println("Select a task from the list by entering its number.");
-        //this will take input from user, convert to integer, and then should subtract 1 to make index
         Scanner scanner = new Scanner(System.in);
-        //here, taking user input and storing it as string
         String taskSelectString = scanner.nextLine();
 
         try {
-            //take user string and converting to integer
             taskChoice = Integer.parseInt(taskSelectString);
-            //take integer of user input and convert to index by subtracting 1
             taskChoice--;
             return taskChoice;
         } catch (NumberFormatException e) {
@@ -43,6 +53,11 @@ public class UserInput {
         return taskChoice;
     }
 
+    /**
+     * Takes user input, prints a repeat of user input in console, and converts to integer. If unsuccessful, throws
+     * NumberFormatException and prints error message to user.
+     * @return user's chosen menu item number or error value (-1)
+     */
     public static int menuSelect() {
         int menuChoice;
         Scanner scanner = new Scanner(System.in);
@@ -56,6 +71,11 @@ public class UserInput {
         }
         return menuChoice;
     }
+
+    /**
+     * Prompts user to enter their name to save to file, in order to greet user upon starting program.
+     * @return user's name as String
+     */
     public static String askUserName() {
         Scanner scanner = new Scanner(System.in);
         System.out.println(ANS_YELLOW + "What's your name?" + ANS_CLEAR);
@@ -63,32 +83,41 @@ public class UserInput {
         return userNameInp;
     }
 
+    /**
+     * Prompts user to input task name, either when adding new task or editing task name. If user presses Enter/Return,
+     * a blank string will be replaced by "**Untitled**".
+     * @return new task name or "**Untitled**"
+     */
     public static String askForName() {
-        //Prompts user to input name, either when adding new task or selecting Edit Name
         Scanner scanner = new Scanner(System.in);
         System.out.println("Type new task " + ANS_BOLD + "name" + ANS_CLEAR + ":");
         String name = scanner.nextLine();
-        //If user does not type a name, replace blank with **Untitled**
         if (name.length()==0) {
             return "**Untitled**";
         }
         return name;
     }
 
+    /**
+     * Prompts user to input task project, either when adding new task or editing task project. If user presses
+     * Enter/Return, a blank string will be saved.
+     * @return new task project
+     */
     public static String askForProject() {
-        //Prompts user to input project, either when adding new task or selecting Edit Project
         Scanner scanner = new Scanner(System.in);
         System.out.println("Type new task " + ANS_BOLD + "project" + ANS_CLEAR + ":");
         String project = scanner.nextLine();
         return project;
     }
 
+    /**
+     * Prompts user to input task due date, either when adding new task or editing task date. If user presses
+     * Enter/Return or does not follow specified pattern of "dd MMM", saves due date as today's date.
+     * @return new task date
+     */
     public static LocalDate askForDate() {
-        //Prompts user to input due date, either when adding new task or selecting Edit Date
         Scanner askDate = new Scanner(System.in);
-
         System.out.println("Type new task " + ANS_BOLD + "due date " + ANS_YELLOW + "(DD Mmm/04 Oct)" + ANS_CLEAR + ":");
-        //try block to check if date correctly formatted, if not, automatically set to today's date
         try {
             LocalDate date = LocalDate.parse(askDate.nextLine(), formatter);
             return date;

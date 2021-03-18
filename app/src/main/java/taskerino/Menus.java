@@ -8,23 +8,30 @@ import java.time.LocalDate;
 
 /**
  * The Menus class handles each of the menus, providing a map to the user so they can access their desired function. It
- * also gives the user a summary of their tasks in the form of a judgement message. In addition, it gives directions to
- * the program on when loading from file is or isn't needed.
+ * gives the user a summary of their tasks in the form of a judgement message. It also gives directions to the program
+ * on when loading from file is or isn't needed.
  * @author Fiona Thompson
  * @version 1.0 (2021.03.18)
  */
 public class Menus {
     TaskList taskList;
     ArrayList<Task> dataList;
+    /**
+     * Starts program with false value for whether or not save file has loaded this program execution.
+     */
     boolean alreadyLoaded = false;
     Sorter sorter = new Sorter();
-
-    //for formatting text and clearing formatting
+    /**
+     * ANSI escape codes corresponding to text formatting.
+     */
     public static final String ANS_REVERSE = "[7m";
     public static final String ANS_YELLOW = "[38;5;185m";
     public static final String ANS_CLEAR = "[0m";
     public static final String ANS_BK_BLUE = "[30;44m";
     public static final String ANS_BLUE = "[34m";
+    /**
+     * Allows conversion of standard LocalDate format "YYYY-MM-DD" to a custom pattern "dd MMM".
+     */
     public static DateTimeFormatter formatter = new DateTimeFormatterBuilder()
             .appendPattern("dd MMM")
             .parseDefaulting(ChronoField.YEAR, 2021)
@@ -34,6 +41,13 @@ public class Menus {
      taskList = new TaskList();
  }
 
+    /**
+     * Loads saved file if it exists, and checks if save file has been loaded in this instance of the program execution.
+     * If not loaded, assigns save data to the taskList. If already loaded, prevents overwriting.
+     * Prints Main Menu options, followed by a judgement message and a summary message informing user of any tasks due
+     * today and any overdue tasks. Takes in user's menu choice and directs the user to their chosen menu, or saves and
+     * exits the program. Returns user to the Main Menu if user's menu choice is invalid.
+     */
     public void mainMenu() {
         //load save file
         dataList = taskList.loadTaskList();
@@ -45,14 +59,12 @@ public class Menus {
             sorter.overdueTasks(taskList);
             //set alreadyLoaded to true which prevents re-loading on each call to mainMenu
             alreadyLoaded = true;
-            //System.out.println("Loaded saved tasks from file.");
         }
-        //show all main menu options
+
         Messages.printMainMenu();
-        //read how many tasks the user has marked Done and Not done, and print a message to correspond
         sorter.makeJudgementOnTasks(taskList);
         System.out.println(ANS_REVERSE + "Select an option by typing a digit and pressing Enter/Return."+ ANS_CLEAR);
-        //ask user to choose menu option
+
         int menuChoice = UserInput.menuSelect();
 
             if (menuChoice == 1) {
@@ -72,20 +84,23 @@ public class Menus {
                 //save and quit
                 taskList.saveTaskList();
                 Messages.printExit();
-               //quit should happen here even without System.exit(0);
             } else {
+                //user input is invalid (-1), return to Main Menu
                 Messages.printInvalidInput();
                 mainMenu();
             }
     }
 
+    /**
+     * Checks if taskList is empty, if empty user is returned to Main Menu. Prints Show Tasks Menu options and takes in
+     * user's menu choice. Prints selected sort option and prompts user to return to Main Menu.
+     */
     public void showMenu() {
-        //check if the list is empty, if so, return to main menu
         if (taskList.size()==0) {
             System.out.println("You don't have any tasks to show!");
             returnToMain();
         }
-        //print menu for options how to show list of tasks
+
         Messages.printShowTasksMenu();
         //ask user for menu choice
         int menuChoice = UserInput.menuSelect();
@@ -111,18 +126,21 @@ public class Menus {
                 sorter.printAllTasks(taskList);
                 returnToMain();
             } else {
-                //user input invalid, return to Show Tasks menu
+                //user input invalid (-1), return to Show Tasks menu
                 showMenu();
             }
     }
 
+    /**
+     * Prints Add Task Menu message and prompts user to input name, project, and due date. Sets ticked status to false
+     * ("incomplete") for all new tasks. Adds new task to taskList, and prints confirmation for the user.
+     */
     public void addMenu() {
-        //display menu for adding new task, get user input for Name/Project/Date
         Messages.printAddTasksMenu();
         String newName = UserInput.askForName();
         String newProject = UserInput.askForProject();
         LocalDate newDate = UserInput.askForDate();
-        //creating a new task, user input for name, project, date, and setting default Ticked status to false
+
         Task newTask = new Task(newName,newProject,newDate, false);
 
         System.out.println("NEW TASK \nName: "+ ANS_BLUE + newTask.name + ANS_CLEAR + "\nProject: " + ANS_BLUE +
@@ -132,13 +150,17 @@ public class Menus {
         returnToMain();
     }
 
+    /**
+     * Checks if taskList is empty, if empty user is returned to Main Menu. Prints Edit Menu message followed by a list
+     * of all saved tasks. Takes in user's selected task and prints task details for confirmation of selection. Prints
+     * list of actions available for editing task, takes in user's selection and allows user to perform the desired
+     * function. Upon completion of function, directs user back to Main Menu.
+     */
     public void editMenu() {
-        // check if there are any tasks in your list, if not send to main menu
         if (taskList.size()==0) {
             System.out.println("You don't have any tasks to edit!");
             returnToMain();
         }
-        //display menu for edit options
         Messages.printEditTasksMenu();
         //show all saved tasks to allow user to choose one
         sorter.printAllTasks(taskList);
@@ -182,15 +204,19 @@ public class Menus {
                 //main menu
                 mainMenu();
             } else {
-                //user input was invalid, return to Edit Tasks menu
+                //user input is invalid (-1), return to Edit Tasks menu
                 editMenu();
             }
     }
 
+    /**
+     * Prints prompt for user to return to the Main Menu. This prompt lets the user know their previous function is
+     * complete (adding, editing, or printing). Allows the user to finish reading the information printed in the
+     * console, and only returns to Main Menu when the user is ready to proceed.
+     * Takes in user input and returns user to Main menu, or reprints prompt.
+     */
     public void returnToMain() {
-        //take the user back to the main menu after adding/editing/printing
         Messages.printReturnToMain();
-
         int menuChoice = UserInput.menuSelect();
 
         if (menuChoice == 1) {

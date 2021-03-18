@@ -2,30 +2,38 @@ package taskerino;
 
 import java.util.Scanner;
 /**
- * The main...
+ * The Main class greets the user with a personalized message and directs to the Main Menu.
  * @author Fiona Thompson
  * @version 1.0 (2021.03.18)
  */
 public class Main {
-    //for formatting text and clearing formatting
+    /**
+     * ANSI escape codes corresponding to text formatting.
+     */
     public static final String ANS_YELLOW = "[38;5;185m";
     public static final String ANS_CLEAR = "[0m";
     public static final String ANS_BOLD = "[1m";
 
-    public static void main(String[] args) throws InterruptedException {
-        //main method of Taskerino
-
+    /**
+     * Attempts to load user's name from save file. If file is found, greets user with a personalized message. If no
+     * file is found, prompts user to enter their name, saves name to file and prints personalized message. If user
+     * does not enter a name, name is set to "Buddy". Directs user to main menu.
+     */
+    public static void main(String[] args) {
         Messages.printWelcome();
 
         FileHandler fileHandler = new FileHandler();
         String userName = fileHandler.readName();
         if (userName.equals("")) {
-            String userNameInp = UserInput.askUserName();
-            if (userNameInp.length() == 0) {
-                userNameInp = "Buddy";
+            //no save file found, ask user for name
+            String userNameInput = UserInput.askUserName();
+            if (userNameInput.length() == 0) {
+                //user pressed Enter/Return without entering name
+                userNameInput = "Buddy";
             }
-            fileHandler.writeName(userNameInp);
-            System.out.println("Nice to meet you, " + ANS_YELLOW + ANS_BOLD + userNameInp.toUpperCase() + "!" + ANS_CLEAR);
+            //save user's name to file
+            fileHandler.writeName(userNameInput);
+            System.out.println("Nice to meet you, " + ANS_YELLOW + ANS_BOLD + userNameInput.toUpperCase() + "!" + ANS_CLEAR);
         } else {
             System.out.println("Welcome back, " + ANS_YELLOW + ANS_BOLD + userName + "!" + ANS_CLEAR);
 

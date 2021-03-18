@@ -8,12 +8,16 @@ import java.util.ArrayList;
  * @version 1.0 (2021.03.18)
  */
 public class FileHandler {
-//my path is C:\Users\fiona\Documents\IdeaProjs\Taskerino\app\src\main\resources
-    private String path = "app/src/main/resources/";
-    //need to include app in string to prevent error
 
+    private String path = "app/src/main/resources/";
+
+    /**
+     * Saves user tasks to file in String format. Creates or rewrites a text save file in "resources" folder with one
+     * task on each line, using ",," as a delimiter. Throws IOException and prints error message if resources folder
+     * is not found.
+     * @param dataList
+     */
     public void writeAsData(ArrayList<Task> dataList) {
-        //save user tasks to file
         try {
             FileWriter fileWriter = new FileWriter(new File(path + "taskerinoData.txt"));
             for (Task writeTask : dataList) {
@@ -28,8 +32,13 @@ public class FileHandler {
         }
     }
 
+    /**
+     * Reads saved tasks from text file in "resources" folder for use within the program. Takes in one line per task,
+     * uses ",," as a delimiter. Recreates task objects by inputting string-only data into secondary constructor,
+     * allowing parsing and conversion for recreation of LocalDate and Boolean values.
+     * @return ArrayList of saved tasks
+     */
     public ArrayList<Task> readAsData() {
-        //load user tasks from file
         ArrayList<Task> dataList = new ArrayList<>();
 
         try {
@@ -51,8 +60,11 @@ public class FileHandler {
         return dataList;
     }
 
+    /**
+     * Saves user's name to file to print personalized greeting on next program execution.
+     * @param userName name of user displayed in greeting
+     */
     public void writeName(String userName) {
-        //save username to file to print personalized greeting on next program execution
         try {
             FileWriter fileWriter = new FileWriter(new File(path + "taskerinoDataUser.txt"));
             fileWriter.write(userName);
@@ -62,8 +74,12 @@ public class FileHandler {
         }
     }
 
+    /**
+     * Attempts to load saved name from text file. Sets user's name to a blank string to be replaced with user's name
+     * if save file is found.
+     * @return user's name or blank string to print within personalized greeting upon starting the program
+     */
     public String readName() {
-        //load user's name for printing personalized greeting
         String userName = "";
         try {
             FileReader fileReader = new FileReader(path + "taskerinoDataUser.txt");
