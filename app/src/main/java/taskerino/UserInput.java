@@ -56,6 +56,12 @@ public class UserInput {
         }
         return menuChoice;
     }
+    public static String askUserName() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println(ANS_YELLOW + "What's your name?" + ANS_CLEAR);
+        String userNameInp = scanner.nextLine();
+        return userNameInp;
+    }
 
     public static String askForName() {
         //Prompts user to input name, either when adding new task or selecting Edit Name

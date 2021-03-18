@@ -3,7 +3,7 @@ package taskerino;
 import java.io.*;
 import java.util.ArrayList;
 /**
- * The main...
+ * The FileHandler class handles reading and writing user's name and task data to file.
  * @author Fiona Thompson
  * @version 1.0 (2021.03.18)
  */
@@ -79,5 +79,4 @@ public class FileHandler {
         }
         return userName;
     }
-
 }

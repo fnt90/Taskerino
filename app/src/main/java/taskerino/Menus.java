@@ -7,7 +7,9 @@ import java.util.*;
 import java.time.LocalDate;
 
 /**
- * The Menus class handles
+ * The Menus class handles each of the menus, providing a map to the user so they can access their desired function. It
+ * also gives the user a summary of their tasks in the form of a judgement message. In addition, it gives directions to
+ * the program on when loading from file is or isn't needed.
  * @author Fiona Thompson
  * @version 1.0 (2021.03.18)
  */
@@ -28,9 +30,9 @@ public class Menus {
             .parseDefaulting(ChronoField.YEAR, 2021)
             .toFormatter(Locale.US);
 
- //public Menus() {
- //    taskList = new TaskList();
- //}
+ public Menus() {
+     taskList = new TaskList();
+ }
 
     public void mainMenu() {
         //load save file

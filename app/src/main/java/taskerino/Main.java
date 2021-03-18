@@ -20,13 +20,9 @@ public class Main {
         FileHandler fileHandler = new FileHandler();
         String userName = fileHandler.readName();
         if (userName.equals("")) {
-            Scanner scanner = new Scanner(System.in);
-            System.out.println(ANS_YELLOW + "What's your name?" + ANS_CLEAR);
-            String userNameInp = scanner.nextLine();
-
+            String userNameInp = UserInput.askUserName();
             if (userNameInp.length() == 0) {
                 userNameInp = "Buddy";
-
             }
             fileHandler.writeName(userNameInp);
             System.out.println("Nice to meet you, " + ANS_YELLOW + ANS_BOLD + userNameInp.toUpperCase() + "!" + ANS_CLEAR);
@@ -36,7 +32,6 @@ public class Main {
         }
         Menus menu = new Menus();
         menu.mainMenu();
-
     }
 }
 
