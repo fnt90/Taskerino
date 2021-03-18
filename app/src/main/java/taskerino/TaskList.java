@@ -1,4 +1,4 @@
-package Taskerino;
+package taskerino;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
@@ -12,11 +12,18 @@ import java.util.Scanner;
 public class TaskList {
     //this should be an array list of Task objects, and the list is called taskList
     private ArrayList<Task> taskList;
-
+    //int taskSelect;
     //for formatting text and clearing formatting
     public static final String ANS_YELLOW = "[38;5;185m";
     public static final String ANS_CLEAR = "[0m";
     public static final String ANS_BOLD = "[1m";
+    public static final String ANS_BK_BLUE = "[30;44m";
+    public static DateTimeFormatter formatter = new DateTimeFormatterBuilder()
+            .appendPattern("dd MMM")
+            .parseDefaulting(ChronoField.YEAR, 2021)
+            .toFormatter(Locale.US);
+
+    //Menus menus = new Menus();
 
 
     public TaskList() {
@@ -45,11 +52,11 @@ public class TaskList {
         return getIndexVal;
     }
 
-    public static String askForName() {
+    public static String askName() {
         //Prompts user to input name, either when adding new task or selecting Edit Name
-        Scanner askName = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
         System.out.println("Type new task " + ANS_BOLD + "name" + ANS_CLEAR + ":");
-        String name = askName.nextLine();
+        String name = scanner.nextLine();
         //If user does not type a name, replace blank with **Untitled**
         if (name.length()==0) {
             return "**Untitled**";
@@ -57,22 +64,22 @@ public class TaskList {
 
         return name;
     }
-    public static String askForProject() {
+    public static String askProj() {
         //Prompts user to input project, either when adding new task or selecting Edit Project
-        Scanner askProj = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
         System.out.println("Type new task " + ANS_BOLD + "project" + ANS_CLEAR + ":");
-        String project = askProj.nextLine();
+        String project = scanner.nextLine();
         return project;
     }
-    public static LocalDate askForDate() {
+    public static LocalDate askDate() {
         //Prompts user to input due date, either when adding new task or selecting Edit Date
         Scanner askDate = new Scanner(System.in);
 
-        DateTimeFormatter formatter = new DateTimeFormatterBuilder()
+        /*DateTimeFormatter formatter = new DateTimeFormatterBuilder()
                 .appendPattern("dd MMM")
                 .parseDefaulting(ChronoField.YEAR, 2021)
                 .toFormatter(Locale.US);
-
+*/
         System.out.println("Type new task " + ANS_BOLD + "due date " + ANS_YELLOW + "(DD Mmm/04 Oct)" + ANS_CLEAR + ":");
         //try block to check if date correctly formatted, if not, automatically set to today's date
         try {
@@ -86,11 +93,49 @@ public class TaskList {
         }
     }
 
+    public void changeName(int taskListSelect) {
+        Task editableName = taskList.get(taskListSelect); //this is NOT working
+        editableName.setName(askName());
+        System.out.println("Task name changed to: " + ANS_BK_BLUE + editableName.name + ANS_CLEAR);
+    }
+
+    public void changeProj(int taskListSelect) {
+        Task editableProj = taskList.get(taskListSelect);
+        editableProj.setProject(askProj());
+        System.out.println("Task project changed to: " + ANS_BK_BLUE + editableProj.project + ANS_CLEAR);
+    }
+    public void changeDate(int taskListSelect) {
+        Task editableDate = taskList.get(taskListSelect);
+        editableDate.setDate(askDate());
+        System.out.println("Task date changed to: " + ANS_BK_BLUE + formatter.format(editableDate.date) + ANS_CLEAR);
+    }
+    public void changeTicked(int taskListSelect) {
+        Task editableTick = taskList.get(taskListSelect);
+        if (editableTick.getTickStatus() == false) {
+            editableTick.setTicked(true);
+        } else {
+            editableTick.setTicked(false);
+        }
+        System.out.println("Task is now marked as: " + ANS_BK_BLUE + editableTick.boolToString() + ANS_CLEAR);
+    }
+
     public void setTaskList(ArrayList<Task> taskList) {
         this.taskList = taskList;
     }
 
     public void saveMethod() {
+        try {
+            System.out.print("Saving");
+            Thread.sleep(500);
+            System.out.print(" .");
+            Thread.sleep(500);
+            System.out.print(" .");
+            Thread.sleep(500);
+            System.out.println(" .");
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            System.out.println("Saving");
+        }
         FileHandler saverFile = new FileHandler();
         saverFile.writeAsData(taskList);
     }

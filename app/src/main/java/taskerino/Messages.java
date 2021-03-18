@@ -1,13 +1,16 @@
-package Taskerino;
+package taskerino;
 
 public class Messages {
 
     //for formatting text and clearing formatting
     public static final String ANS_BOLD = "[1m";
     public static final String ANS_YELLOW = "[38;5;185m";
+    public static final String ANS_GREEN = "[38;5;112m";
+    public static final String ANS_RED = "[38;5;166m";
     public static final String ANS_REVERSE = "[7m";
     public static final String ANS_PURPLE = "[35m";
     public static final String ANS_CLEAR = "[0m";
+    //for rainbow print of Taskerino
     public static final String TASKERINO = "[38;5;212m" + "T"+"[38;5;217m" + "a"+ "[38;5;222m" + "s" +
             "[38;5;229m" + "k" + "[38;5;192m" + "e" + "[38;5;159m" + "r" + "[38;5;117m" + "i" +
             "[38;5;141m" + "n" + "[38;5;135m" + "o";
@@ -51,16 +54,16 @@ public class Messages {
         System.out.println(ANS_PURPLE + "~EDIT MENU~" + ANS_CLEAR);
         System.out.println("You selected Edit, delete or tick off a task.");
     }
-    public static void printEditTasksSelect() {
+    public static void printEditTaskActions() {
         //Display all Edit menu options after selecting which task to edit
         System.out.println(ANS_PURPLE + "~~EDIT SUBMENU" + ANS_CLEAR);
         System.out.println("What do you want to do with this task?");
         System.out.println("1. Edit name");
         System.out.println("2. Edit project");
         System.out.println("3. Edit due date");
-        System.out.println("4. Tick off (or un-tick) this task");
-        System.out.println("5. Delete this task");
-        System.out.println("6. Return to main menu");
+        System.out.println("4. Tick off (or un-tick) task");
+        System.out.println("5. Delete task");
+        System.out.println("6. Cancel (return to main menu)");
     }
     public static void printInvalidInput() {
         //tell user they typed a value that was not a menu choice
@@ -75,17 +78,19 @@ public class Messages {
 
     public static void printExit() {
         //Display after Save & Quit option is selected
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         System.out.println(ANS_YELLOW + "Thanks for using "+TASKERINO+ ANS_YELLOW +"! See you again soon!" + ANS_CLEAR);
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
     }
 
     public static void printJudgementGood() {
         //Message to display if user has more tasks completed than incomplete
-        System.out.println("[38;5;112m" + "Excellent work, you're a star!" + ANS_CLEAR);
+        System.out.println(ANS_GREEN + "Excellent work, you're a star!" + ANS_CLEAR);
     }
 
     public static void printJudgementBad() {
         //Message to display if user has more tasks incomplete than complete
-        System.out.println("[38;5;166m" + "Terrible. Better get on it." + ANS_CLEAR);
+        System.out.println(ANS_RED + "Terrible. Better get on it." + ANS_CLEAR);
     }
 
     public static void printJudgementNeutral() {

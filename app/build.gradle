@@ -31,7 +31,7 @@ dependencies {
 
 application {
     // Define the main class for the application.
-    mainClass = 'Taskerino.Main'
+    mainClass = 'taskerino.Main'
 }
 
 tasks.named('test') {
@@ -42,7 +42,7 @@ tasks.named('test') {
 jar {
  manifest {
      attributes(
-             'Main-Class': 'Taskerino.Main'
+             'Main-Class': 'taskerino.Main'
         )
     }
 }
