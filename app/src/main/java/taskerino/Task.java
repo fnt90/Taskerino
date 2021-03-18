@@ -3,15 +3,26 @@ package taskerino;
 import java.util.Comparator;
 import java.time.LocalDate;
 
-
+/**
+ * The Task class creates Tasks that have a Name and Project with String values, a due date with LocalDate values,
+ * and a ticked/unticked status with a boolean value. A task marked as ticked will be complete, whereas a task marked
+ * as unticked will be incomplete.
+ * @author Fiona Thompson
+ * @version 1.0 (2021.03.18)
+ */
 public class Task {
-    //this gives instructions on how an object Task should look like
     String name;
     String project;
     LocalDate date;
     boolean isTicked;
 
-
+    /**
+     * Main constructor to create task objects with name, project, date and ticked status.
+     * @param name The name of the to-do task the user wants to put on the list
+     * @param project The project to which the to-do task belongs
+     * @param date The due date of the to-do task
+     * @param isTicked The complete or incomplete status of the task
+     */
     public Task(String name, String project, LocalDate date, boolean isTicked) {
         this.name = name;
         this.project = project;
@@ -19,6 +30,13 @@ public class Task {
         this.isTicked = isTicked;
     }
 
+    /**
+     * Secondary constructor to correctly read Date and Ticked status from save file.
+     * @param name Name of task to be read from save file
+     * @param project Project of task to be read from save file
+     * @param sDate String in LocalDate format YYYY-MM-DD to be read from save file
+     * @param status String "complete" or "incomplete" corresponding to boolean true or false
+     */
     public Task(String name, String project, String sDate, String status) {
         //this was added in order to correctly read Date and Ticked status from save file
         this.name = name;
@@ -59,16 +77,25 @@ public class Task {
         this.isTicked = isTicked;
     }
 
+    /**
+     * Converts boolean true/false to String for ease of saving to file and printing to list, for user to easily
+     * understand true means task is completed and false means task is incomplete.
+     * @return string to represent boolean value
+     */
     public String boolToString(){
-        //to convert boolean TRUE to "complete" and FALSE to "incomplete" for user understanding
-        if (isTicked==true){
+        if (isTicked){
             return "complete";
         } else {
             return "incomplete";
         }
     }
+
+    /**
+     * Converts String stored in save file back to boolean for storage in current TaskList.
+     * @param string String version of isTicked
+     * @return boolean value for isTicked variable
+     */
     public boolean stringToBool(String string) {
-        //to convert saved data from String back into boolean form, to correctly display # of tasks done and allow editing
         if (string.equals("complete")) {
             return true;
         } else {
@@ -76,6 +103,9 @@ public class Task {
         }
     }
 
+    /**
+     * Custom comparator to allow sorting of tasks by their Project field, ignoring case to allow user-friendly sorting.
+     */
         public static Comparator<Task> taskProjComparator = new Comparator<Task>() {
             @Override
             public int compare(Task t1, Task t2) {
@@ -84,7 +114,9 @@ public class Task {
                 return project1.compareToIgnoreCase(project2);
             }
         };
-
+    /**
+     * Custom comparator to allow sorting of tasks by their due date.
+     */
         public static Comparator<Task> taskDateComparator = new Comparator<Task>() {
             @Override
             public int compare(Task t1, Task t2) {
