@@ -1,6 +1,5 @@
 package taskerino;
 
-import java.util.Scanner;
 /**
  * The Main class greets the user with a personalized message and directs to the Main Menu.
  * @author Fiona Thompson

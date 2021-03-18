@@ -15,7 +15,7 @@ import java.util.Scanner;
  */
 public class UserInput {
     /**
-     * @param taskChoice String of user input, should be a number corresponding to a task printed on console
+     * String of user input, should be a number corresponding to a task printed on console
      */
     public static int taskChoice;
     /**
