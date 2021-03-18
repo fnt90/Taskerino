@@ -17,6 +17,7 @@ public class Sorter {
             .parseDefaulting(ChronoField.YEAR, 2021)
             .toFormatter(Locale.US);
 
+    
     public void printAllTasks(TaskList taskList) {
         //show all saved tasks in the order they were added
         int index = 0;
