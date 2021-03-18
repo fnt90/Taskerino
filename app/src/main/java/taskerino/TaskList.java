@@ -1,35 +1,32 @@
 package taskerino;
 
-import java.time.DateTimeException;
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.temporal.ChronoField;
 import java.util.Locale;
 import java.util.ArrayList;
-import java.util.Scanner;
 
+/**
+ * The TaskList class should create an ArrayList of Tasks which can be added to, deleted from, edited, displayed,
+ * and saved to file.
+ * @author Fiona Thompson
+ * @version 1.0 (2021.03.18)
+ */
 public class TaskList {
-    //this should be an array list of Task objects, and the list is called taskList
     private ArrayList<Task> taskList;
-    //int taskSelect;
+
     //for formatting text and clearing formatting
-    public static final String ANS_YELLOW = "[38;5;185m";
     public static final String ANS_CLEAR = "[0m";
-    public static final String ANS_BOLD = "[1m";
     public static final String ANS_BK_BLUE = "[30;44m";
     public static DateTimeFormatter formatter = new DateTimeFormatterBuilder()
             .appendPattern("dd MMM")
             .parseDefaulting(ChronoField.YEAR, 2021)
             .toFormatter(Locale.US);
 
-    //Menus menus = new Menus();
-
-
     public TaskList() {
         taskList = new ArrayList<>();
-
     }
+
     public void addTask(Task task) {
         taskList.add(task);
     }
@@ -39,7 +36,6 @@ public class TaskList {
     }
 
     public int size() {
-
         return taskList.size();
     }
 
@@ -52,78 +48,38 @@ public class TaskList {
         return getIndexVal;
     }
 
-    public static String askName() {
-        //Prompts user to input name, either when adding new task or selecting Edit Name
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Type new task " + ANS_BOLD + "name" + ANS_CLEAR + ":");
-        String name = scanner.nextLine();
-        //If user does not type a name, replace blank with **Untitled**
-        if (name.length()==0) {
-            return "**Untitled**";
-        }
-
-        return name;
-    }
-    public static String askProj() {
-        //Prompts user to input project, either when adding new task or selecting Edit Project
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Type new task " + ANS_BOLD + "project" + ANS_CLEAR + ":");
-        String project = scanner.nextLine();
-        return project;
-    }
-    public static LocalDate askDate() {
-        //Prompts user to input due date, either when adding new task or selecting Edit Date
-        Scanner askDate = new Scanner(System.in);
-
-        /*DateTimeFormatter formatter = new DateTimeFormatterBuilder()
-                .appendPattern("dd MMM")
-                .parseDefaulting(ChronoField.YEAR, 2021)
-                .toFormatter(Locale.US);
-*/
-        System.out.println("Type new task " + ANS_BOLD + "due date " + ANS_YELLOW + "(DD Mmm/04 Oct)" + ANS_CLEAR + ":");
-        //try block to check if date correctly formatted, if not, automatically set to today's date
-        try {
-            LocalDate date = LocalDate.parse(askDate.nextLine(), formatter);
-            return date;
-        } catch (DateTimeException e) {
-            System.out.println("Invalid date entered (or you didn't capitalize month). " + ANS_YELLOW +
-                    "Setting due date to " + ANS_BOLD + "today." + ANS_CLEAR);
-            LocalDate date = LocalDate.now();
-            return date;
-        }
-    }
-
     public void changeName(int taskListSelect) {
-        Task editableName = taskList.get(taskListSelect); //this is NOT working
-        editableName.setName(askName());
-        System.out.println("Task name changed to: " + ANS_BK_BLUE + editableName.name + ANS_CLEAR);
+        Task editName = taskList.get(taskListSelect);
+        editName.setName(UserInput.askForName());
+        System.out.println("Task name changed to: " + ANS_BK_BLUE + editName.name + ANS_CLEAR);
     }
 
-    public void changeProj(int taskListSelect) {
-        Task editableProj = taskList.get(taskListSelect);
-        editableProj.setProject(askProj());
-        System.out.println("Task project changed to: " + ANS_BK_BLUE + editableProj.project + ANS_CLEAR);
+    public void changeProject(int taskListSelect) {
+        Task editProject = taskList.get(taskListSelect);
+        editProject.setProject(UserInput.askForProject());
+        System.out.println("Task project changed to: " + ANS_BK_BLUE + editProject.project + ANS_CLEAR);
     }
     public void changeDate(int taskListSelect) {
-        Task editableDate = taskList.get(taskListSelect);
-        editableDate.setDate(askDate());
-        System.out.println("Task date changed to: " + ANS_BK_BLUE + formatter.format(editableDate.date) + ANS_CLEAR);
+        Task editDate = taskList.get(taskListSelect);
+        editDate.setDate(UserInput.askForDate());
+        System.out.println("Task date changed to: " + ANS_BK_BLUE + formatter.format(editDate.date) + ANS_CLEAR);
     }
     public void changeTicked(int taskListSelect) {
-        Task editableTick = taskList.get(taskListSelect);
-        if (editableTick.getTickStatus() == false) {
-            editableTick.setTicked(true);
+        Task editTickStatus = taskList.get(taskListSelect);
+        if (!editTickStatus.getTickStatus()) {
+            editTickStatus.setTicked(true);
         } else {
-            editableTick.setTicked(false);
+            editTickStatus.setTicked(false);
         }
-        System.out.println("Task is now marked as: " + ANS_BK_BLUE + editableTick.boolToString() + ANS_CLEAR);
+        System.out.println("Task is now marked as: " + ANS_BK_BLUE + editTickStatus.boolToString() + ANS_CLEAR);
     }
 
     public void setTaskList(ArrayList<Task> taskList) {
         this.taskList = taskList;
     }
 
-    public void saveMethod() {
+    public void saveTaskList() {
+        //print 'Saving. . .' with delayed periods to draw user attention
         try {
             System.out.print("Saving");
             Thread.sleep(500);
@@ -140,11 +96,10 @@ public class TaskList {
         saverFile.writeAsData(taskList);
     }
 
-    public ArrayList<Task> loadMethod() {
+    public ArrayList<Task> loadTaskList() {
         FileHandler loaderFile = new FileHandler();
         ArrayList<Task> dataList = new ArrayList<>();
         dataList = loaderFile.readAsData();
         return dataList;
     }
-
 }

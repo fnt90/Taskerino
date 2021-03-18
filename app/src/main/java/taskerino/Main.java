@@ -1,7 +1,11 @@
 package taskerino;
 
 import java.util.Scanner;
-
+/**
+ * The main...
+ * @author Fiona Thompson
+ * @version 1.0 (2021.03.18)
+ */
 public class Main {
     //for formatting text and clearing formatting
     public static final String ANS_YELLOW = "[38;5;185m";
@@ -22,7 +26,7 @@ public class Main {
 
             if (userNameInp.length() == 0) {
                 userNameInp = "Buddy";
-                //I'm not your buddy, guy
+
             }
             fileHandler.writeName(userNameInp);
             System.out.println("Nice to meet you, " + ANS_YELLOW + ANS_BOLD + userNameInp.toUpperCase() + "!" + ANS_CLEAR);

@@ -1,7 +1,10 @@
 package taskerino;
-
+/**
+ * The Messages class contains all multi-line text blocks, as well as some frequently re-used text and formatting.
+ * @author Fiona Thompson
+ * @version 1.0 (2021.03.18)
+ */
 public class Messages {
-
     //for formatting text and clearing formatting
     public static final String ANS_BOLD = "[1m";
     public static final String ANS_YELLOW = "[38;5;185m";
@@ -10,11 +13,10 @@ public class Messages {
     public static final String ANS_REVERSE = "[7m";
     public static final String ANS_PURPLE = "[35m";
     public static final String ANS_CLEAR = "[0m";
-    //for rainbow print of Taskerino
+    //for rainbow print of Taskerino title
     public static final String TASKERINO = "[38;5;212m" + "T"+"[38;5;217m" + "a"+ "[38;5;222m" + "s" +
             "[38;5;229m" + "k" + "[38;5;192m" + "e" + "[38;5;159m" + "r" + "[38;5;117m" + "i" +
             "[38;5;141m" + "n" + "[38;5;135m" + "o";
-
 
     public static void printWelcome() {
         //A happy welcoming message to be printed only upon starting up the program
@@ -26,23 +28,23 @@ public class Messages {
     public static void printMainMenu() {
         //Display all main menu options
         System.out.println(ANS_PURPLE + ANS_BOLD + "~~~MAIN MENU~~~" + ANS_CLEAR);
-        System.out.println("What do you want to do?");
-        System.out.println("1. Add new task");
-        System.out.println("2. Show all saved tasks");
-        System.out.println("3. Edit, delete, or tick off a task");
-        System.out.println("4. View instructions");
-        System.out.println("5. Save and quit");
+        System.out.println("What do you want to do?\n" +
+                "1. Add new task\n" +
+                "2. Show all saved tasks\n" +
+                "3. Edit, delete, or tick off a task\n" +
+                "4. View instructions\n" +
+                "5. Save and quit");
 
     }
     public static void printShowTasksMenu() {
         //Display all Show menu options
         System.out.println(ANS_PURPLE + "~SHOW TASKS MENU~" + ANS_CLEAR);
-        System.out.println("How do you want to sort your tasks?");
-        System.out.println("1. By ticked status (complete first)");
-        System.out.println("2. By due date (oldest first)");
-        System.out.println("3. By project (alphabetical)");
-        System.out.println("4. In the order you added them");
-        System.out.println("5. Return to main menu");
+        System.out.println("How do you want to sort your tasks?\n" +
+                "1. By ticked status (complete first)\n" +
+                "2. By due date (oldest first)\n" +
+                "3. By project (alphabetical)\n" +
+                "4. In the order you added them\n" +
+                "5. Return to main menu");
     }
     public static void printAddTasksMenu() {
         //welcome user to Add tasks menu
@@ -57,13 +59,13 @@ public class Messages {
     public static void printEditTaskActions() {
         //Display all Edit menu options after selecting which task to edit
         System.out.println(ANS_PURPLE + "~~EDIT SUBMENU" + ANS_CLEAR);
-        System.out.println("What do you want to do with this task?");
-        System.out.println("1. Edit name");
-        System.out.println("2. Edit project");
-        System.out.println("3. Edit due date");
-        System.out.println("4. Tick off (or un-tick) task");
-        System.out.println("5. Delete task");
-        System.out.println("6. Cancel (return to main menu)");
+        System.out.println("What do you want to do with this task?\n" +
+                "1. Edit name\n" +
+                "2. Edit project\n" +
+                "3. Edit due date\n" +
+                "4. Tick off (or un-tick) task\n" +
+                "5. Delete task\n" +
+                "6. Cancel (return to main menu)");
     }
     public static void printInvalidInput() {
         //tell user they typed a value that was not a menu choice

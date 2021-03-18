@@ -1,4 +1,5 @@
 package taskerino;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
@@ -8,6 +9,12 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
+/**
+ * The Sorter class handles methods for displaying and sorting Task objects. This includes printing all tasks,
+ * printing sorted tasks, and counting tasks using parameters such as tick status or due date.
+ * @author Fiona Thompson
+ * @version 1.0 (2021.03.18)
+ */
 public class Sorter {
     public static final String ANS_CLEAR = "[0m";
     public static final String ANS_BLUE = "[34m";
@@ -17,7 +24,6 @@ public class Sorter {
             .parseDefaulting(ChronoField.YEAR, 2021)
             .toFormatter(Locale.US);
 
-    
     public void printAllTasks(TaskList taskList) {
         //show all saved tasks in the order they were added
         int index = 0;

@@ -2,7 +2,11 @@ package taskerino;
 
 import java.io.*;
 import java.util.ArrayList;
-
+/**
+ * The main...
+ * @author Fiona Thompson
+ * @version 1.0 (2021.03.18)
+ */
 public class FileHandler {
 //my path is C:\Users\fiona\Documents\IdeaProjs\Taskerino\app\src\main\resources
     private String path = "app/src/main/resources/";

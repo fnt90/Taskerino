@@ -3,14 +3,19 @@ package taskerino;
 import java.util.Comparator;
 import java.time.LocalDate;
 
-
+/**
+ * The Task class should create Tasks that have a Name and Project with String values, a due date with LocalDate values,
+ * and a ticked/unticked status with a boolean value. A task marked as ticked will be complete, whereas a task marked
+ * as unticked will be incomplete.
+ * @author Fiona Thompson
+ * @version 1.0 (2021.03.18)
+ */
 public class Task {
     //this gives instructions on how an object Task should look like
     String name;
     String project;
     LocalDate date;
     boolean isTicked;
-
 
     public Task(String name, String project, LocalDate date, boolean isTicked) {
         this.name = name;
@@ -61,7 +66,7 @@ public class Task {
 
     public String boolToString(){
         //to convert boolean TRUE to "complete" and FALSE to "incomplete" for user understanding
-        if (isTicked==true){
+        if (isTicked){
             return "complete";
         } else {
             return "incomplete";

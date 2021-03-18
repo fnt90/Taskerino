@@ -6,7 +6,11 @@ import java.time.temporal.ChronoField;
 import java.util.*;
 import java.time.LocalDate;
 
-
+/**
+ * The Menus class handles
+ * @author Fiona Thompson
+ * @version 1.0 (2021.03.18)
+ */
 public class Menus {
     TaskList taskList;
     ArrayList<Task> dataList;
@@ -24,13 +28,13 @@ public class Menus {
             .parseDefaulting(ChronoField.YEAR, 2021)
             .toFormatter(Locale.US);
 
- public Menus() {
-     taskList = new TaskList();
- }
+ //public Menus() {
+ //    taskList = new TaskList();
+ //}
 
     public void mainMenu() {
         //load save file
-        dataList = taskList.loadMethod();
+        dataList = taskList.loadTaskList();
         //check if save file exists, and check if file has already been loaded
         if (dataList != null && !alreadyLoaded) {
             //first loading confirmed, set loaded info into taskList
@@ -64,7 +68,7 @@ public class Menus {
                 returnToMain();
             } else if (menuChoice == 5) {
                 //save and quit
-                taskList.saveMethod();
+                taskList.saveTaskList();
                 Messages.printExit();
                //quit should happen here even without System.exit(0);
             } else {
@@ -82,24 +86,24 @@ public class Menus {
         //print menu for options how to show list of tasks
         Messages.printShowTasksMenu();
         //ask user for menu choice
-        int menuSelect = UserInput.menuSelect();
+        int menuChoice = UserInput.menuSelect();
 
-            if (menuSelect == 1) {
+            if (menuChoice == 1) {
                 //by ticked status
                 sorter.printByStatus(taskList);
                 returnToMain();
-            } else if (menuSelect == 2) {
+            } else if (menuChoice == 2) {
                 //by due date
                 sorter.sortByDate(taskList);
                 returnToMain();
-            } else if (menuSelect == 3) {
+            } else if (menuChoice == 3) {
                 //by project
                 sorter.sortByProj(taskList);
                 returnToMain();
-            } else if (menuSelect == 5) {
+            } else if (menuChoice == 5) {
                 //return to main
                 mainMenu();
-            } else if (menuSelect == 4) {
+            } else if (menuChoice == 4) {
                 //print all stored tasks
                 System.out.println(ANS_YELLOW + "Here are all your saved tasks:" + ANS_CLEAR);
                 sorter.printAllTasks(taskList);
@@ -113,11 +117,11 @@ public class Menus {
     public void addMenu() {
         //display menu for adding new task, get user input for Name/Project/Date
         Messages.printAddTasksMenu();
-        String newTsName = TaskList.askName();
-        String newTsProj = TaskList.askProj();
-        LocalDate newTsDate = TaskList.askDate();
+        String newName = UserInput.askForName();
+        String newProject = UserInput.askForProject();
+        LocalDate newDate = UserInput.askForDate();
         //creating a new task, user input for name, project, date, and setting default Ticked status to false
-        Task newTask = new Task(newTsName,newTsProj,newTsDate, false);
+        Task newTask = new Task(newName,newProject,newDate, false);
 
         System.out.println("NEW TASK \nName: "+ ANS_BLUE + newTask.name + ANS_CLEAR + "\nProject: " + ANS_BLUE +
                 newTask.project + ANS_CLEAR + "\nDate: " + ANS_BLUE + formatter.format(newTask.date) + ANS_CLEAR);
@@ -137,15 +141,15 @@ public class Menus {
         //show all saved tasks to allow user to choose one
         sorter.printAllTasks(taskList);
         //user selects task
-        int taskSelect = UserInput.taskListSelect();
-        if (taskSelect == -1) {
+        int taskChoice = UserInput.taskListSelect();
+        if (taskChoice == -1) {
             //user input is invalid
             editMenu();
         }
         //user input is valid, print details of selected task
-        Task editor = taskList.get(taskSelect);
-        System.out.println("You selected: " + ANS_BK_BLUE + (taskSelect + 1) + ". " + editor.name + ", " +
-                editor.project + ", " + formatter.format(editor.date) + ", " + editor.boolToString() + ANS_CLEAR);
+        Task taskToEdit = taskList.get(taskChoice);
+        System.out.println("You selected: " + ANS_BK_BLUE + (taskChoice + 1) + ". " + taskToEdit.name + ", " +
+                taskToEdit.project + ", " + formatter.format(taskToEdit.date) + ", " + taskToEdit.boolToString() + ANS_CLEAR);
 
         Messages.printEditTaskActions();
 
@@ -153,23 +157,23 @@ public class Menus {
 
             if (menuChoice == 1) {
                 //edit name
-                taskList.changeName(taskSelect);
+                taskList.changeName(taskChoice);
                 returnToMain();
             } else if (menuChoice == 2) {
                 //edit project
-                taskList.changeProj(taskSelect);
+                taskList.changeProject(taskChoice);
                 returnToMain();
             } else if (menuChoice == 3) {
                 //edit date
-                taskList.changeDate(taskSelect);
+                taskList.changeDate(taskChoice);
                 returnToMain();
             } else if (menuChoice == 4) {
                 //tick or untick: set Complete to Incomplete, or Incomplete to Complete
-                taskList.changeTicked(taskSelect);
+                taskList.changeTicked(taskChoice);
                 returnToMain();
             } else if (menuChoice == 5) {
                 //delete task
-                taskList.deleteTask(taskList.get(taskSelect));
+                taskList.deleteTask(taskList.get(taskChoice));
                 System.out.println("Task deleted.");
                 returnToMain();
             } else if (menuChoice == 6) {
