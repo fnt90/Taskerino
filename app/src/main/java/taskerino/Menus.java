@@ -86,7 +86,6 @@ public class Menus {
                 Messages.printExit();
             } else {
                 //user input is invalid (-1), return to Main Menu
-                Messages.printInvalidInput();
                 mainMenu();
             }
     }
