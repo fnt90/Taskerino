@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="0.0" y="0.0">taskerino.Messages</node>
+    <node x="24.4015503875969" y="555.0">taskerino.UserInput</node>
+    <node x="329.70591085271326" y="2064.0">taskerino.Main</node>
+    <node x="375.0682170542635" y="109.0">taskerino.Task</node>
+    <node x="141.99999999999997" y="1295.0">taskerino.Sorter</node>
+    <node x="305.7059108527132" y="1618.0">taskerino.Menus</node>
+    <node x="441.0" y="880.0">taskerino.TaskList</node>
+    <node x="874.5553047404064" y="541.3611738148984">taskerino.FileHandler</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="taskerino.Menus" target="taskerino.Task">
+      <point x="45.33333333333326" y="-193.0" />
+      <point x="453.03924418604646" y="1588.0" />
+      <point x="430.5" y="1588.0" />
+      <point x="430.5" y="535.0" />
+      <point x="490.5682170542635" y="535.0" />
+      <point x="-16.5" y="138.5" />
+    </edge>
+    <edge source="taskerino.Main" target="taskerino.Messages">
+      <point x="-65.00000000000006" y="-60.5" />
+      <point x="342.7059108527132" y="2044.0" />
+      <point x="2.901550387596899" y="2044.0" />
+      <point x="2.901550387596899" y="525.0" />
+      <point x="25.75" y="525.0" />
+      <point x="-77.25" y="247.5" />
+    </edge>
+    <edge source="taskerino.Menus" target="taskerino.Messages">
+      <point x="-90.6666666666668" y="-193.0" />
+      <point x="317.0392441860464" y="1598.0" />
+      <point x="13.901550387596899" y="1598.0" />
+      <point x="13.901550387596899" y="535.0" />
+      <point x="77.25" y="535.0" />
+      <point x="-25.75" y="247.5" />
+    </edge>
+    <edge source="taskerino.Sorter" target="taskerino.TaskList">
+      <point x="85.33333333333331" y="-126.5" />
+      <point x="355.33333333333326" y="1270.0" />
+      <point x="475.83333333333326" y="1270.0" />
+      <point x="-69.66666666666669" y="182.5" />
+    </edge>
+    <edge source="taskerino.Menus" target="taskerino.Sorter">
+      <point x="-45.33333333333343" y="-193.0" />
+      <point x="362.3725775193798" y="1578.0" />
+      <point x="205.99999999999997" y="1578.0" />
+      <point x="-64.0" y="126.5" />
+    </edge>
+    <edge source="taskerino.TaskList" target="taskerino.FileHandler">
+      <point x="41.80000000000001" y="-182.5" />
+      <point x="587.3" y="855.0" />
+      <point x="584.875" y="855.0" />
+      <point x="-86.625" y="71.5" />
+    </edge>
+    <edge source="taskerino.Main" target="taskerino.Menus">
+      <point x="-13.000000000000057" y="-60.5" />
+      <point x="394.7059108527132" y="2024.0" />
+      <point x="356.7059108527132" y="2024.0" />
+      <point x="-51.0" y="193.0" />
+    </edge>
+    <edge source="taskerino.Menus" target="taskerino.TaskList">
+      <point x="90.66666666666656" y="-193.0" />
+      <point x="498.3725775193798" y="1598.0" />
+      <point x="609.6074612403102" y="1598.0" />
+      <point x="609.6074612403102" y="1270.0" />
+      <point x="615.1666666666666" y="1270.0" />
+      <point x="69.66666666666666" y="182.5" />
+    </edge>
+    <edge source="taskerino.Sorter" target="taskerino.Task">
+      <point x="0.0" y="-126.5" />
+      <point x="270.0" y="1270.0" />
+      <point x="258.76065891472865" y="1270.0" />
+      <point x="258.76065891472865" y="535.0" />
+      <point x="391.5682170542635" y="535.0" />
+      <point x="-115.5" y="138.5" />
+    </edge>
+    <edge source="taskerino.TaskList" target="taskerino.Task">
+      <point x="0.0" y="-182.5" />
+      <point x="545.5" y="535.0" />
+      <point x="556.5682170542635" y="535.0" />
+      <point x="49.5" y="138.5" />
+    </edge>
+    <edge source="taskerino.Menus" target="taskerino.UserInput">
+      <point x="-68.00000000000011" y="-193.0" />
+      <point x="339.7059108527131" y="1588.0" />
+      <point x="120.26065891472865" y="1588.0" />
+      <point x="120.26065891472865" y="855.0" />
+      <point x="126.4015503875969" y="855.0" />
+      <point x="0.0" y="137.5" />
+    </edge>
+    <edge source="taskerino.Main" target="taskerino.UserInput">
+      <point x="-39.00000000000006" y="-60.5" />
+      <point x="368.7059108527132" y="2034.0" />
+      <point x="98.70591085271315" y="2034.0" />
+      <point x="98.70591085271315" y="855.0" />
+      <point x="58.4015503875969" y="855.0" />
+      <point x="-68.0" y="137.5" />
+    </edge>
+    <edge source="taskerino.FileHandler" target="taskerino.Task">
+      <point x="-57.75" y="-71.5" />
+      <point x="613.75" y="535.0" />
+      <point x="589.5682170542635" y="535.0" />
+      <point x="82.5" y="138.5" />
+    </edge>
+    <edge source="taskerino.TaskList" target="taskerino.UserInput">
+      <point x="-83.60000000000002" y="-182.5" />
+      <point x="461.9" y="855.0" />
+      <point x="194.4015503875969" y="855.0" />
+      <point x="68.0" y="137.5" />
+    </edge>
+    <edge source="taskerino.Sorter" target="taskerino.Messages">
+      <point x="-85.33333333333331" y="-126.5" />
+      <point x="184.66666666666666" y="1270.0" />
+      <point x="247.76065891472865" y="1270.0" />
+      <point x="247.76065891472865" y="535.0" />
+      <point x="180.25" y="535.0" />
+      <point x="77.25" y="247.5" />
+    </edge>
+    <edge source="taskerino.UserInput" target="taskerino.Messages">
+      <point x="0.0" y="-137.5" />
+      <point x="126.4015503875969" y="535.0" />
+      <point x="128.75" y="535.0" />
+      <point x="25.75" y="247.5" />
+    </edge>
+    <edge source="taskerino.Main" target="taskerino.FileHandler">
+      <point x="64.99999999999994" y="-60.5" />
+      <point x="472.7059108527132" y="2044.0" />
+      <point x="730.988468992248" y="2044.0" />
+      <point x="730.988468992248" y="855.0" />
+      <point x="758.125" y="855.0" />
+      <point x="86.625" y="71.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.4018140589569161" x="393.5" y="1082.5" />
+  <SelectedNodes>
+    <node>taskerino.FileHandler</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+    <Category>Constructors</Category>
+    <Category>Fields</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
