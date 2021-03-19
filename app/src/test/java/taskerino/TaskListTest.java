@@ -23,7 +23,6 @@ class TaskListTest {
         final Task task = new Task("name", "project", LocalDate.of(2020, 1, 1), false);
         taskListUnderTest.addTask(task);
         assertEquals(taskListUnderTest.size(), 1);
-
     }
 
     @Test
@@ -47,36 +46,6 @@ class TaskListTest {
         assertEquals(task, result);
     }
 
-   // @Test
-   // void testChangeName() {
-        // Setup
-
-        // Run the test
-       // taskListUnderTest.changeName(0);
-
-        // Verify the results
-    //}
-
-   // @Test
-    //void testChangeProject() {
-        // Setup
-
-        // Run the test
-    //    taskListUnderTest.changeProject(0);
-
-        // Verify the results
-    //}
-
-   // @Test
-   // void testChangeDate() {
-        // Setup
-
-        // Run the test
-    //    taskListUnderTest.changeDate(0);
-
-        // Verify the results
-   // }
-
     @Test
     void testChangeTicked() {
         Task task = new Task("name", "project", LocalDate.of(2020, 1, 1), false);
@@ -84,5 +53,5 @@ class TaskListTest {
         taskListUnderTest.changeTicked(0);
         assertTrue(task.isTicked);
     }
-    
+
 }
