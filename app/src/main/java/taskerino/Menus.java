@@ -118,7 +118,7 @@ public class Menus {
                 returnToMain();
             } else if (menuChoice == 5) {
                 //return to main
-                mainMenu();
+                returnToMain();
             } else if (menuChoice == 4) {
                 //print all stored tasks
                 System.out.println(ANS_YELLOW + "Here are all your saved tasks:" + ANS_CLEAR);
