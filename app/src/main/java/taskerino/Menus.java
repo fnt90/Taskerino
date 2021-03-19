@@ -141,7 +141,7 @@ public class Menus {
         String newProject = UserInput.askForProject();
         LocalDate newDate = UserInput.askForDate();
 
-        Task newTask = new Task(newName,newProject,newDate, false);
+        Task newTask = new Task(newName, newProject, newDate, false);
 
         System.out.println("NEW TASK \nName: "+ ANS_BLUE + newTask.name + ANS_CLEAR + "\nProject: " + ANS_BLUE +
                 newTask.project + ANS_CLEAR + "\nDate: " + ANS_BLUE + formatter.format(newTask.date) + ANS_CLEAR);
@@ -157,7 +157,7 @@ public class Menus {
      * function. Upon completion of function, directs user back to Main Menu.
      */
     public void editMenu() {
-        if (taskList.size()==0) {
+        if (taskList.size() == 0) {
             System.out.println("You don't have any tasks to edit!");
             returnToMain();
         }
