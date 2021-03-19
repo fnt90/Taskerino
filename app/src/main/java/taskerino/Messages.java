@@ -42,7 +42,6 @@ public class Messages {
                 "3. Edit, delete, or tick off a task\n" +
                 "4. View instructions\n" +
                 "5. Save and quit");
-
     }
     /**
      * Prints menu options for the Show Tasks Menu.
@@ -130,7 +129,6 @@ public class Messages {
      * a README file.
      */
     public static void printInstructions() {
-        //Provide some basic info about the program to user, upon request
         System.out.println(ANS_PURPLE + "~INSTRUCTIONS~" + ANS_CLEAR);
         System.out.println("Thanks for checking out my To-Do List project! This program \n" +
                 "will store tasks for you to help you remember what you need \n" +

@@ -15,7 +15,7 @@ public class FileHandler {
      * Saves user tasks to file in String format. Creates or rewrites a text save file in "resources" folder with one
      * task on each line, using ",," as a delimiter. Throws IOException and prints error message if resources folder
      * is not found.
-     * @param dataList
+     * @param dataList ArrayList of Tasks to be written to file
      */
     public void writeAsData(ArrayList<Task> dataList) {
         try {

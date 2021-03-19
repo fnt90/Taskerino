@@ -33,6 +33,8 @@ java -jar apps/build/libs/app.jar
 may appear differently. Author strongly recommends running Taskerino through IntelliJ terminal for best results.
 
 ## Usage
+![Welcome message](screens/taskerino_0.JPG)
+
 Running the app will present a welcome message, and prompt you to enter your name. The Main menu will then be printed,
 and you can add some tasks to your to-do list by selecting Add Task. At the bottom of the menu, you will get an overview 
 of any overdue tasks or tasks due today, as well as a tally of how many tasks you've completed.
@@ -45,10 +47,14 @@ Main menu still image:
 
 
 When adding a task, you will be prompted to enter a task Name, Project, and Due date. This GIF shows entering a task 
-with some information, and shows what happens if you do not enter any information. In this case, the task name is set 
-to Untitled, project will remain blank, and Due date is set to today's date.
+with some information.
 
-![Adding tasks](screens/addingtasks.gif)
+![Adding tasks](screens/addtask1fast.gif)
+
+If you choose not to enter any information, the task name is set to Untitled, project will remain blank, and Due date 
+is set to today's date.
+
+![Adding tasks no info](screens/addtask2.gif)
 
 You can edit your task to change the information stored, mark it as complete, or delete it. After entering the Edit 
 menu, Taskerino will display all your stored tasks. Choose one to edit by entering its corresponding number as shown below.
@@ -64,6 +70,17 @@ When you are finished, exit the program by selecting Save and quit. This will sa
 the resources folder.
 
 ![Saving and exit](screens/savequit.gif)
+
+![Thanks for using taskerino](screens/thanksbye.jpg)
+
+##Javadocs
+
+Generate Javadocs .html files by navigating to /app/src/main/java and running javadoc command.
+
+```bash
+javadoc taskerino
+```
+
 ## Author
 Fiona Thompson
 

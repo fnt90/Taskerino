@@ -38,13 +38,12 @@ public class Task {
      * @param status String "complete" or "incomplete" corresponding to boolean true or false
      */
     public Task(String name, String project, String sDate, String status) {
-        //this was added in order to correctly read Date and Ticked status from save file
         this.name = name;
         this.project = project;
         this.date = LocalDate.parse(sDate);
         this.isTicked = stringToBool(status);
-
     }
+
     public String getName() {
         return name;
     }
@@ -106,25 +105,25 @@ public class Task {
     /**
      * Custom comparator to allow sorting of tasks by their Project field, ignoring case to allow user-friendly sorting.
      */
-        public static Comparator<Task> taskProjComparator = new Comparator<Task>() {
-            @Override
-            public int compare(Task t1, Task t2) {
-                String project1 = t1.getProject();
-                String project2 = t2.getProject();
-                return project1.compareToIgnoreCase(project2);
-            }
-        };
+    public static Comparator<Task> taskProjComparator = new Comparator<Task>() {
+        @Override
+        public int compare(Task t1, Task t2) {
+            String project1 = t1.getProject();
+            String project2 = t2.getProject();
+            return project1.compareToIgnoreCase(project2);
+        }
+    };
     /**
      * Custom comparator to allow sorting of tasks by their due date.
      */
-        public static Comparator<Task> taskDateComparator = new Comparator<Task>() {
-            @Override
-            public int compare(Task t1, Task t2) {
-                LocalDate date1 = t1.getDate();
-                LocalDate date2 = t2.getDate();
-                return date1.compareTo(date2);
-            }
-        };
+    public static Comparator<Task> taskDateComparator = new Comparator<Task>() {
+        @Override
+        public int compare(Task t1, Task t2) {
+            LocalDate date1 = t1.getDate();
+            LocalDate date2 = t2.getDate();
+            return date1.compareTo(date2);
+        }
+    };
 }
 
 
