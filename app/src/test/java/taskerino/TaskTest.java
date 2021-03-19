@@ -3,6 +3,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -26,5 +29,17 @@ class TaskTest {
     void testGetTickStatusReturnsFalseOnNewTask() {
         final boolean result = taskUnderTest.getTickStatus();
         assertFalse(result);
+    }
+
+    @Test
+    void stringToBoolReturnsIncompleteWhenIsTickedEqualsFalse() {
+        //taskUnderTest.boolToString();
+        assertEquals(taskUnderTest.boolToString(),"incomplete");
+    }
+
+    @Test
+    void stringToBoolReturnsCompleteWhenIsTickedEqualsTrue() {
+        Task completedTask = new Task("name", "project", LocalDate.of(2020, 1, 1), true);
+        assertEquals(completedTask.boolToString(),"complete");
     }
 }

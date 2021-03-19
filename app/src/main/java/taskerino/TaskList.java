@@ -48,8 +48,8 @@ public class TaskList {
     }
 
     public Task get(int index) {
-        Task getIndexVal = taskList.get(index);
-        return getIndexVal;
+        Task taskAtIndex = taskList.get(index);
+        return taskAtIndex;
     }
 
     /**
