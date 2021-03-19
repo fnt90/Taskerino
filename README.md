@@ -84,7 +84,7 @@ javadoc taskerino
 ## Author
 Fiona Thompson
 
-Created between Feb 18 and Mar 19 2021 for an assignment from Software Development Academy, iteration 9.
+Created between Feb 22 and Mar 19 2021 for an assignment from Software Development Academy, iteration 9.
 
 Note: GIFS were created from mp4 using
 https://ezgif.com/video-to-gif
