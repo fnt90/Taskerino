@@ -73,7 +73,7 @@ the resources folder.
 
 ![Thanks for using taskerino](screens/thanksbye.jpg)
 
-##Javadocs
+## Javadocs
 
 Generate Javadocs .html files by navigating to /app/src/main/java and running javadoc command.
 
